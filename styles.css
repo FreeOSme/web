@@ -1,3 +1,6 @@
+/* =========================
+	Theme Tokens
+========================= */
 :root {
 	--bg-window: #f6f5f4;
 	--bg-view: #ffffff;
@@ -18,6 +21,9 @@
 	--max: 1120px;
 }
 
+/* =========================
+   Base Reset
+========================= */
 * {
 	box-sizing: border-box;
 }
@@ -39,6 +45,9 @@ body {
 	overflow-x: hidden;
 }
 
+/* =========================
+   Ambient Background
+========================= */
 .noise {
 	position: fixed;
 	inset: 0;
@@ -80,6 +89,9 @@ body {
 	to { transform: translateY(-10px) translateX(12px) scale(1.03); }
 }
 
+/* =========================
+   App Shell And Navigation
+========================= */
 .container {
 	width: min(var(--max), calc(100% - 2rem));
 	margin: 0 auto;
@@ -164,6 +176,9 @@ header {
 	border-color: rgba(214, 211, 209, 0.8);
 }
 
+/* =========================
+   Shared Header Controls
+========================= */
 .view-switcher {
 	display: inline-flex;
 	align-items: center;
@@ -227,6 +242,9 @@ header {
 	font-weight: 700;
 }
 
+/* =========================
+   Icon System
+========================= */
 .markdown-heading {
 	display: inline-flex;
 	align-items: center;
@@ -655,6 +673,9 @@ header {
 	box-shadow: 0 -4px 0 currentColor, 0 4px 0 currentColor;
 }
 
+/* =========================
+   Home Page Layout
+========================= */
 .hero {
 	display: grid;
 	grid-template-columns: 1.08fr 0.92fr;
@@ -1017,6 +1038,9 @@ footer {
 	font-size: 0.9rem;
 }
 
+/* =========================
+   Global Responsive Rules
+========================= */
 @media (max-width: 960px) {
 	.hero {
 		grid-template-columns: 1fr;
@@ -1061,5 +1085,166 @@ footer {
 	.btn,
 	.mini-btn {
 		width: auto;
+	}
+}
+
+/* =========================
+   About Page
+========================= */
+.about-layout {
+	padding-top: 3rem;
+	padding-bottom: 2rem;
+}
+
+.about-hero {
+	max-width: 78ch;
+	margin-bottom: 1.2rem;
+}
+
+.about-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+.about-grid .section-title {
+	font-size: 1.15rem;
+	margin-bottom: 0.8rem;
+}
+
+/* =========================
+   Releases And Changelog Pages
+========================= */
+.releases-layout,
+.changelog-layout {
+	padding-top: 3rem;
+	padding-bottom: 2rem;
+}
+
+.releases-hero,
+.changelog-hero {
+	padding: 1rem 0 1.5rem;
+}
+
+.document-layout {
+	display: grid;
+	grid-template-columns: 280px minmax(0, 1fr);
+	gap: 1rem;
+	align-items: start;
+}
+
+.document-sidebar {
+	position: sticky;
+	top: 5.5rem;
+	padding: 1rem;
+}
+
+.sidebar-title {
+	margin: 0 0 0.45rem;
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.document-panel {
+	min-height: 60vh;
+	padding: 1.25rem 1.35rem;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(247, 246, 245, 0.99));
+	box-shadow: 0 14px 36px rgba(36, 31, 49, 0.08);
+}
+
+.markdown-wrap {
+	overflow-x: auto;
+}
+
+.markdown-wrap > :first-child {
+	margin-top: 0;
+}
+
+.markdown-wrap h1,
+.markdown-wrap h2,
+.markdown-wrap h3 {
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+}
+
+.markdown-wrap h1 {
+	font-size: clamp(1.5rem, 2.2vw, 2rem);
+	margin-top: 0;
+}
+
+.markdown-wrap h2 {
+	font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+	margin-top: 1.5rem;
+	padding-bottom: 0.45rem;
+	border-bottom: 1px solid var(--line);
+}
+
+.markdown-wrap h3 {
+	font-size: 1rem;
+	margin-top: 1.1rem;
+}
+
+.markdown-wrap p,
+.markdown-wrap li {
+	color: var(--ink-soft);
+}
+
+.markdown-wrap ul {
+	padding-left: 1.1rem;
+}
+
+.markdown-wrap li + li {
+	margin-top: 0.32rem;
+}
+
+.markdown-wrap code {
+	font-family: "Space Mono", monospace;
+	font-size: 0.9em;
+	padding: 0.1rem 0.3rem;
+	border-radius: 6px;
+	background: rgba(53, 132, 228, 0.08);
+}
+
+.markdown-wrap a {
+	color: var(--brand);
+	font-weight: 700;
+}
+
+.anchor-links {
+	display: grid;
+	gap: 0.6rem;
+	margin-bottom: 0;
+}
+
+/* =========================
+   Docs/Detail Responsive Rules
+========================= */
+@media (max-width: 920px) {
+	.document-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.document-sidebar {
+		position: static;
+	}
+
+	.anchor-links {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 900px) {
+	.about-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media (max-width: 640px) {
+	.anchor-links {
+		grid-template-columns: 1fr;
+	}
+
+	.about-grid {
+		grid-template-columns: 1fr;
 	}
 }
