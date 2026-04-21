@@ -260,6 +260,7 @@ header {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.65rem;
+	margin-bottom: 2rem;
 }
 
 .btn-label,
@@ -865,7 +866,7 @@ section:nth-of-type(4) { animation-delay: 150ms; }
 }
 
 .section-sub {
-	margin: 2rem 0 1.2rem;
+	margin: 0 0 1.2rem;
 	color: var(--ink-soft);
 	max-width: 72ch;
 }

@@ -3,78 +3,21 @@ const PREVIEW_LIMIT = 6;
 
 const versions = [
 	{
-		name: "FreeOS.me 0.3 Canary",
-		status: "Canary",
-		date: "Apr 2026",
-		notes: "Installer improvements and the first baseline tools bundle.",
-		releaseUrl: "releases.html#v0-3-canary",
-		isoUrl: DOWNLOAD_BASE_URL + "/freeos-me-0.3.0-canary.iso",
-		checksumUrl: DOWNLOAD_BASE_URL + "/freeos-me-0.3.0-canary.sha256",
-		notesUrl: "changelog.html#v0-3-canary"
-	},
-	{
-		name: "FreeOS.me 0.2 Beta",
-		status: "Beta",
-		date: "Feb 2026",
-		notes: "New default theme, boot optimization, and networking refinements.",
-		releaseUrl: "releases.html#v0-2-beta",
-		isoUrl: DOWNLOAD_BASE_URL + "/freeos-me-0.2.0-beta.iso",
-		checksumUrl: DOWNLOAD_BASE_URL + "/freeos-me-0.2.0-beta.sha256",
-		notesUrl: "changelog.html#v0-2-beta"
-	},
-	{
 		name: "FreeOS.me 0.1 Alpha",
-		status: "Alpha",
-		date: "Dec 2025",
+		status: "Alpha", //Canary, Beta, Alpha, Planned
+		date: "April 2026",
 		notes: "First public build with a functional base and initial repository.",
 		releaseUrl: "releases.html#v0-1-alpha",
 		isoUrl: DOWNLOAD_BASE_URL + "/freeos-me-0.1.0-alpha.iso",
 		checksumUrl: DOWNLOAD_BASE_URL + "/freeos-me-0.1.0-alpha.sha256",
 		notesUrl: "changelog.html#v0-1-alpha"
-	},
-	{
-		name: "FreeOS.me 1.0 Stable",
-		status: "Planned",
-		date: "Target: Q4 2026",
-		notes: "First stable public release target with installation hardening and signed artifacts.",
-		releaseUrl: "releases.html#v1-0-stable",
-		isoUrl: "#",
-		checksumUrl: "#",
-		notesUrl: "changelog.html#v1-0-stable"
 	}
 ];
 
 const logs = [
 	{
-		version: "1.0 Stable",
-		date: "Target Q4 2026",
-		changes: [
-			"Signed artifacts are planned for the first stable release.",
-			"Installer hardening is planned for broader hardware coverage.",
-			"Baseline security profile is planned for default install."
-		]
-	},
-	{
-		version: "0.3 Canary",
-		date: "2026-04-11",
-		changes: [
-			"Boot time was reduced on test hardware.",
-			"The base package structure was reorganized.",
-			"The initial installation flow was improved."
-		]
-	},
-	{
-		version: "0.2 Beta",
-		date: "2026-02-08",
-		changes: [
-			"Networking adjustments improved Wi-Fi stability.",
-			"The main visual theme was refreshed.",
-			"Legacy dependencies were cleaned up."
-		]
-	},
-	{
-		version: "0.1 Alpha",
-		date: "2025-12-02",
+		version: "FreeOS.me 0.1 Alpha",
+		date: "2026-12-04",
 		changes: [
 			"Initial project release.",
 			"Boot process validated on reference hardware.",
