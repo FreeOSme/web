@@ -16,7 +16,7 @@ const versions = [
 
 const logs = [
 	{
-		version: "FreeOS.me 0.1 Alpha",
+		version: "0.1 Alpha",
 		date: "2026-12-04",
 		changes: [
 			"Initial project release.",
