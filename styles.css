@@ -179,6 +179,34 @@ h1 {
 	font-size: 1.04rem;
 }
 
+.status-strip {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 0.6rem;
+	margin: 0 0 1.2rem;
+}
+
+.status-chip {
+	border: 1px solid var(--line);
+	background: rgba(255, 255, 255, 0.03);
+	border-radius: 12px;
+	padding: 0.55rem 0.65rem;
+	display: grid;
+	gap: 0.2rem;
+}
+
+.status-key {
+	font-family: "Space Mono", monospace;
+	font-size: 0.7rem;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+	color: var(--ink-soft);
+}
+
+.status-chip strong {
+	font-size: 0.95rem;
+}
+
 .cta-row {
 	display: flex;
 	gap: 0.8rem;
@@ -424,6 +452,10 @@ footer {
 		padding-top: 3rem;
 	}
 
+	.status-strip {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
 	.grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
@@ -444,6 +476,10 @@ footer {
 	}
 
 	.grid {
+		grid-template-columns: 1fr;
+	}
+
+	.status-strip {
 		grid-template-columns: 1fr;
 	}
 

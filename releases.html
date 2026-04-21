@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="FreeOS.me full releases page rendered from Markdown.">
+	<title>FreeOS.me | Full Releases</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="releases.css">
+</head>
+<body>
+	<div class="noise" aria-hidden="true"></div>
+	<div class="blob blob-a" aria-hidden="true"></div>
+	<div class="blob blob-b" aria-hidden="true"></div>
+
+	<header>
+		<div class="container nav-wrap">
+			<a class="brand" href="index.html" aria-label="Go back to homepage">
+				<span class="brand-logo">F</span>
+				<span>FreeOS.me</span>
+			</a>
+			<nav class="nav-links" aria-label="Main navigation">
+				<a href="index.html#mission">Mission</a>
+				<a href="changelog.html">Changelog</a>
+				<a href="#markdown">Markdown View</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="container releases-layout">
+		<section aria-labelledby="page-title" class="releases-hero">
+			<p class="eyebrow">Detailed release registry</p>
+			<h1 id="page-title">Full Releases</h1>
+			<p class="section-sub">
+				This page renders from RELEASES.md and contains all version entries and package status.
+			</p>
+			<div class="cta-row">
+				<a class="btn btn-primary" href="index.html">Back to Home</a>
+				<a class="btn btn-secondary" href="RELEASES.md">Open Raw Markdown</a>
+			</div>
+		</section>
+
+		<section class="anchor-links" aria-label="Release anchors">
+			<a class="mini-btn" href="#v1-0-stable">v1.0 Stable</a>
+			<a class="mini-btn" href="#v0-3-canary">v0.3 Canary</a>
+			<a class="mini-btn" href="#v0-2-beta">v0.2 Beta</a>
+			<a class="mini-btn" href="#v0-1-alpha">v0.1 Alpha</a>
+		</section>
+
+		<section id="markdown" class="card markdown-wrap" aria-live="polite">
+			<p class="meta">Loading releases...</p>
+		</section>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>FreeOS.me <span id="year"></span> · Personal project · Linux distribution in progress</p>
+		</div>
+	</footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+	<script src="releases.js"></script>
+</body>
+</html>
