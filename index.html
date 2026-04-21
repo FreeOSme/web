@@ -1,1 +1,108 @@
-Testing
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="FreeOS.me - Personal Linux distribution with releases, mission, and project changelog.">
+	<title>FreeOS.me | Linux Distribution</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="noise" aria-hidden="true"></div>
+	<div class="blob blob-a" aria-hidden="true"></div>
+	<div class="blob blob-b" aria-hidden="true"></div>
+
+	<header>
+		<div class="container nav-wrap">
+			<a class="brand" href="#home" aria-label="Go to FreeOS.me home">
+				<span class="brand-logo">F</span>
+				<span>FreeOS.me</span>
+			</a>
+			<nav class="nav-links" aria-label="Main navigation">
+				<a href="#mission">Mission</a>
+				<a href="#versions">Releases</a>
+				<a href="#changelog">Changelog</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="home" class="container">
+		<section class="hero" aria-labelledby="hero-title">
+			<article>
+				<span class="eyebrow">Personal Linux distribution in active development</span>
+				<h1 id="hero-title">FreeOS.me<br>Lightweight, free, and crafted with obsessive attention to detail.</h1>
+				<p>
+					This is the official home of FreeOS.me. You can publish each release,
+					explain the project mission, and track the important changes between versions.
+				</p>
+				<div class="cta-row">
+					<a class="btn btn-primary" href="#versions">View Latest Release</a>
+					<a class="btn btn-secondary" href="#changelog">Explore Changes</a>
+				</div>
+			</article>
+
+			<aside class="terminal" aria-label="Terminal summary">
+				<div class="dots" aria-hidden="true">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<pre>$ neofetch
+OS: FreeOS.me preview
+Kernel: linux-lts
+Desktop: custom shell
+Status: Personal project
+
+$ mission --show
+"Build a clear, fast, and maintainable distro.
+No noise. No filler. Just usefulness."</pre>
+			</aside>
+		</section>
+
+		<section id="mission" aria-labelledby="mission-title">
+			<h2 id="mission-title" class="section-title">Project Mission</h2>
+			<p class="section-sub">
+				FreeOS.me aims to build a clean and reliable Linux experience for everyday use.
+				The project evolves in public: each iteration is versioned, technical decisions are documented,
+				and changes are tracked so anyone can understand where the distro is heading.
+			</p>
+			<div class="grid">
+				<article class="card">
+					<h3 class="ver-title">Real Simplicity</h3>
+					<p class="meta">Less friction, more focus: all essentials ready from first boot.</p>
+				</article>
+				<article class="card">
+					<h3 class="ver-title">Performance</h3>
+					<p class="meta">A lightweight foundation and practical choices for both modest and modern hardware.</p>
+				</article>
+				<article class="card">
+					<h3 class="ver-title">Open Evolution</h3>
+					<p class="meta">A visible roadmap and clear changelog so every release tells a technical story.</p>
+				</article>
+			</div>
+		</section>
+
+		<section id="versions" aria-labelledby="versions-title">
+			<h2 id="versions-title" class="section-title">Releases</h2>
+			<p class="section-sub">FreeOS.me releases. You can edit the JavaScript array to update these cards.</p>
+			<div class="grid" id="versionsGrid" aria-live="polite"></div>
+		</section>
+
+		<section id="changelog" aria-labelledby="changelog-title">
+			<h2 id="changelog-title" class="section-title">Changelog</h2>
+			<p class="section-sub">A short log of key changes across releases.</p>
+			<div class="timeline" id="changelogTimeline" aria-live="polite"></div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>FreeOS.me <span id="year"></span> · Personal project · Linux distribution in progress</p>
+		</div>
+	</footer>
+	<script src="app.js"></script>
+</body>
+</html>
