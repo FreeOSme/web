@@ -1,4 +1,5 @@
 const DOWNLOAD_BASE_URL = "https://freeos.me/downloads";
+const PREVIEW_LIMIT = 4;
 
 const versions = [
 	{
@@ -86,7 +87,7 @@ const versionsGrid = document.getElementById("versionsGrid");
 const changelogTimeline = document.getElementById("changelogTimeline");
 
 function renderVersions() {
-	versionsGrid.innerHTML = versions.map(function(version) {
+	versionsGrid.innerHTML = versions.slice(0, PREVIEW_LIMIT).map(function(version) {
 		const hasIso = version.isoUrl && version.isoUrl !== "#";
 		const hasChecksum = version.checksumUrl && version.checksumUrl !== "#";
 		const hasNotes = version.notesUrl && version.notesUrl !== "#";
@@ -97,7 +98,7 @@ function renderVersions() {
 }
 
 function renderLogs() {
-	changelogTimeline.innerHTML = logs.map(function(entry) {
+	changelogTimeline.innerHTML = logs.slice(0, PREVIEW_LIMIT).map(function(entry) {
 		const list = entry.changes.map(function(change) {
 			return "<li>" + change + "</li>";
 		}).join("");
