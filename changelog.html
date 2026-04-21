@@ -7,7 +7,7 @@
 	<title>FreeOS.me | Full Changelog</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="styles.css">
 	<link rel="stylesheet" href="changelog.css">
 </head>
@@ -19,12 +19,12 @@
 	<header>
 		<div class="container nav-wrap">
 			<a class="brand" href="index.html" aria-label="Go back to homepage">
-				<span class="brand-logo">F</span>
+				<span class="brand-logo" aria-hidden="true"><span class="brand-glyph"></span></span>
 				<span>FreeOS.me</span>
 			</a>
 			<nav class="nav-links" aria-label="Main navigation">
-				<a href="releases.html">Releases</a>
-				<a href="#markdown">Markdown View</a>
+				<a href="releases.html"><span class="nav-label"><span class="ui-icon icon-release" aria-hidden="true"></span>Releases</span></a>
+				<a href="#markdown"><span class="nav-label"><span class="ui-icon icon-markdown" aria-hidden="true"></span>Markdown View</span></a>
 			</nav>
 		</div>
 	</header>
@@ -32,26 +32,41 @@
 	<main class="container changelog-layout">
 		<section aria-labelledby="page-title" class="changelog-hero">
 			<p class="eyebrow">Detailed release notes</p>
-			<h1 id="page-title">Full Changelog</h1>
+			<h1 id="page-title" class="title-with-icon"><span class="ui-icon icon-changelog" aria-hidden="true"></span>Full Changelog</h1>
 			<p class="section-sub">
 				This page renders from CHANGELOG.md and includes quick anchors for current releases.
 			</p>
+			<div class="view-switcher" aria-label="Section switcher">
+				<a class="view-tab" href="releases.html"><span class="tab-label"><span class="ui-icon icon-release" aria-hidden="true"></span>Releases</span></a>
+				<a class="view-tab active" href="changelog.html"><span class="tab-label"><span class="ui-icon icon-changelog" aria-hidden="true"></span>Changelog</span></a>
+			</div>
+			<div class="document-meta" aria-label="Document metadata">
+				<span class="meta-pill"><span class="ui-icon icon-markdown" aria-hidden="true"></span>Source <strong>CHANGELOG.md</strong></span>
+				<span class="meta-pill"><span class="ui-icon icon-details" aria-hidden="true"></span>View <strong>Rendered</strong></span>
+				<span class="meta-pill"><span class="ui-icon icon-changelog" aria-hidden="true"></span>Scope <strong>Latest history</strong></span>
+			</div>
 			<div class="cta-row">
-				<a class="btn btn-primary" href="index.html">Back to Home</a>
-				<a class="btn btn-secondary" href="CHANGELOG.md">Open Raw Markdown</a>
+				<a class="btn btn-primary" href="index.html"><span class="btn-label"><span class="ui-icon icon-home" aria-hidden="true"></span>Back to Home</span></a>
+				<a class="btn btn-secondary" href="CHANGELOG.md"><span class="btn-label"><span class="ui-icon icon-markdown" aria-hidden="true"></span>Open Raw Markdown</span></a>
 			</div>
 		</section>
 
-		<section class="anchor-links" aria-label="Release anchors">
-			<a class="mini-btn" href="#v1-0-stable">v1.0 Stable</a>
-			<a class="mini-btn" href="#v0-3-canary">v0.3 Canary</a>
-			<a class="mini-btn" href="#v0-2-beta">v0.2 Beta</a>
-			<a class="mini-btn" href="#v0-1-alpha">v0.1 Alpha</a>
-		</section>
+		<div class="document-layout">
+			<aside class="card document-sidebar" aria-labelledby="changelog-nav-title">
+				<h2 id="changelog-nav-title" class="sidebar-title title-with-icon"><span class="ui-icon icon-nav" aria-hidden="true"></span>Quick Navigation</h2>
+				<p class="meta">Jump straight to a tracked version change set.</p>
+				<section class="anchor-links" aria-label="Release anchors">
+					<a class="mini-btn" href="#v1-0-stable">v1.0 Stable</a>
+					<a class="mini-btn" href="#v0-3-canary">v0.3 Canary</a>
+					<a class="mini-btn" href="#v0-2-beta">v0.2 Beta</a>
+					<a class="mini-btn" href="#v0-1-alpha">v0.1 Alpha</a>
+				</section>
+			</aside>
 
-		<section id="markdown" class="card markdown-wrap" aria-live="polite">
-			<p class="meta">Loading changelog...</p>
-		</section>
+			<section id="markdown" class="card markdown-wrap document-panel" aria-live="polite">
+				<p class="meta">Loading changelog...</p>
+			</section>
+		</div>
 	</main>
 
 	<footer>

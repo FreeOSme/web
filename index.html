@@ -7,7 +7,7 @@
 	<title>FreeOS.me | Linux Distribution</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,12 +18,12 @@
 	<header>
 		<div class="container nav-wrap">
 			<a class="brand" href="#home" aria-label="Go to FreeOS.me home">
-				<span class="brand-logo">F</span>
+				<span class="brand-logo" aria-hidden="true"><span class="brand-glyph"></span></span>
 				<span>FreeOS.me</span>
 			</a>
 			<nav class="nav-links" aria-label="Main navigation">
-				<a href="releases.html">Releases</a>
-				<a href="changelog.html">Changelog</a>
+				<a href="releases.html"><span class="nav-label"><span class="ui-icon icon-release" aria-hidden="true"></span>Releases</span></a>
+				<a href="changelog.html"><span class="nav-label"><span class="ui-icon icon-changelog" aria-hidden="true"></span>Changelog</span></a>
 			</nav>
 		</div>
 	</header>
@@ -52,8 +52,8 @@
 					</div>
 				</div>
 				<div class="cta-row">
-					<a class="btn btn-primary" href="releases.html#v0-3-canary">View Latest Release</a>
-					<a class="btn btn-secondary" href="changelog.html">Full Changelog</a>
+					<a class="btn btn-primary" href="releases.html#v0-3-canary"><span class="btn-label"><span class="ui-icon icon-release" aria-hidden="true"></span>View Latest Release</span></a>
+					<a class="btn btn-secondary" href="changelog.html"><span class="btn-label"><span class="ui-icon icon-changelog" aria-hidden="true"></span>Full Changelog</span></a>
 				</div>
 			</article>
 
@@ -76,7 +76,7 @@ No noise. No filler. Just usefulness."</pre>
 		</section>
 
 		<section id="mission" aria-labelledby="mission-title">
-			<h2 id="mission-title" class="section-title">Project Mission</h2>
+			<h2 id="mission-title" class="section-title title-with-icon"><span class="ui-icon icon-mission" aria-hidden="true"></span>Project Mission</h2>
 			<p class="section-sub">
 				FreeOS.me aims to build a clean and reliable Linux experience for everyday use.
 				The project evolves in public: each iteration is versioned, technical decisions are documented,
@@ -99,16 +99,16 @@ No noise. No filler. Just usefulness."</pre>
 		</section>
 
 		<section id="versions" aria-labelledby="versions-title">
-			<h2 id="versions-title" class="section-title">Releases</h2>
+			<h2 id="versions-title" class="section-title title-with-icon"><span class="ui-icon icon-release" aria-hidden="true"></span>Releases</h2>
 			<p class="section-sub">A short release preview. For complete release history and package status, open the full releases page.</p>
-			<p><a class="btn btn-secondary" href="releases.html">Browse All Releases</a></p>
+			<p><a class="btn btn-secondary" href="releases.html"><span class="btn-label"><span class="ui-icon icon-release" aria-hidden="true"></span>Browse All Releases</span></a></p>
 			<div class="grid" id="versionsGrid" aria-live="polite"></div>
 		</section>
 
 		<section id="changelog" aria-labelledby="changelog-title">
-			<h2 id="changelog-title" class="section-title">Recent Changes</h2>
+			<h2 id="changelog-title" class="section-title title-with-icon"><span class="ui-icon icon-changelog" aria-hidden="true"></span>Recent Changes</h2>
 			<p class="section-sub">A short preview of recent updates. For full release details, visit the dedicated changelog page.</p>
-			<p><a class="btn btn-secondary" href="changelog.html">Read Full Changelog</a></p>
+			<p><a class="btn btn-secondary" href="changelog.html"><span class="btn-label"><span class="ui-icon icon-changelog" aria-hidden="true"></span>Read Full Changelog</span></a></p>
 			<div class="timeline" id="changelogTimeline" aria-live="polite"></div>
 		</section>
 	</main>

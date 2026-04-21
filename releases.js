@@ -29,6 +29,31 @@ function addVersionAnchors() {
 	});
 }
 
+function decorateMarkdownHeadings() {
+	const iconMap = {
+		"summary": "icon-summary",
+		"artifacts": "icon-artifacts",
+		"notes": "icon-notes",
+		"added": "icon-added",
+		"changed": "icon-changed",
+		"removed": "icon-removed",
+		"security": "icon-security",
+		"performance": "icon-performance",
+		"validation": "icon-validation"
+	};
+
+	markdownTarget.querySelectorAll("h3").forEach(function(heading) {
+		const text = (heading.textContent || "").trim().toLowerCase();
+		const iconClass = iconMap[text];
+
+		if (!iconClass || heading.querySelector(".markdown-heading")) {
+			return;
+		}
+
+		heading.innerHTML = "<span class=\"markdown-heading\"><span class=\"ui-icon " + iconClass + "\" aria-hidden=\"true\"></span><span>" + heading.textContent + "</span></span>";
+	});
+}
+
 fetch("RELEASES.md")
 	.then(function(response) {
 		if (!response.ok) {
@@ -42,6 +67,7 @@ fetch("RELEASES.md")
 		}
 		markdownTarget.innerHTML = marked.parse(markdown);
 		addVersionAnchors();
+		decorateMarkdownHeadings();
 	})
 	.catch(function() {
 		fallbackMarkup();
