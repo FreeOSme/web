@@ -276,6 +276,7 @@ header {
 .icon-mission::before,
 .icon-release::before,
 .icon-changelog::before,
+.icon-about::before,
 .icon-home::before,
 .icon-markdown::before,
 .icon-details::before,
@@ -329,6 +330,23 @@ header {
 	box-shadow: -3px 3px 0 currentColor, 3px 5px 0 currentColor;
 	transform: rotate(35deg);
 	transform-origin: center;
+}
+
+.icon-about::before {
+	border-radius: 999px;
+	border-width: 1.8px;
+}
+
+.icon-about::after {
+	content: "";
+	position: absolute;
+	left: 6px;
+	top: 3px;
+	width: 2px;
+	height: 2px;
+	border-radius: 999px;
+	background: currentColor;
+	box-shadow: 0 4px 0 currentColor, 0 6px 0 currentColor;
 }
 
 .icon-home::before {
