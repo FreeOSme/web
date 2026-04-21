@@ -296,6 +296,7 @@ header {
 .icon-release::before,
 .icon-changelog::before,
 .icon-about::before,
+	.icon-github::before,
 .icon-home::before,
 .icon-markdown::before,
 .icon-details::before,
@@ -366,6 +367,25 @@ header {
 	border-radius: 999px;
 	background: currentColor;
 	box-shadow: 0 4px 0 currentColor, 0 6px 0 currentColor;
+}
+
+.icon-github::before {
+	border: 0;
+	background: currentColor;
+	clip-path: polygon(22% 34%, 30% 20%, 39% 20%, 43% 15%, 50% 12%, 57% 15%, 61% 20%, 70% 20%, 78% 34%, 78% 50%, 72% 61%, 72% 81%, 63% 81%, 63% 67%, 56% 64%, 56% 82%, 44% 82%, 44% 64%, 37% 67%, 37% 81%, 28% 81%, 28% 61%, 22% 50%);
+	opacity: 0.95;
+}
+
+.icon-github::after {
+	content: "";
+	position: absolute;
+	left: 4px;
+	top: 4px;
+	width: 2px;
+	height: 2px;
+	border-radius: 999px;
+	background: var(--bg-window);
+	box-shadow: 4px 0 0 var(--bg-window);
 }
 
 .icon-home::before {
