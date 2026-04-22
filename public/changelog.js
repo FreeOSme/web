@@ -3,14 +3,16 @@ if (yearElement) {
 	yearElement.textContent = new Date().getFullYear();
 }
 
+const CHANGELOG_RAW_URL = "https://gitlab.com/freeos.me/core/-/raw/d883072cb0df262dfff0e9357938230773eda03f/CHANGELOG.md";
+const CHANGELOG_BLOB_URL = "https://gitlab.com/freeos.me/core/-/blob/d883072cb0df262dfff0e9357938230773eda03f/CHANGELOG.md";
+
 const markdownTarget = document.getElementById("markdown");
 
 function fallbackMarkup() {
 	markdownTarget.innerHTML = ""
-		+ "<h2>Unable to load CHANGELOG.md from this context</h2>"
-		+ "<p class=\"meta\">If you are opening this page via file://, browser security may block local file fetch.</p>"
-		+ "<p><a class=\"btn btn-secondary\" href=\"CHANGELOG.md\">Open CHANGELOG.md directly</a></p>"
-		+ "<p class=\"meta\">Tip: run a local server for full Markdown rendering, for example: <code>python -m http.server 8080</code></p>";
+		+ "<h2>Unable to load CHANGELOG.md from GitLab</h2>"
+		+ "<p class=\"meta\">The remote repository may be unavailable or blocked from this network.</p>"
+		+ "<p><a class=\"btn btn-secondary\" href=\"" + CHANGELOG_BLOB_URL + "\" target=\"_blank\" rel=\"noopener noreferrer\">Open CHANGELOG.md on GitLab</a></p>";
 }
 
 function addVersionAnchors() {
@@ -57,7 +59,7 @@ function decorateMarkdownHeadings() {
 	});
 }
 
-fetch("CHANGELOG.md")
+fetch(CHANGELOG_RAW_URL)
 	.then(function(response) {
 		if (!response.ok) {
 			throw new Error("Could not fetch changelog markdown.");

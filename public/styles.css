@@ -176,6 +176,13 @@ header {
 	border-color: rgba(214, 211, 209, 0.8);
 }
 
+.nav-links a.active {
+	color: var(--ink);
+	background: #ffffff;
+	border-color: var(--line);
+	box-shadow: var(--shadow-soft);
+}
+
 /* =========================
    Shared Header Controls
 ========================= */
