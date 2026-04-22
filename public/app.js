@@ -1,5 +1,5 @@
 const DOWNLOAD_BASE_URL = "https://freeos.me/downloads";
-const PREVIEW_LIMIT = 6;
+const PREVIEW_LIMIT = 3;
 
 const versions = [
 	{
