@@ -12,7 +12,7 @@ if (-not $Ref) {
 	if ($env:CORE_REF) {
 		$Ref = $env:CORE_REF
 	} else {
-		$Ref = "d883072cb0df262dfff0e9357938230773eda03f"
+		$Ref = "main"
 	}
 }
 

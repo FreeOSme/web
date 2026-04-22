@@ -1,7 +1,7 @@
 image: mcr.microsoft.com/powershell:7.4-alpine-3.20
 
 variables:
-  CORE_DEFAULT_REF: d883072cb0df262dfff0e9357938230773eda03f
+  CORE_DEFAULT_REF: main
   CORE_DEFAULT_PROJECT_PATH: freeos.me/core
 
 pages:
