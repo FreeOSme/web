@@ -1,0 +1,175 @@
+(function() {
+	function getRepoConfig() {
+		return window.FREEOS_REPO_CONFIG || {
+			host: "https://gitlab.com",
+			projectPath: "freeos.me/core",
+			ref: "d883072cb0df262dfff0e9357938230773eda03f"
+		};
+	}
+
+	function getDocsBase() {
+		const config = getRepoConfig();
+		return config.host + "/" + config.projectPath + "/-/";
+	}
+
+	function getDocUrls(fileName) {
+		const config = getRepoConfig();
+		const base = getDocsBase();
+		return {
+			raw: base + "raw/" + config.ref + "/" + fileName,
+			blob: base + "blob/" + config.ref + "/" + fileName
+		};
+	}
+
+	function toVersionAnchor(version) {
+		return "v" + version.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+	}
+
+	function statusFromVersion(version) {
+		const lower = version.toLowerCase();
+		if (lower.includes("canary")) {
+			return "Canary";
+		}
+		if (lower.includes("beta")) {
+			return "Beta";
+		}
+		if (lower.includes("alpha")) {
+			return "Alpha";
+		}
+		if (lower.includes("stable")) {
+			return "Stable";
+		}
+		return "Planned";
+	}
+
+	function prettyVersion(version) {
+		const status = statusFromVersion(version);
+		const cleaned = version.replace(/-?(alpha|beta|canary|stable)$/i, "").replace(/[\[\]]/g, "").trim();
+		if (!cleaned) {
+			return version;
+		}
+		return cleaned + " " + status;
+	}
+
+	function parseReleaseEntries(markdown) {
+		const sections = markdown.match(/^##\s+.+(?:\n(?!##\s).*)*/gm) || [];
+
+		return sections.map(function(section) {
+			const headingMatch = section.match(/^##\s+([^\s]+)\s*\(([^)]+)\)/m);
+			if (!headingMatch) {
+				return null;
+			}
+
+			const rawVersion = headingMatch[1].trim();
+			const date = headingMatch[2].trim();
+			const notesMatch = section.match(/###\s+Summary[\s\S]*?^[-*]\s+(.+)$/m);
+			const isoMatch = section.match(/https?:\/\/\S+\.iso\b/i);
+			const checksumMatch = section.match(/https?:\/\/\S+\.sha256\b/i);
+			const notesUrlMatch = section.match(/\[.*?\]\(([^)]+)\)/);
+			const anchor = toVersionAnchor(rawVersion);
+
+			return {
+				name: "FreeOS.me " + prettyVersion(rawVersion),
+				status: statusFromVersion(rawVersion),
+				date: date,
+				notes: notesMatch ? notesMatch[1].trim() : "Release notes available.",
+				releaseUrl: "releases.html#" + anchor,
+				isoUrl: isoMatch ? isoMatch[0] : "#",
+				checksumUrl: checksumMatch ? checksumMatch[0] : "#",
+				notesUrl: notesUrlMatch ? notesUrlMatch[1] : "changelog.html#" + anchor
+			};
+		}).filter(Boolean);
+	}
+
+	function parseChangelogEntries(markdown) {
+		const sections = markdown.match(/^##\s+.+(?:\n(?!##\s).*)*/gm) || [];
+
+		return sections.map(function(section) {
+			const headingMatch = section.match(/^##\s+\[?([^\]\n]+)\]?\s*-\s*([0-9]{4}-[0-9]{2}-[0-9]{2})/m);
+			if (!headingMatch) {
+				return null;
+			}
+
+			const versionRaw = headingMatch[1].trim();
+			const date = headingMatch[2].trim();
+			const bullets = (section.match(/^[-*]\s+.+$/gm) || []).map(function(line) {
+				return line.replace(/^[-*]\s+/, "").trim();
+			}).slice(0, 3);
+
+			return {
+				version: prettyVersion(versionRaw),
+				date: date,
+				changes: bullets.length ? bullets : ["See full changelog for details."]
+			};
+		}).filter(Boolean);
+	}
+
+	function makeAnchorId(text) {
+		const versionMatch = text.match(/([0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9]+)?)/i);
+		if (versionMatch) {
+			return "v" + versionMatch[1].toLowerCase().replace(/[^a-z0-9]+/g, "-");
+		}
+		return "v" + text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+	}
+
+	function extractAnchorLabel(text) {
+		const versionMatch = text.match(/([0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9]+)?)/i);
+		if (versionMatch) {
+			return "v" + versionMatch[1].replace(/-(alpha|beta|canary|stable)$/i, function(_, suffix) {
+				return " " + suffix.charAt(0).toUpperCase() + suffix.slice(1).toLowerCase();
+			});
+		}
+		return text;
+	}
+
+	function applyVersionAnchors(markdownTarget, anchorsContainer) {
+		const sections = markdownTarget.querySelectorAll("h2");
+		const links = [];
+
+		sections.forEach(function(section) {
+			const text = section.textContent || "";
+			const id = makeAnchorId(text);
+			section.id = id;
+			links.push({ id: id, label: extractAnchorLabel(text) });
+		});
+
+		if (anchorsContainer) {
+			anchorsContainer.innerHTML = links.map(function(link) {
+				return "<a class=\"mini-btn\" href=\"#" + link.id + "\">" + link.label + "</a>";
+			}).join("") || "<p class=\"meta\">No anchors available.</p>";
+		}
+	}
+
+	function decorateMarkdownHeadings(markdownTarget) {
+		const iconMap = {
+			"summary": "icon-summary",
+			"artifacts": "icon-artifacts",
+			"notes": "icon-notes",
+			"added": "icon-added",
+			"changed": "icon-changed",
+			"removed": "icon-removed",
+			"security": "icon-security",
+			"performance": "icon-performance",
+			"validation": "icon-validation"
+		};
+
+		markdownTarget.querySelectorAll("h3").forEach(function(heading) {
+			const text = (heading.textContent || "").trim().toLowerCase();
+			const iconClass = iconMap[text];
+
+			if (!iconClass || heading.querySelector(".markdown-heading")) {
+				return;
+			}
+
+			heading.innerHTML = "<span class=\"markdown-heading\"><span class=\"ui-icon " + iconClass + "\" aria-hidden=\"true\"></span><span>" + heading.textContent + "</span></span>";
+		});
+	}
+
+	window.FREEOS_CONTENT = {
+		getDocUrls: getDocUrls,
+		parseReleaseEntries: parseReleaseEntries,
+		parseChangelogEntries: parseChangelogEntries,
+		applyVersionAnchors: applyVersionAnchors,
+		decorateMarkdownHeadings: decorateMarkdownHeadings
+	};
+})();
