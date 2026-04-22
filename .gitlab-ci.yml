@@ -1,0 +1,10 @@
+# Definimos el trabajo de despliegue
+pages:
+  stage: deploy
+  script:
+    - echo "FreeOS deploying static files..."
+  artifacts:
+    paths:
+      - public  
+  only:
+    - main
