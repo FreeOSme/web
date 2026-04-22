@@ -1,12 +1,24 @@
 param(
-	[string]$Ref = "d883072cb0df262dfff0e9357938230773eda03f",
+	[string]$Ref = "",
 	[string]$GitLabHost = "https://gitlab.com",
 	[string]$ProjectPath = "freeos.me/core",
-	[string]$OutputPath = "public/site-content.js"
+	[string]$OutputPath = "public/js/site-content.js"
 )
 
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
+
+if (-not $Ref) {
+	if ($env:CORE_REF) {
+		$Ref = $env:CORE_REF
+	} else {
+		$Ref = "d883072cb0df262dfff0e9357938230773eda03f"
+	}
+}
+
+if ($env:CORE_PROJECT_PATH) {
+	$ProjectPath = $env:CORE_PROJECT_PATH
+}
 
 $baseUrl = "$GitLabHost/$ProjectPath/-/raw/$Ref"
 $docs = [ordered]@{}

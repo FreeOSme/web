@@ -1,13 +1,17 @@
 image: mcr.microsoft.com/powershell:7.4-alpine-3.20
 
-# Definimos el trabajo de despliegue
+variables:
+  CORE_DEFAULT_REF: d883072cb0df262dfff0e9357938230773eda03f
+  CORE_DEFAULT_PROJECT_PATH: freeos.me/core
+
 pages:
   stage: deploy
   script:
-    - pwsh -File scripts/generate-site-content.ps1
+    - pwsh -File scripts/generate-site-content.ps1 -Ref "${CORE_REF:-$CORE_DEFAULT_REF}" -ProjectPath "${CORE_PROJECT_PATH:-$CORE_DEFAULT_PROJECT_PATH}"
     - echo "FreeOS deploying static files..."
   artifacts:
     paths:
       - public
-  only:
-    - main
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "pipeline"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
