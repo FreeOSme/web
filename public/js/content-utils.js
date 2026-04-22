@@ -68,13 +68,15 @@
 		const sections = markdown.match(/^##\s+.+(?:\n(?!##\s).*)*/gm) || [];
 
 		return sections.map(function(section) {
-			const headingMatch = section.match(/^##\s+([^\s]+)\s*\(([^)]+)\)/m);
-			if (!headingMatch) {
-				return null;
-			}
+				const headingMatch =
+					section.match(/^##\s+\[?([^\]\n(]+)\]?\s*-\s*([0-9]{4}-[0-9]{2}-[0-9]{2})/m) ||
+					section.match(/^##\s+([^\s(]+)\s*\(([^)]+)\)/m);
+				if (!headingMatch) {
+					return null;
+				}
 
-			const rawVersion = headingMatch[1].trim();
-			const date = headingMatch[2].trim();
+				const rawVersion = headingMatch[1].trim();
+				const date = headingMatch[2].trim();
 			const notesMatch = section.match(/###\s+Summary[\s\S]*?^[-*]\s+(.+)$/m);
 			const isoMatch = section.match(/https?:\/\/\S+\.iso\b/i);
 			const checksumMatch = section.match(/https?:\/\/\S+\.sha256\b/i);
