@@ -183,6 +183,20 @@ header {
 	box-shadow: var(--shadow-soft);
 }
 
+.nav-links a[target="_blank"] .nav-label::after,
+.btn[target="_blank"] .btn-label::after,
+.mini-btn[target="_blank"] .btn-label::after {
+	content: "";
+	display: inline-block;
+	width: 0.5rem;
+	height: 0.5rem;
+	border-top: 1.6px solid currentColor;
+	border-right: 1.6px solid currentColor;
+	transform: translateY(-1px);
+	box-sizing: border-box;
+	opacity: 0.82;
+}
+
 /* =========================
    Icon System
 ========================= */

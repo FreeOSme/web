@@ -24,7 +24,18 @@
 			+ "\t\t</nav>"
 			+ "\t</div>"
 			+ "</header>";
+
 	}
+
+	document.querySelectorAll("a[target=\"_blank\"]").forEach(function(link) {
+		if (!link.getAttribute("aria-label")) {
+			const baseLabel = (link.textContent || "External link").trim();
+			link.setAttribute("aria-label", baseLabel + " (opens in new tab)");
+		}
+		if (!link.getAttribute("title")) {
+			link.setAttribute("title", "Opens in new tab");
+		}
+	});
 
 	const footerMount = document.getElementById("site-footer");
 	if (footerMount) {
