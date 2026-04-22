@@ -1,10 +1,13 @@
+image: mcr.microsoft.com/powershell:7.4-alpine-3.20
+
 # Definimos el trabajo de despliegue
 pages:
   stage: deploy
   script:
+    - pwsh -File scripts/generate-site-content.ps1
     - echo "FreeOS deploying static files..."
   artifacts:
     paths:
-      - public  
+      - public
   only:
     - main

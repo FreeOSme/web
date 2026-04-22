@@ -1,10 +1,23 @@
 (function() {
 	function getRepoConfig() {
+		var embeddedContent = window.FREEOS_SITE_CONTENT || {};
+		var embeddedRef = embeddedContent.ref;
+
 		return window.FREEOS_REPO_CONFIG || {
 			host: "https://gitlab.com",
 			projectPath: "freeos.me/core",
-			ref: "d883072cb0df262dfff0e9357938230773eda03f"
+			ref: embeddedRef || "d883072cb0df262dfff0e9357938230773eda03f"
 		};
+	}
+
+	function getEmbeddedDoc(fileName) {
+		var content = window.FREEOS_SITE_CONTENT;
+
+		if (!content || !content.docs) {
+			return "";
+		}
+
+		return content.docs[fileName] || "";
 	}
 
 	function getDocsBase() {
@@ -165,11 +178,119 @@
 		});
 	}
 
+	function escapeHtml(text) {
+		return text
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;")
+			.replace(/\"/g, "&quot;")
+			.replace(/'/g, "&#39;");
+	}
+
+	function stripHtmlComments(text) {
+		return text.replace(/<!--.*?-->/g, "").trim();
+	}
+
+	function buildLink(href, label) {
+		var safeHref = escapeHtml(href);
+		var safeLabel = escapeHtml(label);
+		var isExternal = /^https?:\/\//i.test(href);
+		var attrs = isExternal ? ' target=\"_blank\" rel=\"noopener noreferrer\"' : "";
+
+		return '<a href="' + safeHref + '"' + attrs + '>' + safeLabel + '</a>';
+	}
+
+	function renderInlineMarkdown(text) {
+		var source = stripHtmlComments(text);
+		var pattern = /\[([^\]]+)\]\(([^)]+)\)|(https?:\/\/[^\s<]+|[A-Za-z0-9._/-]+\.html#[A-Za-z0-9._-]+)/g;
+		var html = "";
+		var lastIndex = 0;
+		var match;
+
+		while ((match = pattern.exec(source)) !== null) {
+			html += escapeHtml(source.slice(lastIndex, match.index));
+
+			if (match[1] && match[2]) {
+				html += buildLink(match[2], match[1]);
+			} else {
+				html += buildLink(match[3], match[3]);
+			}
+
+			lastIndex = pattern.lastIndex;
+		}
+
+		html += escapeHtml(source.slice(lastIndex));
+		return html;
+	}
+
+	function renderMarkdown(markdown) {
+		var lines = markdown.replace(/\r\n/g, "\n").split("\n");
+		var html = [];
+		var paragraphLines = [];
+		var listItems = [];
+
+		function flushParagraph() {
+			if (!paragraphLines.length) {
+				return;
+			}
+
+			html.push("<p>" + renderInlineMarkdown(paragraphLines.join(" ")) + "</p>");
+			paragraphLines = [];
+		}
+
+		function flushList() {
+			if (!listItems.length) {
+				return;
+			}
+
+			html.push("<ul>" + listItems.map(function(item) {
+				return "<li>" + renderInlineMarkdown(item) + "</li>";
+			}).join("") + "</ul>");
+			listItems = [];
+		}
+
+		lines.forEach(function(line) {
+			var trimmed = line.trim();
+			var headingMatch;
+			var listMatch;
+
+			if (!trimmed) {
+				flushParagraph();
+				flushList();
+				return;
+			}
+
+			headingMatch = trimmed.match(/^(#{1,6})\s+(.+)$/);
+			if (headingMatch) {
+				flushParagraph();
+				flushList();
+				html.push("<h" + headingMatch[1].length + ">" + renderInlineMarkdown(headingMatch[2]) + "</h" + headingMatch[1].length + ">");
+				return;
+			}
+
+			listMatch = trimmed.match(/^[-*]\s+(.+)$/);
+			if (listMatch) {
+				flushParagraph();
+				listItems.push(listMatch[1]);
+				return;
+			}
+
+			paragraphLines.push(trimmed);
+		});
+
+		flushParagraph();
+		flushList();
+
+		return html.join("");
+	}
+
 	window.FREEOS_CONTENT = {
 		getDocUrls: getDocUrls,
+		getEmbeddedDoc: getEmbeddedDoc,
 		parseReleaseEntries: parseReleaseEntries,
 		parseChangelogEntries: parseChangelogEntries,
 		applyVersionAnchors: applyVersionAnchors,
-		decorateMarkdownHeadings: decorateMarkdownHeadings
+		decorateMarkdownHeadings: decorateMarkdownHeadings,
+		renderMarkdown: renderMarkdown
 	};
 })();

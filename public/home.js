@@ -2,9 +2,8 @@ const versionsGrid = document.getElementById("versionsGrid");
 const changelogTimeline = document.getElementById("changelogTimeline");
 const PREVIEW_LIMIT = 3;
 const content = window.FREEOS_CONTENT;
-
-const RELEASES_RAW_URL = content.getDocUrls("RELEASES.md").raw;
-const CHANGELOG_RAW_URL = content.getDocUrls("CHANGELOG.md").raw;
+const releasesMarkdown = content.getEmbeddedDoc("RELEASES.md");
+const changelogMarkdown = content.getEmbeddedDoc("CHANGELOG.md");
 
 function renderVersions(versions) {
 	if (!versions.length) {
@@ -38,25 +37,12 @@ function renderLogs(logs) {
 	}).join("");
 }
 
-Promise.all([
-	fetch(RELEASES_RAW_URL).then(function(response) {
-		if (!response.ok) {
-			throw new Error("Could not fetch releases markdown.");
-		}
-		return response.text();
-	}),
-	fetch(CHANGELOG_RAW_URL).then(function(response) {
-		if (!response.ok) {
-			throw new Error("Could not fetch changelog markdown.");
-		}
-		return response.text();
-	})
-]).then(function(results) {
-	const releasesMarkdown = results[0];
-	const changelogMarkdown = results[1];
+
+if (releasesMarkdown && changelogMarkdown) {
 	renderVersions(content.parseReleaseEntries(releasesMarkdown));
 	renderLogs(content.parseChangelogEntries(changelogMarkdown));
-}).catch(function() {
+
+} else {
 	renderVersions([]);
 	renderLogs([]);
-});
+}

@@ -5,11 +5,12 @@ if (markdownTarget) {
 	const anchorsContainer = document.getElementById(isReleasesPage ? "releaseAnchors" : "changelogAnchors");
 	const docName = isReleasesPage ? "RELEASES.md" : "CHANGELOG.md";
 	const docUrls = window.FREEOS_CONTENT.getDocUrls(docName);
+	const markdown = window.FREEOS_CONTENT.getEmbeddedDoc(docName);
 
 	function fallbackMarkup() {
 		markdownTarget.innerHTML = ""
-			+ "<h2>Unable to load " + docName + " from GitLab</h2>"
-			+ "<p class=\"meta\">The remote repository may be unavailable or blocked from this network.</p>"
+			+ "<h2>Unable to load generated content for " + docName + "</h2>"
+			+ "<p class=\"meta\">The published site does not currently include an embedded copy of this document.</p>"
 			+ "<p><a class=\"btn btn-secondary\" href=\"" + docUrls.blob + "\" target=\"_blank\" rel=\"noopener noreferrer\">Open " + docName + " on GitLab</a></p>";
 
 		if (anchorsContainer) {
@@ -17,22 +18,11 @@ if (markdownTarget) {
 		}
 	}
 
-	fetch(docUrls.raw)
-		.then(function(response) {
-			if (!response.ok) {
-				throw new Error("Could not fetch markdown.");
-			}
-			return response.text();
-		})
-		.then(function(markdown) {
-			if (typeof marked === "undefined") {
-				throw new Error("Markdown renderer is not available.");
-			}
-			markdownTarget.innerHTML = marked.parse(markdown);
-			window.FREEOS_CONTENT.applyVersionAnchors(markdownTarget, anchorsContainer);
-			window.FREEOS_CONTENT.decorateMarkdownHeadings(markdownTarget);
-		})
-		.catch(function() {
-			fallbackMarkup();
-		});
+	if (!markdown) {
+		fallbackMarkup();
+	} else {
+		markdownTarget.innerHTML = window.FREEOS_CONTENT.renderMarkdown(markdown);
+		window.FREEOS_CONTENT.applyVersionAnchors(markdownTarget, anchorsContainer);
+		window.FREEOS_CONTENT.decorateMarkdownHeadings(markdownTarget);
+	}
 }
