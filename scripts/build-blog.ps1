@@ -7,8 +7,7 @@ $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
 if (-not (Test-Path $SourcePath)) {
-	Write-Host "Hugo source folder '$SourcePath' not found. Skipping blog build."
-	exit 0
+	throw "Hugo source folder '$SourcePath' not found."
 }
 
 $hugo = Get-Command hugo -ErrorAction SilentlyContinue
@@ -21,4 +20,15 @@ if (-not (Test-Path $OutputPath)) {
 }
 
 & hugo --source $SourcePath --destination $OutputPath --cleanDestinationDir
+
+$generatedIndex = Join-Path $OutputPath "index.html"
+if (-not (Test-Path $generatedIndex)) {
+	throw "Hugo build did not produce $generatedIndex"
+}
+
+$generatedContent = Get-Content -Path $generatedIndex -Raw
+if ($generatedContent -match "Blog build pending") {
+	throw "Hugo output still contains placeholder content."
+}
+
 Write-Host "Generated Hugo blog into $OutputPath"
