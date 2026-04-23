@@ -1,17 +1,55 @@
 {{ define "main" }}
-  <article>
-    <p style="margin-bottom: 1rem;">
-      <a href="{{ "/blog/" | relURL }}">← Back to blog</a>
+  {{ $author := or .Params.author .Site.Params.author }}
+  <article class="blog-single">
+    <p class="blog-back-link-wrap">
+      <a class="blog-cta blog-cta-subtle" href="{{ "/blog/" | relURL }}">← Back to blog</a>
     </p>
-    <h1>{{ .Title }}</h1>
-    <p style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1.5rem;">
-      Published on {{ .Date.Format "January 2, 2006" }}
+
+    <header class="blog-single-header">
+      <p class="section-kicker">Article</p>
+      <h1>{{ .Title }}</h1>
+      <p class="blog-meta">Published on {{ .Date.Format "January 2, 2006" }} · {{ .ReadingTime }} min read · By {{ $author }}</p>
+
       {{ with .Params.summary }}
-        <br><em>{{ . }}</em>
+        <p class="blog-single-summary">{{ . }}</p>
       {{ end }}
-    </p>
-    <div style="color: var(--ink); font-size: 1.02rem; line-height: 1.7;">
+
+      {{ with .Params.tags }}
+        <ul class="blog-tag-list" aria-label="Post tags">
+          {{ range . }}
+            <li><span class="blog-tag">{{ . }}</span></li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    </header>
+
+    <div class="blog-content">
       {{ .Content }}
     </div>
   </article>
+
+  {{ $otherPosts := where .Site.RegularPages "Section" "posts" }}
+  {{ $otherPosts = where $otherPosts "RelPermalink" "ne" .RelPermalink }}
+  {{ $related := first 3 ($otherPosts.ByDate.Reverse) }}
+  {{ if gt (len $related) 0 }}
+    <section class="blog-related" aria-labelledby="more-from-blog-title">
+      <div class="blog-section-head">
+        <h2 id="more-from-blog-title">More from the blog</h2>
+      </div>
+      <div class="blog-post-grid">
+        {{ range $related }}
+          {{ $relatedAuthor := or .Params.author $.Site.Params.author }}
+          <article class="blog-post-card">
+            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            <p class="blog-meta">{{ .Date.Format "January 2, 2006" }} · {{ .ReadingTime }} min read · By {{ $relatedAuthor }}</p>
+            {{ with .Params.summary }}
+              <p>{{ . }}</p>
+            {{ else }}
+              <p>{{ .Summary | plainify | truncate 120 }}</p>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
 {{ end }}

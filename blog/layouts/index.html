@@ -1,23 +1,85 @@
 {{ define "main" }}
-  <section>
-    <h1>{{ .Title }}</h1>
-    {{ with .Content }}<div style="font-size: 1.05rem; margin-bottom: 2rem; color: var(--ink-soft);">{{ . }}</div>{{ end }}
-  </section>
+  {{ $posts := where .Site.RegularPages "Section" "posts" }}
+  {{ $sortedPosts := $posts.ByDate.Reverse }}
+  {{ $paginator := .Paginate $sortedPosts 7 }}
 
-  <section>
-    <h2>Latest Posts</h2>
-    {{ $posts := where .Site.RegularPages "Section" "posts" }}
-    {{ if gt (len $posts) 0 }}
-      <ul class="post-list">
-        {{ range $posts.ByDate.Reverse }}
-          <li>
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            <span>{{ .Date.Format "January 2, 2006" }}</span>
-          </li>
-        {{ end }}
-      </ul>
-    {{ else }}
-      <p style="color: var(--ink-soft);">No blog posts yet. Check back soon!</p>
+  <section class="blog-home-intro">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}
+      <div class="blog-home-subtitle">{{ . }}</div>
     {{ end }}
   </section>
+
+  {{ if gt (len $sortedPosts) 0 }}
+    {{ if eq $paginator.PageNumber 1 }}
+      {{ $featured := index $sortedPosts 0 }}
+      {{ $featuredAuthor := or $featured.Params.author .Site.Params.author }}
+      <section class="blog-featured" aria-labelledby="featured-post-title">
+        <p class="section-kicker">Featured</p>
+        <article class="blog-featured-card">
+          <h2 id="featured-post-title"><a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a></h2>
+          <p class="blog-meta">{{ $featured.Date.Format "January 2, 2006" }} · {{ $featured.ReadingTime }} min read · By {{ $featuredAuthor }}</p>
+          {{ with $featured.Params.summary }}
+            <p class="blog-featured-summary">{{ . }}</p>
+          {{ else }}
+            <p class="blog-featured-summary">{{ $featured.Summary | plainify | truncate 180 }}</p>
+          {{ end }}
+          <p><a class="blog-cta" href="{{ $featured.RelPermalink }}">Read featured post</a></p>
+        </article>
+      </section>
+    {{ end }}
+
+    <section class="blog-latest" aria-labelledby="latest-posts-title">
+      <div class="blog-section-head">
+        <h2 id="latest-posts-title">Latest Posts</h2>
+        <a class="blog-archive-link" href="{{ "/posts/" | relURL }}">View archive</a>
+      </div>
+
+      {{ $pagePosts := $paginator.Pages }}
+      {{ if and (eq $paginator.PageNumber 1) (gt (len $pagePosts) 1) }}
+        {{ $pagePosts = after 1 $pagePosts }}
+      {{ end }}
+
+      {{ if gt (len $pagePosts) 0 }}
+        <div class="blog-post-grid">
+          {{ range $pagePosts }}
+            {{ $postAuthor := or .Params.author $.Site.Params.author }}
+            <article class="blog-post-card">
+              <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+              <p class="blog-meta">{{ .Date.Format "January 2, 2006" }} · {{ .ReadingTime }} min read · By {{ $postAuthor }}</p>
+              {{ with .Params.summary }}
+                <p>{{ . }}</p>
+              {{ else }}
+                <p>{{ .Summary | plainify | truncate 120 }}</p>
+              {{ end }}
+            </article>
+          {{ end }}
+        </div>
+      {{ else }}
+        <p class="blog-muted">Only one post is published so far. More updates are coming soon.</p>
+      {{ end }}
+
+      {{ if gt $paginator.TotalPages 1 }}
+        <nav class="blog-pagination" aria-label="Blog pages">
+          {{ if $paginator.HasPrev }}
+            <a class="blog-page-link" href="{{ $paginator.Prev.URL }}">← Newer posts</a>
+          {{ else }}
+            <span class="blog-page-link is-disabled">← Newer posts</span>
+          {{ end }}
+
+          <span class="blog-page-status">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+
+          {{ if $paginator.HasNext }}
+            <a class="blog-page-link" href="{{ $paginator.Next.URL }}">Older posts →</a>
+          {{ else }}
+            <span class="blog-page-link is-disabled">Older posts →</span>
+          {{ end }}
+        </nav>
+      {{ end }}
+    </section>
+  {{ else }}
+    <section>
+      <p class="blog-muted">No blog posts yet. Check back soon.</p>
+    </section>
+  {{ end }}
 {{ end }}

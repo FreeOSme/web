@@ -1,21 +1,46 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ if .Content }}
-    <div style="font-size: 1.05rem; margin-bottom: 2rem; color: var(--ink-soft);">
-      {{ .Content }}
-    </div>
-  {{ end }}
+  <section class="blog-home-intro">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}
+      <div class="blog-home-subtitle">{{ . }}</div>
+    {{ end }}
+  </section>
 
-  {{ if .Pages }}
-    <ul class="post-list">
-      {{ range .Pages.ByDate.Reverse }}
-        <li>
-          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-          <span>{{ .Date.Format "January 2, 2006" }}</span>
-        </li>
+  {{ $paginator := .Paginate (.Pages.ByDate.Reverse) 12 }}
+  {{ if gt (len $paginator.Pages) 0 }}
+    <div class="blog-post-grid">
+      {{ range $paginator.Pages }}
+        {{ $postAuthor := or .Params.author $.Site.Params.author }}
+        <article class="blog-post-card">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p class="blog-meta">{{ .Date.Format "January 2, 2006" }} · {{ .ReadingTime }} min read · By {{ $postAuthor }}</p>
+          {{ with .Params.summary }}
+            <p>{{ . }}</p>
+          {{ else }}
+            <p>{{ .Summary | plainify | truncate 120 }}</p>
+          {{ end }}
+        </article>
       {{ end }}
-    </ul>
+    </div>
+
+    {{ if gt $paginator.TotalPages 1 }}
+      <nav class="blog-pagination" aria-label="Blog pages">
+        {{ if $paginator.HasPrev }}
+          <a class="blog-page-link" href="{{ $paginator.Prev.URL }}">← Newer posts</a>
+        {{ else }}
+          <span class="blog-page-link is-disabled">← Newer posts</span>
+        {{ end }}
+
+        <span class="blog-page-status">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+
+        {{ if $paginator.HasNext }}
+          <a class="blog-page-link" href="{{ $paginator.Next.URL }}">Older posts →</a>
+        {{ else }}
+          <span class="blog-page-link is-disabled">Older posts →</span>
+        {{ end }}
+      </nav>
+    {{ end }}
   {{ else }}
-    <p style="color: var(--ink-soft);">No posts found.</p>
+    <p class="blog-muted">No posts found.</p>
   {{ end }}
 {{ end }}
