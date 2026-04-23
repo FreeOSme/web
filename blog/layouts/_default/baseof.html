@@ -5,14 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
   <meta name="description" content="{{ with .Summary }}{{ . | plainify }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/blog.css" | relURL }}">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
-      <nav>
-        <a href="{{ "/" | relURL }}">Home</a>
+  <header>
+    <div class="container nav-wrap">
+      <a class="brand" href="{{ "/" | relURL }}" aria-label="Go back to homepage">
+        <span>FreeOS.me</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="{{ "/" | relURL }}"><span class="nav-label">Home</span></a>
+        <a href="{{ "/blog/" | relURL }}"><span class="nav-label">Blog</span></a>
+        <a href="{{ "/releases.html" | relURL }}"><span class="nav-label">Releases</span></a>
+        <a href="{{ "/changelog.html" | relURL }}"><span class="nav-label">Changelog</span></a>
       </nav>
     </div>
   </header>
@@ -20,5 +28,11 @@
   <main class="container">
     {{ block "main" . }}{{ end }}
   </main>
+
+  <footer>
+    <div class="container">
+      <p>FreeOS.me @{{ now.Year }} · Linux distribution in progress</p>
+    </div>
+  </footer>
 </body>
 </html>

@@ -1,7 +1,7 @@
 {{ define "main" }}
   <section>
     <h1>{{ .Title }}</h1>
-    {{ with .Content }}<p>{{ . }}</p>{{ end }}
+    {{ with .Content }}<div style="font-size: 1.05rem; margin-bottom: 2rem; color: var(--ink-soft);">{{ . }}</div>{{ end }}
   </section>
 
   <section>
@@ -12,12 +12,12 @@
         {{ range $posts.ByDate.Reverse }}
           <li>
             <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            <span>{{ .Date.Format "2006-01-02" }}</span>
+            <span>{{ .Date.Format "January 2, 2006" }}</span>
           </li>
         {{ end }}
       </ul>
     {{ else }}
-      <p>No blog posts yet.</p>
+      <p style="color: var(--ink-soft);">No blog posts yet. Check back soon!</p>
     {{ end }}
   </section>
 {{ end }}

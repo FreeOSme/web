@@ -1,9 +1,16 @@
 {{ define "main" }}
   <article>
-    <p><a href="{{ "/" | relURL }}">Back to blog</a></p>
+    <p style="margin-bottom: 1rem;">
+      <a href="{{ "/blog/" | relURL }}">← Back to blog</a>
+    </p>
     <h1>{{ .Title }}</h1>
-    <p>{{ .Date.Format "2006-01-02" }}</p>
-    <div>
+    <p style="color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1.5rem;">
+      Published on {{ .Date.Format "January 2, 2006" }}
+      {{ with .Params.summary }}
+        <br><em>{{ . }}</em>
+      {{ end }}
+    </p>
+    <div style="color: var(--ink); font-size: 1.02rem; line-height: 1.7;">
       {{ .Content }}
     </div>
   </article>
