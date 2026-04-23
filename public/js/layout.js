@@ -5,14 +5,14 @@
 	function isActive(path) {
 		// Home: activo si estamos en "/" o no hay página específica
 		if (path === "index.html") {
-			return (currentPage === "" || currentPage === "index.html") ? " active" : "";
+			return (currentPath === "/" || currentPath === "/index.html") ? " active" : "";
 		}
 		return currentPage === path ? " active" : "";
 	}
 
 	function isBlogActive() {
-		// Activo si la ruta comienza con /blog (pero no es /blog/ exacto mezclado con otro)
-		return currentPath.startsWith("/blog") && currentPage !== "index.html" ? " active" : "";
+		// Activo para /blog, /blog/ y cualquier subruta del blog
+		return (currentPath === "/blog" || currentPath.startsWith("/blog/")) ? " active" : "";
 	}
 
 	function isCommunityActive() {
