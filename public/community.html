@@ -19,23 +19,38 @@
 
 	<main class="container about-layout">
 		<section class="about-hero" aria-labelledby="community-title">
-			<h1 id="community-title" class="title-with-icon"><span class="ui-icon icon-about" aria-hidden="true"></span>Community</h1>
+			<h1 id="community-title" class="title-with-icon"><span class="ui-icon icon-community" aria-hidden="true"></span>Community</h1>
 			<p class="section-sub">
 				Connect with the FreeOS.me community, follow project updates, and collaborate on ideas,
 				reporting, and contributions as the distro evolves in public.
-				<a href="/community/" class="btn-link">Join the Chat</a>
-				<a href="https://matrix.to/#/@vicente:matrix.org" target="_blank" rel="noopener noreferrer">Escríbeme un mensaje directo en Matrix</a>
-				<div class="chat-container" style="margin-top: 2rem; border-radius: 8px; overflow: hidden; border: 1px solid #444;">
-				<iframe 
-					src="https://freeos.me/community/#/room/#freeos.me:matrix.org" 
-					width="100%" 
-					height="600px" 
-					frameborder="0" 
-					allow="microphone; camera; display-capture"
-					title="Chat de la Comunidad FreeOS">
-				</iframe>
-				</div>
 			</p>
+
+			<div class="community-actions" aria-label="Community actions">
+				<a href="/community/" class="btn-link">Join the chat client</a>
+				<a href="https://matrix.to/#/#freeos.me:matrix.org" target="_blank" rel="noopener noreferrer" class="btn-link">Open room in Matrix</a>
+				<a href="https://matrix.to/#/@vicente:matrix.org" target="_blank" rel="noopener noreferrer" class="btn-link">Send me a direct message</a>
+			</div>
+
+			<section class="community-readonly" aria-labelledby="community-readonly-title">
+				<h2 id="community-readonly-title" class="section-title">Room timeline (read-only)</h2>
+				<p class="section-sub readonly-note">
+					This embedded timeline is read-only. To participate, use the chat client links above.
+				</p>
+				<div class="readonly-frame-wrap">
+					<iframe
+						class="readonly-frame"
+						src="https://view.matrix.org/room/%23freeos.me:matrix.org"
+						title="FreeOS Matrix room read-only timeline"
+						loading="lazy"
+						referrerpolicy="no-referrer"
+						sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+					</iframe>
+				</div>
+				<p class="section-sub readonly-fallback">
+					If the embedded timeline does not load, open it directly:
+					<a href="https://view.matrix.org/room/%23freeos.me:matrix.org" target="_blank" rel="noopener noreferrer">Read-only timeline</a>
+				</p>
+			</section>
 		</section>
 	</main>
 
