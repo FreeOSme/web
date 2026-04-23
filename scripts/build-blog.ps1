@@ -6,8 +6,12 @@ param(
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
-if (-not (Test-Path $SourcePath)) {
-	throw "Hugo source folder '$SourcePath' not found."
+$repoRoot = Split-Path -Parent $PSScriptRoot
+$sourceFullPath = Join-Path $repoRoot $SourcePath
+$outputFullPath = Join-Path $repoRoot $OutputPath
+
+if (-not (Test-Path $sourceFullPath)) {
+	throw "Hugo source folder '$sourceFullPath' not found."
 }
 
 $hugo = Get-Command hugo -ErrorAction SilentlyContinue
@@ -15,20 +19,20 @@ if (-not $hugo) {
 	throw "Hugo is not installed or not available in PATH."
 }
 
-if (-not (Test-Path $OutputPath)) {
-	New-Item -ItemType Directory -Path $OutputPath -Force | Out-Null
+if (-not (Test-Path $outputFullPath)) {
+	New-Item -ItemType Directory -Path $outputFullPath -Force | Out-Null
 }
 
-& hugo --source $SourcePath --destination $OutputPath --cleanDestinationDir
+& hugo --source $sourceFullPath --destination $outputFullPath --cleanDestinationDir
 
-$generatedIndex = Join-Path $OutputPath "index.html"
+$generatedIndex = Join-Path $outputFullPath "index.html"
 if (-not (Test-Path $generatedIndex)) {
 	throw "Hugo build did not produce $generatedIndex"
 }
 
 $generatedContent = Get-Content -Path $generatedIndex -Raw
-if ($generatedContent -match "Blog build pending") {
-	throw "Hugo output still contains placeholder content."
+if ($generatedContent -notmatch "Latest Posts") {
+	throw "Hugo output does not look like generated blog index (missing expected heading)."
 }
 
-Write-Host "Generated Hugo blog into $OutputPath"
+Write-Host "Generated Hugo blog into $outputFullPath"
