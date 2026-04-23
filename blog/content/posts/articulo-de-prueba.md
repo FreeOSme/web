@@ -4,6 +4,7 @@ date: 2026-04-23
 draft: false
 summary: "Post de prueba para validar el flujo Hugo + GitLab Pages."
 tags: ["prueba", "devlog"]
+
 ---
 
 ## Contexto
