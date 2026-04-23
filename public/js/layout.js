@@ -3,11 +3,16 @@
 	const currentPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
 
 	function isActive(path) {
+		// Home: activo si estamos en "/" o no hay página específica
+		if (path === "index.html") {
+			return (currentPage === "" || currentPage === "index.html") ? " active" : "";
+		}
 		return currentPage === path ? " active" : "";
 	}
 
 	function isBlogActive() {
-		return currentPath.includes("/blog/") ? " active" : "";
+		// Activo si la ruta comienza con /blog (pero no es /blog/ exacto mezclado con otro)
+		return currentPath.startsWith("/blog") && currentPage !== "index.html" ? " active" : "";
 	}
 
 	const headerMount = document.getElementById("site-header");
@@ -15,16 +20,16 @@
 		headerMount.innerHTML = ""
 			+ "<header>"
 			+ "\t<div class=\"container nav-wrap\">"
-			+ "\t\t<a class=\"brand\" href=\"index.html\" aria-label=\"Go back to homepage\">"
+			+ "\t\t<a class=\"brand\" href=\"/\" aria-label=\"Go back to homepage\">"
 			+ "\t\t\t<span class=\"brand-logo\" aria-hidden=\"true\"><span class=\"brand-glyph\"></span></span>"
 			+ "\t\t\t<span>FreeOS.me</span>"
 			+ "\t\t</a>"
 			+ "\t\t<nav class=\"nav-links\" aria-label=\"Main navigation\">"
-			+ "\t\t\t<a class=\"" + isActive("index.html") + "\" href=\"index.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-home\" aria-hidden=\"true\"></span>Home</span></a>"
+			+ "\t\t\t<a class=\"" + isActive("index.html") + "\" href=\"/\"><span class=\"nav-label\"><span class=\"ui-icon icon-home\" aria-hidden=\"true\"></span>Home</span></a>"
 			+ "\t\t\t<a class=\"" + isBlogActive() + "\" href=\"/blog/\"><span class=\"nav-label\"><span class=\"ui-icon icon-summary\" aria-hidden=\"true\"></span>Blog</span></a>"
-			+ "\t\t\t<a class=\"" + isActive("releases.html") + "\" href=\"releases.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-release\" aria-hidden=\"true\"></span>Releases</span></a>"
-			+ "\t\t\t<a class=\"" + isActive("changelog.html") + "\" href=\"changelog.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-changelog\" aria-hidden=\"true\"></span>Changelog</span></a>"
-			+ "\t\t\t<a class=\"" + isActive("about.html") + "\" href=\"about.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-about\" aria-hidden=\"true\"></span>About</span></a>"
+			+ "\t\t\t<a class=\"" + isActive("releases.html") + "\" href=\"/releases.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-release\" aria-hidden=\"true\"></span>Releases</span></a>"
+			+ "\t\t\t<a class=\"" + isActive("changelog.html") + "\" href=\"/changelog.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-changelog\" aria-hidden=\"true\"></span>Changelog</span></a>"
+			+ "\t\t\t<a class=\"" + isActive("about.html") + "\" href=\"/about.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-about\" aria-hidden=\"true\"></span>About</span></a>"
 			+ "\t\t\t<a href=\"https://gitlab.com/freeos.me\" target=\"_blank\" rel=\"noopener noreferrer\"><span class=\"nav-label\"><span class=\"ui-icon icon-gitlab\" aria-hidden=\"true\"></span>GitLab</span></a>"
 			+ "\t\t</nav>"
 			+ "\t</div>"
