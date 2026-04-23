@@ -15,6 +15,14 @@
 		return currentPath.startsWith("/blog") && currentPage !== "index.html" ? " active" : "";
 	}
 
+	function isCommunityActive() {
+		return currentPath === "/community.html"
+			|| currentPath === "/community"
+			|| currentPath.startsWith("/community/")
+			? " active"
+			: "";
+	}
+
 	const headerMount = document.getElementById("site-header");
 	if (headerMount) {
 		headerMount.innerHTML = ""
@@ -29,7 +37,7 @@
 			+ "\t\t\t<a class=\"" + isBlogActive() + "\" href=\"/blog/\"><span class=\"nav-label\"><span class=\"ui-icon icon-summary\" aria-hidden=\"true\"></span>Blog</span></a>"
 			+ "\t\t\t<a class=\"" + isActive("releases.html") + "\" href=\"/releases.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-release\" aria-hidden=\"true\"></span>Releases</span></a>"
 			+ "\t\t\t<a class=\"" + isActive("changelog.html") + "\" href=\"/changelog.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-changelog\" aria-hidden=\"true\"></span>Changelog</span></a>"
-			+ "\t\t\t<a class=\"" + isActive("community.html") + "\" href=\"/community.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-community\" aria-hidden=\"true\"></span>Community</span></a>"
+			+ "\t\t\t<a class=\"" + isCommunityActive() + "\" href=\"/community/\"><span class=\"nav-label\"><span class=\"ui-icon icon-community\" aria-hidden=\"true\"></span>Community</span></a>"
 			+ "\t\t\t<a class=\"" + isActive("about.html") + "\" href=\"/about.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-about\" aria-hidden=\"true\"></span>About</span></a>"
 			+ "\t\t\t<a href=\"https://gitlab.com/freeos.me\" target=\"_blank\" rel=\"noopener noreferrer\"><span class=\"nav-label\"><span class=\"ui-icon icon-gitlab\" aria-hidden=\"true\"></span>GitLab</span></a>"
 			+ "\t\t</nav>"
