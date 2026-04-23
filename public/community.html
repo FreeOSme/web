@@ -34,21 +34,15 @@
 			<section class="community-readonly" aria-labelledby="community-readonly-title">
 				<h2 id="community-readonly-title" class="section-title">Room timeline (read-only)</h2>
 				<p class="section-sub readonly-note">
-					This embedded timeline is read-only. To participate, use the chat client links above.
+					This timeline is loaded from Matrix public APIs. To participate, use the chat client links above.
 				</p>
-				<div class="readonly-frame-wrap">
-					<iframe
-						class="readonly-frame"
-						src="https://view.matrix.org/room/%23freeos.me:matrix.org"
-						title="FreeOS Matrix room read-only timeline"
-						loading="lazy"
-						referrerpolicy="no-referrer"
-						sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-					</iframe>
+				<div class="readonly-frame-wrap" id="matrix-readonly" data-homeserver="https://matrix.org" data-room-alias="#freeos.me:matrix.org">
+					<div class="matrix-status" id="matrix-status" role="status" aria-live="polite">Loading room timeline...</div>
+					<ul class="matrix-timeline" id="matrix-timeline" aria-label="Latest room messages"></ul>
 				</div>
 				<p class="section-sub readonly-fallback">
-					If the embedded timeline does not load, open it directly:
-					<a href="https://view.matrix.org/room/%23freeos.me:matrix.org" target="_blank" rel="noopener noreferrer">Read-only timeline</a>
+					If public timeline access is disabled for this room, open it directly:
+					<a href="https://matrix.to/#/#freeos.me:matrix.org" target="_blank" rel="noopener noreferrer">Open room in Matrix</a>
 				</p>
 			</section>
 		</section>
@@ -56,5 +50,6 @@
 
 	<div id="site-footer"></div>
 	<script src="js/layout.js"></script>
+	<script src="js/community-readonly.js"></script>
 </body>
 </html>
