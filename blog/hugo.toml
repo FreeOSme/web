@@ -1,0 +1,9 @@
+baseURL = "https://freeos.me/blog/"
+languageCode = "en-us"
+title = "FreeOS.me Blog"
+defaultContentLanguage = "en"
+
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  description = "Updates, notes, and development logs for FreeOS.me"
