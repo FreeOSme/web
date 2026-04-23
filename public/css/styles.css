@@ -249,6 +249,7 @@ header {
 .icon-release::before,
 .icon-changelog::before,
 .icon-about::before,
+.icon-community::before,
 .icon-gitlab::before,
 .icon-github::before,
 .icon-home::before,
@@ -321,6 +322,25 @@ header {
 	border-radius: 999px;
 	background: currentColor;
 	box-shadow: 0 4px 0 currentColor, 0 6px 0 currentColor;
+}
+
+.icon-community::before {
+	border-radius: 999px;
+	border-width: 1.8px;
+	opacity: 0.95;
+}
+
+.icon-community::after {
+	content: "";
+	position: absolute;
+	left: 3px;
+	right: 3px;
+	bottom: 2px;
+	height: 5px;
+	border: 1.8px solid currentColor;
+	border-top: 0;
+	border-radius: 0 0 999px 999px;
+	box-sizing: border-box;
 }
 
 .icon-gitlab::before,
