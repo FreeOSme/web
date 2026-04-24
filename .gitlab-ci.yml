@@ -7,8 +7,9 @@ variables:
 pages:
   stage: deploy
   script:
-    - apk add --no-cache hugo
+    - apk add --no-cache hugo git
     - pwsh -File scripts/build-blog.ps1
+    - pwsh -File scripts/build-wiki.ps1
     - pwsh -File scripts/generate-site-content.ps1 -Ref "${CORE_REF:-$CORE_DEFAULT_REF}" -ProjectPath "${CORE_PROJECT_PATH:-$CORE_DEFAULT_PROJECT_PATH}"
     - echo "FreeOS deploying static files..."
   artifacts:

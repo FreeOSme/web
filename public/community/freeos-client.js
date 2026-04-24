@@ -8,6 +8,7 @@
     var NAV_ITEMS = [
         { label: "Home", href: "/", icon: "icon-home", active: isHomeActive },
         { label: "Blog", href: "/blog/", icon: "icon-summary", active: isBlogActive },
+        { label: "Wiki", href: "/wiki/", icon: "icon-summary", active: isWikiActive },
         { label: "Community", href: "/community.html", icon: "icon-community", active: isCommunityActive },
         { label: "Releases", href: "/releases.html", icon: "icon-release", active: isReleasesActive },
         { label: "Changelog", href: "/changelog.html", icon: "icon-changelog", active: isChangelogActive },
@@ -26,6 +27,10 @@
 
     function isBlogActive() {
         return getCurrentPath().indexOf("/blog") === 0;
+    }
+
+    function isWikiActive() {
+        return getCurrentPath().indexOf("/wiki") === 0;
     }
 
     function isCommunityActive() {

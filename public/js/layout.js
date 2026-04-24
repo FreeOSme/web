@@ -16,6 +16,7 @@
 	const NAV_ITEMS = [
 		{ label: "Home", href: "/", icon: "icon-home", isActive: isHomeActive },
 		{ label: "Blog", href: "/blog/", icon: "icon-summary", isActive: isBlogActive },
+		{ label: "Wiki", href: "/wiki/", icon: "icon-summary", isActive: isWikiActive },
         { label: "Community", href: "/community.html", icon: "icon-community", isActive: isCommunityActive },
 		{ label: "Releases", href: "/releases.html", icon: "icon-release", isActive: function() { return isPageActive("releases.html"); } },
 		{ label: "Changelog", href: "/changelog.html", icon: "icon-changelog", isActive: function() { return isPageActive("changelog.html"); } },		
@@ -33,6 +34,10 @@
 
 	function isBlogActive() {
 		return currentPath === "/blog" || currentPath.startsWith("/blog/");
+	}
+
+	function isWikiActive() {
+		return currentPath === "/wiki" || currentPath.startsWith("/wiki/");
 	}
 
 	function isCommunityActive() {
