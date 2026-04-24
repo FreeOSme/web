@@ -1,0 +1,175 @@
+/* FreeOS visual overrides for hosted Element (runtime CSS, no rebuild required). */
+:root {
+    --font-family: "Cantarell", "Segoe UI", sans-serif;
+    --font-family-monospace: "Space Mono", "Fira Code", monospace;
+
+    --accent-color: #3584e4;
+    --links: #1c71d8;
+    --primary-color: #3584e4;
+    --alert: #c01c28;
+    --warning-color: #ed333b;
+
+    --background: #ffffff;
+    --timeline-background-color: #ffffff;
+    --timeline-background-color-50pct: rgba(255, 255, 255, 0.5);
+    --timeline-text-color: #241f31;
+    --timeline-text-color-50pct: rgba(36, 31, 49, 0.64);
+    --timeline-text-secondary-color: #5e5c64;
+
+    --roomlist-background-color: #f6f5f4;
+    --roomlist-background-color-0pct: rgba(246, 245, 244, 0);
+    --roomlist-highlights-color: #ebebed;
+    --roomlist-separator-color: #d6d3d1;
+    --roomlist-text-secondary-color: #5e5c64;
+
+    --sidebar-color: #f1f3f5;
+    --sidebar-color-50pct: rgba(241, 243, 245, 0.5);
+
+    --menu-selected-color: #ebf3ff;
+    --eventbubble-self-bg: #ebf3ff;
+    --eventbubble-others-bg: #f7f7f8;
+    --eventbubble-bg-hover: #edf5ff;
+    --room-highlight-color: #1c71d8;
+}
+
+/* Add subtle app-shell polish closer to the FreeOS website surfaces. */
+.mx_RoomView,
+.mx_RoomHeader,
+.mx_MainSplit {
+    background: var(--timeline-background-color);
+}
+
+.mx_LeftPanel,
+.mx_SpacePanel,
+.mx_RoomList {
+    background: var(--roomlist-background-color);
+}
+
+.mx_RoomList .mx_RoomTile_selected,
+.mx_RoomList .mx_RoomSublist_tiles .mx_RoomTile:hover {
+    background: var(--menu-selected-color);
+}
+
+.mx_AccessibleButton_kind_primary,
+.mx_Dialog button.mx_AccessibleButton_kind_primary {
+    background-color: #3584e4;
+    border-color: #1c71d8;
+}
+
+.mx_AccessibleButton_kind_primary:hover,
+.mx_Dialog button.mx_AccessibleButton_kind_primary:hover {
+    background-color: #1c71d8;
+}
+
+/* Fine-tune major containers to feel closer to the FreeOS card and surface language. */
+.mx_RoomView,
+.mx_RoomHeader,
+.mx_MainSplit,
+.mx_ChatPage,
+.mx_MatrixChat {
+    color: #241f31;
+}
+
+.mx_LeftPanel {
+    border-right: 1px solid #d6d3d1;
+}
+
+.mx_RoomHeader {
+    border-bottom: 1px solid #d6d3d1;
+}
+
+.mx_RoomList .mx_RoomTile,
+.mx_RoomList .mx_RoomSublist_tiles .mx_RoomTile {
+    border-radius: 10px;
+}
+
+.mx_RoomList .mx_RoomSublist_tiles .mx_RoomTile:hover {
+    box-shadow: inset 0 0 0 1px rgba(53, 132, 228, 0.22);
+}
+
+.mx_RoomList .mx_RoomTile_selected {
+    box-shadow: inset 0 0 0 1px rgba(53, 132, 228, 0.35);
+}
+
+/* Message bubbles and timelines */
+.mx_EventTile_content,
+.mx_MTextBody,
+.mx_EventTile {
+    color: #241f31;
+}
+
+.mx_EventTile.mx_EventTile_info,
+.mx_EventTile.mx_EventTile_notice {
+    color: #5e5c64;
+}
+
+.mx_EventTile .mx_EventTile_line,
+.mx_ReplyThread {
+    border-radius: 12px;
+}
+
+/* Composer and text inputs */
+.mx_MessageComposer,
+.mx_BasicMessageComposer,
+.mx_MessageComposer_input,
+.mx_Field input,
+.mx_Field textarea,
+.mx_Autocomplete_Completion_container {
+    background: #ffffff;
+    border-color: #d6d3d1;
+}
+
+.mx_Field input:focus,
+.mx_Field textarea:focus,
+.mx_MessageComposer_input:focus {
+    border-color: #3584e4;
+    box-shadow: 0 0 0 2px rgba(53, 132, 228, 0.16);
+}
+
+/* Menus, dialogs, and popovers */
+.mx_ContextualMenu,
+.mx_Dialog,
+.mx_Dialog_content,
+.mx_BasicMessageComposer_formatBar,
+.mx_Toast,
+.mx_Tooltip {
+    background: #ffffff;
+    border: 1px solid #d6d3d1;
+    box-shadow: 0 8px 24px rgba(36, 31, 49, 0.08);
+}
+
+.mx_Dialog_header {
+    border-bottom: 1px solid #d6d3d1;
+}
+
+.mx_ContextualMenu_item.mx_ContextualMenu_item_selected,
+.mx_ContextualMenu_item:hover {
+    background: #ebf3ff;
+}
+
+/* Secondary and icon button alignment with site accents */
+.mx_AccessibleButton_kind_secondary,
+.mx_AccessibleButton_kind_danger.mx_AccessibleButton_kind_secondary {
+    background: linear-gradient(180deg, #ffffff, #f4f3f2);
+    border-color: #d6d3d1;
+    color: #241f31;
+}
+
+.mx_AccessibleButton_kind_secondary:hover {
+    border-color: #bdb8b2;
+}
+
+.mx_AccessibleButton_kind_link {
+    color: #1c71d8;
+}
+
+/* Keep contrast readable on narrow layouts too. */
+@media (max-width: 900px) {
+    .mx_LeftPanel {
+        border-right: 0;
+    }
+
+    .mx_RoomHeader {
+        border-bottom: 1px solid #d6d3d1;
+    }
+}

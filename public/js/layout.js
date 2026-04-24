@@ -9,9 +9,9 @@
 	const NAV_ITEMS = [
 		{ label: "Home", href: "/", icon: "icon-home", isActive: isHomeActive },
 		{ label: "Blog", href: "/blog/", icon: "icon-summary", isActive: isBlogActive },
+        { label: "Community", href: "/community.html", icon: "icon-community", isActive: isCommunityActive },
 		{ label: "Releases", href: "/releases.html", icon: "icon-release", isActive: function() { return isPageActive("releases.html"); } },
-		{ label: "Changelog", href: "/changelog.html", icon: "icon-changelog", isActive: function() { return isPageActive("changelog.html"); } },
-		{ label: "Community", href: "/community.html", icon: "icon-community", isActive: isCommunityActive },
+		{ label: "Changelog", href: "/changelog.html", icon: "icon-changelog", isActive: function() { return isPageActive("changelog.html"); } },		
 		{ label: "About", href: "/about.html", icon: "icon-about", isActive: function() { return isPageActive("about.html"); } },
 		{ label: "GitLab", href: EXTERNAL_LINKS.gitlab, icon: "icon-gitlab", isExternal: true }
 	];

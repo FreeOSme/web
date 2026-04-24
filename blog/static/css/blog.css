@@ -344,6 +344,20 @@ footer {
   padding: 0.2rem 0.55rem;
 }
 
+.blog-tag-link {
+  text-decoration: none;
+}
+
+.blog-tag-link:hover {
+  text-decoration: none;
+  background: rgba(53, 132, 228, 0.16);
+}
+
+.blog-tag-link:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
 .blog-content {
   color: var(--ink);
   font-size: 1.03rem;

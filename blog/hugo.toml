@@ -3,7 +3,8 @@ languageCode = "en-us"
 title = "FreeOS.me Blog"
 defaultContentLanguage = "en"
 
-disableKinds = ["taxonomy", "term"]
+[taxonomies]
+  tag = "tags"
 
 [params]
   description = "Updates, notes, and development logs for FreeOS.me"

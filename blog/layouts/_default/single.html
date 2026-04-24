@@ -17,7 +17,8 @@
       {{ with .Params.tags }}
         <ul class="blog-tag-list" aria-label="Post tags">
           {{ range . }}
-            <li><span class="blog-tag">{{ . }}</span></li>
+            {{ $tagSlug := . | urlize }}
+            <li><a class="blog-tag blog-tag-link" href="{{ (printf "tags/%s/" $tagSlug) | relURL }}">{{ . }}</a></li>
           {{ end }}
         </ul>
       {{ end }}
