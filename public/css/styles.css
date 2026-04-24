@@ -1074,14 +1074,21 @@ footer {
 
 .community-hero {
 	display: grid;
-	grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+	grid-template-columns: 1fr;
 	gap: 1rem;
 	align-items: start;
 	padding: 0 0 1rem;
 }
 
-.community-copy .title-with-icon {
+.community-intro .title-with-icon {
 	margin-bottom: 1rem;
+}
+
+.community-top-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(280px, 0.95fr);
+	gap: 0.8rem;
+	align-items: start;
 }
 
 .community-channel-groups {
@@ -1119,6 +1126,10 @@ footer {
 
 .community-channel-mastodon .community-channel-title {
 	color: #9c27b0;
+}
+
+.community-channel-full {
+	width: 100%;
 }
 
 .community-channel-title {
@@ -1181,7 +1192,7 @@ footer {
 }
 
 @media (max-width: 920px) {
-	.community-hero {
+	.community-top-grid {
 		grid-template-columns: 1fr;
 	}
 
