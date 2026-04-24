@@ -1,40 +1,62 @@
 (function () {
     "use strict";
 
-    function ensureWebsiteLink() {
-        if (document.getElementById("freeos-client-link")) {
+    function applyTopOffset() {
+        var matrixRoot = document.getElementById("matrixchat");
+        if (matrixRoot) {
+            matrixRoot.style.paddingTop = "56px";
+            matrixRoot.style.boxSizing = "border-box";
+        }
+
+        document.body.classList.add("freeos-has-header");
+    }
+
+    function ensureHeader() {
+        if (document.getElementById("freeos-client-header")) {
+            applyTopOffset();
             return;
         }
 
-        var link = document.createElement("a");
-        link.id = "freeos-client-link";
-        link.href = "https://freeos.me";
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = "FreeOS.me";
-        link.setAttribute("aria-label", "Open FreeOS.me website");
+        var header = document.createElement("header");
+        header.id = "freeos-client-header";
+        header.setAttribute("aria-label", "FreeOS navigation");
 
-        link.style.position = "fixed";
-        link.style.right = "14px";
-        link.style.bottom = "12px";
-        link.style.zIndex = "2147483647";
-        link.style.padding = "8px 11px";
-        link.style.borderRadius = "10px";
-        link.style.border = "1px solid rgba(28, 113, 216, 0.45)";
-        link.style.background = "linear-gradient(180deg, #ffffff, #edf5ff)";
-        link.style.color = "#1c71d8";
-        link.style.font = "600 12px/1.2 Cantarell, Segoe UI, sans-serif";
-        link.style.textDecoration = "none";
-        link.style.boxShadow = "0 4px 14px rgba(36, 31, 49, 0.12)";
+        header.style.position = "fixed";
+        header.style.top = "0";
+        header.style.left = "0";
+        header.style.right = "0";
+        header.style.height = "56px";
+        header.style.zIndex = "2147483647";
+        header.style.display = "flex";
+        header.style.alignItems = "center";
+        header.style.justifyContent = "space-between";
+        header.style.padding = "0 14px";
+        header.style.background = "rgba(246, 245, 244, 0.92)";
+        header.style.backdropFilter = "blur(12px)";
+        header.style.borderBottom = "1px solid rgba(214, 211, 209, 0.9)";
+        header.style.boxShadow = "0 1px 0 rgba(255, 255, 255, 0.6)";
+        header.style.fontFamily = "Cantarell, Segoe UI, sans-serif";
 
-        document.body.appendChild(link);
+        header.innerHTML =
+            '<a href="https://freeos.me" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;color:#241f31;font-weight:700;font-size:.98rem;">' +
+            '<span style="width:28px;height:28px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(180deg,#65a3f0,#3584e4);color:#fff;font-size:.72rem;font-weight:700;">OS</span>' +
+            '<span>FreeOS.me</span>' +
+            '</a>' +
+            '<nav aria-label="Main" style="display:flex;gap:.45rem;align-items:center;flex-wrap:wrap;justify-content:flex-end;">' +
+            '<a href="https://freeos.me/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:#5e5c64;font-size:.9rem;font-weight:600;padding:.35rem .62rem;border-radius:9px;border:1px solid transparent;">Home</a>' +
+            '<a href="https://freeos.me/blog/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:#5e5c64;font-size:.9rem;font-weight:600;padding:.35rem .62rem;border-radius:9px;border:1px solid transparent;">Blog</a>' +
+            '<a href="https://freeos.me/community.html" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:#241f31;background:#fff;font-size:.9rem;font-weight:600;padding:.35rem .62rem;border-radius:9px;border:1px solid rgba(214, 211, 209, 0.9);">Community</a>' +
+            '</nav>';
+
+        document.body.appendChild(header);
+        applyTopOffset();
     }
 
     function init() {
-        ensureWebsiteLink();
+        ensureHeader();
 
         var observer = new MutationObserver(function () {
-            ensureWebsiteLink();
+            ensureHeader();
         });
 
         observer.observe(document.documentElement, {
