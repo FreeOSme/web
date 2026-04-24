@@ -1,6 +1,6 @@
 ---
 title: "Testing"
-date: 2026-04-23
+date: 2026-04-24
 draft: false
 summary: "Wooowwww + GitLab Pages."
 author: "Vicente Garcia Diaz"
