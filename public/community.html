@@ -17,39 +17,72 @@
 	<div class="blob blob-b" aria-hidden="true"></div>
 	<div id="site-header"></div>
 
-	<main class="container about-layout">
-		<section class="about-hero" aria-labelledby="community-title">
-			<h1 id="community-title" class="title-with-icon"><span class="ui-icon icon-community" aria-hidden="true"></span>Community</h1>
-			<p class="section-sub">
-				Connect with the FreeOS.me community, follow project updates, and collaborate on ideas,
-				reporting, and contributions as the distro evolves in public.
-			</p>
-
-			<div class="community-actions" aria-label="Community actions">
-				<a href="/community/" class="btn-link">Join the chat client</a>
-				<a href="https://matrix.to/#/#freeos.me:matrix.org" target="_blank" rel="noopener noreferrer" class="btn-link">Open room in Matrix</a>
-				<a href="https://matrix.to/#/@vicente:matrix.org" target="_blank" rel="noopener noreferrer" class="btn-link">Send me a direct message</a>
+	<main class="container about-layout community-shell">
+		<section class="community-hero" aria-labelledby="community-title">
+			<div class="community-copy">
+				<h1 id="community-title" class="title-with-icon"><span class="ui-icon icon-community" aria-hidden="true"></span>Community</h1>
+				<p class="section-sub">
+					Join the FreeOS.me conversation to follow progress, ask questions, share ideas, and coordinate contributions as the distro evolves in public.
+				</p>
+				<div class="community-actions" aria-label="Community actions">
+					<a href="https://matrix.to/#/#freeos.me:matrix.org" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><span class="btn-label"><span class="ui-icon icon-community" aria-hidden="true"></span>Open room in Matrix</span></a>
+					<a href="https://matrix.to/#/@vicente:matrix.org" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><span class="btn-label"><span class="ui-icon icon-about" aria-hidden="true"></span>Message me</span></a>
+					<a href="https://mastodon.social/@freeosme" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><span class="btn-label"><span class="ui-icon icon-mastodon" aria-hidden="true"></span>Mastodon</span></a>
+				</div>
 			</div>
 
-			<section class="community-readonly" aria-labelledby="community-readonly-title">
-				<h2 id="community-readonly-title" class="section-title">Room timeline (read-only)</h2>
-				<p class="section-sub readonly-note">
-					This timeline is loaded from Matrix public APIs. To participate, use the chat client links above.
+			<aside class="community-panel card" aria-label="Community room details">
+				<p class="section-kicker">Main room</p>
+				<h2>#freeos.me:matrix.org</h2>
+				<p class="community-panel-text">
+					The Matrix room is the main place for project updates, feedback, and contributor coordination.
 				</p>
-				<div class="readonly-frame-wrap" id="matrix-readonly" data-homeserver="https://matrix.org" data-room-alias="#freeos.me:matrix.org">
-					<div class="matrix-status" id="matrix-status" role="status" aria-live="polite">Loading room timeline...</div>
-					<ul class="matrix-timeline" id="matrix-timeline" aria-label="Latest room messages"></ul>
+				<div class="community-meta" aria-label="Room details">
+					<span class="tag tag-beta">Matrix</span>
+					<span class="tag tag-canary">Public room</span>
+					<span class="tag tag-alpha">Open discussion</span>
 				</div>
-				<p class="section-sub readonly-fallback">
-					If public timeline access is disabled for this room, open it directly:
-					<a href="https://matrix.to/#/#freeos.me:matrix.org" target="_blank" rel="noopener noreferrer">Open room in Matrix</a>
-				</p>
-			</section>
+			</aside>
+		</section>
+
+		<section aria-labelledby="community-ways-title">
+			<h2 id="community-ways-title" class="section-title">What You Can Use It For</h2>
+			<div class="grid community-grid">
+				<article class="card community-card">
+					<h3>Project updates</h3>
+					<p>Follow release planning, blog announcements, web changes, and distro progress without waiting for long-form posts.</p>
+				</article>
+				<article class="card community-card">
+					<h3>Questions and feedback</h3>
+					<p>Ask about current decisions, suggest improvements, or report rough edges in the site and release workflow.</p>
+				</article>
+				<article class="card community-card">
+					<h3>Contributor coordination</h3>
+					<p>Use the room to discuss docs, packaging, testing, website work, and the next concrete tasks for FreeOS.me.</p>
+				</article>
+			</div>
+		</section>
+
+		<section aria-labelledby="community-start-title">
+			<h2 id="community-start-title" class="section-title">How To Join</h2>
+			<div class="grid community-grid">
+				<article class="card community-card">
+					<h3>1. Open the room</h3>
+					<p>Use Matrix directly with the room alias <strong>#freeos.me:matrix.org</strong> or open it through the button above.</p>
+				</article>
+				<article class="card community-card">
+					<h3>2. Introduce yourself</h3>
+					<p>Say what you are interested in: testing, packaging, documentation, website work, or general project feedback.</p>
+				</article>
+				<article class="card community-card">
+					<h3>3. Pick a thread</h3>
+					<p>Jump into current discussions or ask for the next practical place where you can help move the project forward.</p>
+				</article>
+			</div>
 		</section>
 	</main>
 
 	<div id="site-footer"></div>
 	<script src="js/layout.js"></script>
-	<script src="js/community-readonly.js"></script>
 </body>
 </html>

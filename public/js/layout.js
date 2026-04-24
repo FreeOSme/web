@@ -1,30 +1,62 @@
 (function() {
+	// Normalize the current location once so every active-state check uses the same source of truth.
 	const currentPath = window.location.pathname.toLowerCase();
 	const currentPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+	const EXTERNAL_LINKS = {
+		gitlab: "https://gitlab.com/freeos.me"
+	};
+	// Keep navigation data declarative so adding, removing, or reordering items only requires editing this array.
+	const NAV_ITEMS = [
+		{ label: "Home", href: "/", icon: "icon-home", isActive: isHomeActive },
+		{ label: "Blog", href: "/blog/", icon: "icon-summary", isActive: isBlogActive },
+		{ label: "Releases", href: "/releases.html", icon: "icon-release", isActive: function() { return isPageActive("releases.html"); } },
+		{ label: "Changelog", href: "/changelog.html", icon: "icon-changelog", isActive: function() { return isPageActive("changelog.html"); } },
+		{ label: "Community", href: "/community.html", icon: "icon-community", isActive: isCommunityActive },
+		{ label: "About", href: "/about.html", icon: "icon-about", isActive: function() { return isPageActive("about.html"); } },
+		{ label: "GitLab", href: EXTERNAL_LINKS.gitlab, icon: "icon-gitlab", isExternal: true }
+	];
 
-	function isActive(path) {
-		// Home: activo si estamos en "/" o no hay página específica
-		if (path === "index.html") {
-			return (currentPath === "/" || currentPath === "/index.html") ? " active" : "";
-		}
-		return currentPage === path ? " active" : "";
+	function isPageActive(pageName) {
+		return currentPage === pageName;
+	}
+
+	function isHomeActive() {
+		return currentPath === "/" || currentPath === "/index.html";
 	}
 
 	function isBlogActive() {
-		// Activo para /blog, /blog/ y cualquier subruta del blog
-		return (currentPath === "/blog" || currentPath.startsWith("/blog/")) ? " active" : "";
+		return currentPath === "/blog" || currentPath.startsWith("/blog/");
 	}
 
 	function isCommunityActive() {
 		return currentPath === "/community.html"
 			|| currentPath === "/community"
-			|| currentPath.startsWith("/community/")
-			? " active"
-			: "";
+			|| currentPath.startsWith("/community/");
 	}
 
-	const headerMount = document.getElementById("site-header");
-	if (headerMount) {
+	function renderNavLink(item) {
+		const isActive = item.isActive ? item.isActive() : false;
+		const className = isActive ? " class=\"active\"" : "";
+		const externalAttrs = item.isExternal ? " target=\"_blank\" rel=\"noopener noreferrer\"" : "";
+
+		// Build the full anchor markup in one place so label, icon, active state, and external behavior stay consistent.
+		return "<a"
+			+ className
+			+ " href=\"" + item.href + "\""
+			+ externalAttrs
+			+ ">"
+			+ "<span class=\"nav-label\"><span class=\"ui-icon " + item.icon + "\" aria-hidden=\"true\"></span>"
+			+ item.label
+			+ "</span></a>";
+	}
+
+	function renderHeader() {
+		const headerMount = document.getElementById("site-header");
+		if (!headerMount) {
+			return;
+		}
+
+		// Inject the shared header at runtime so every static page can reuse the same navigation definition.
 		headerMount.innerHTML = ""
 			+ "<header>"
 			+ "\t<div class=\"container nav-wrap\">"
@@ -33,31 +65,33 @@
 			+ "\t\t\t<span>FreeOS.me</span>"
 			+ "\t\t</a>"
 			+ "\t\t<nav class=\"nav-links\" aria-label=\"Main navigation\">"
-			+ "\t\t\t<a class=\"" + isActive("index.html") + "\" href=\"/\"><span class=\"nav-label\"><span class=\"ui-icon icon-home\" aria-hidden=\"true\"></span>Home</span></a>"
-			+ "\t\t\t<a class=\"" + isBlogActive() + "\" href=\"/blog/\"><span class=\"nav-label\"><span class=\"ui-icon icon-summary\" aria-hidden=\"true\"></span>Blog</span></a>"
-			+ "\t\t\t<a class=\"" + isActive("releases.html") + "\" href=\"/releases.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-release\" aria-hidden=\"true\"></span>Releases</span></a>"
-			+ "\t\t\t<a class=\"" + isActive("changelog.html") + "\" href=\"/changelog.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-changelog\" aria-hidden=\"true\"></span>Changelog</span></a>"
-			+ "\t\t\t<a class=\"" + isCommunityActive() + "\" href=\"/community.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-community\" aria-hidden=\"true\"></span>Community</span></a>"
-			+ "\t\t\t<a class=\"" + isActive("about.html") + "\" href=\"/about.html\"><span class=\"nav-label\"><span class=\"ui-icon icon-about\" aria-hidden=\"true\"></span>About</span></a>"
-			+ "\t\t\t<a href=\"https://gitlab.com/freeos.me\" target=\"_blank\" rel=\"noopener noreferrer\"><span class=\"nav-label\"><span class=\"ui-icon icon-gitlab\" aria-hidden=\"true\"></span>GitLab</span></a>"
+			+ NAV_ITEMS.map(renderNavLink).join("")
 			+ "\t\t</nav>"
 			+ "\t</div>"
 			+ "</header>";
-
 	}
 
-	document.querySelectorAll("a[target=\"_blank\"]").forEach(function(link) {
-		if (!link.getAttribute("aria-label")) {
-			const baseLabel = (link.textContent || "External link").trim();
-			link.setAttribute("aria-label", baseLabel + " (opens in new tab)");
-		}
-		if (!link.getAttribute("title")) {
-			link.setAttribute("title", "Opens in new tab");
-		}
-	});
+	function decorateExternalLinks() {
+		// External-link affordances are added centrally so page templates do not need to repeat accessibility text.
+		document.querySelectorAll("a[target=\"_blank\"]").forEach(function(link) {
+			if (!link.getAttribute("aria-label")) {
+				const baseLabel = (link.textContent || "External link").trim();
+				link.setAttribute("aria-label", baseLabel + " (opens in new tab)");
+			}
 
-	const footerMount = document.getElementById("site-footer");
-	if (footerMount) {
+			if (!link.getAttribute("title")) {
+				link.setAttribute("title", "Opens in new tab");
+			}
+		});
+	}
+
+	function renderFooter() {
+		const footerMount = document.getElementById("site-footer");
+		if (!footerMount) {
+			return;
+		}
+
+		// The footer is generated here for the same reason as the header: one definition across all static pages.
 		const year = new Date().getFullYear();
 		footerMount.innerHTML = ""
 			+ "<footer>"
@@ -66,4 +100,8 @@
 			+ "\t</div>"
 			+ "</footer>";
 	}
+
+	renderHeader();
+	decorateExternalLinks();
+	renderFooter();
 })();
