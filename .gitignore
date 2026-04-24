@@ -1,4 +1,7 @@
 TO-DO.txt
 blog/.hugo_build.lock
 blog/resources/
+wiki/.hugo_build.lock
+wiki/resources/
+wiki/themes/hextra/
 *.tmp.ps1

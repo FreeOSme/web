@@ -11,6 +11,8 @@ $ProgressPreference = "SilentlyContinue"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $sourceFullPath = Join-Path $repoRoot $SourcePath
 $outputFullPath = Join-Path $repoRoot $OutputPath
+$themesPath = Join-Path $sourceFullPath "themes"
+$hextraThemePath = Join-Path $themesPath "hextra"
 
 function Assert-PathExists {
 	param(
@@ -30,8 +32,35 @@ function Assert-HugoAvailable {
 	}
 }
 
+function Assert-GitAvailable {
+	$git = Get-Command git -ErrorAction SilentlyContinue
+	if (-not $git) {
+		throw "Git is not installed or not available in PATH."
+	}
+}
+
+function Ensure-HextraTheme {
+	param(
+		[string]$ThemePath,
+		[string]$ThemesParentPath
+	)
+
+	if (Test-Path $ThemePath) {
+		return
+	}
+
+	if (-not (Test-Path $ThemesParentPath)) {
+		New-Item -ItemType Directory -Path $ThemesParentPath -Force | Out-Null
+	}
+
+	Write-Host "Hextra theme not found. Cloning into $ThemePath"
+	& git clone --depth 1 https://github.com/imfing/hextra.git $ThemePath
+}
+
 Assert-PathExists -Path $sourceFullPath -Message "Hugo source folder '$sourceFullPath' not found."
 Assert-HugoAvailable
+Assert-GitAvailable
+Ensure-HextraTheme -ThemePath $hextraThemePath -ThemesParentPath $themesPath
 
 if (-not (Test-Path $outputFullPath)) {
 	New-Item -ItemType Directory -Path $outputFullPath -Force | Out-Null
