@@ -1,4 +1,11 @@
 (function() {
+	// Analytics
+	const _analytics = document.createElement("script");
+	_analytics.defer = true;
+	_analytics.src = "https://cloud.umami.is/script.js";
+	_analytics.dataset.websiteId = "1a0825be-da9b-4123-8871-3374153a3ccb";
+	document.head.appendChild(_analytics);
+
 	// Normalize the current location once so every active-state check uses the same source of truth.
 	const currentPath = window.location.pathname.toLowerCase();
 	const currentPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
