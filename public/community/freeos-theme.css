@@ -72,10 +72,15 @@
 
 .mx_LeftPanel {
     border-right: 1px solid #d6d3d1;
+    background:
+        linear-gradient(180deg, rgba(53, 132, 228, 0.06), rgba(53, 132, 228, 0) 18%),
+        #f6f5f4;
 }
 
 .mx_RoomHeader {
     border-bottom: 1px solid #d6d3d1;
+    background:
+        linear-gradient(90deg, rgba(53, 132, 228, 0.12), rgba(53, 132, 228, 0.02) 32%, rgba(255, 255, 255, 0.98));
 }
 
 .mx_RoomList .mx_RoomTile,
@@ -89,6 +94,11 @@
 
 .mx_RoomList .mx_RoomTile_selected {
     box-shadow: inset 0 0 0 1px rgba(53, 132, 228, 0.35);
+}
+
+.mx_RoomList .mx_RoomSublist_tiles {
+    padding: 0.3rem;
+    border-radius: 12px;
 }
 
 /* Message bubbles and timelines */
@@ -106,6 +116,16 @@
 .mx_EventTile .mx_EventTile_line,
 .mx_ReplyThread {
     border-radius: 12px;
+}
+
+.mx_EventTile .mx_EventTile_line {
+    border: 1px solid rgba(214, 211, 209, 0.72);
+    background: linear-gradient(180deg, #ffffff, #f9f9fa);
+}
+
+.mx_EventTile[data-sender-is-self="true"] .mx_EventTile_line {
+    border-color: rgba(53, 132, 228, 0.28);
+    background: linear-gradient(180deg, #eef5ff, #e6f1ff);
 }
 
 /* Composer and text inputs */
@@ -161,6 +181,23 @@
 
 .mx_AccessibleButton_kind_link {
     color: #1c71d8;
+}
+
+/* Make top-level app chrome visibly themed even before entering a room. */
+.mx_MatrixChat {
+    background:
+        radial-gradient(circle at 100% 0%, rgba(53, 132, 228, 0.08), transparent 32%),
+        radial-gradient(circle at 0% 100%, rgba(98, 160, 234, 0.06), transparent 34%),
+        #ffffff;
+}
+
+.mx_AccessibleButton_kind_primary {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(28, 113, 216, 0.2);
+}
+
+.mx_AccessibleButton_kind_secondary {
+    border-radius: 10px;
 }
 
 /* Keep contrast readable on narrow layouts too. */
