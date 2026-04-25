@@ -726,7 +726,7 @@ header {
 ========================= */
 .hero {
 	display: grid;
-	grid-template-columns: 1.08fr 0.92fr;
+	grid-template-columns: 0.95fr 1.05fr;
 	gap: 1.25rem;
 	align-items: center;
 	padding: 3.3rem 0 2.4rem;
