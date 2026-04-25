@@ -10,17 +10,19 @@
 	const currentPath = window.location.pathname.toLowerCase();
 	const currentPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
 	const EXTERNAL_LINKS = {
-		gitlab: "https://gitlab.com/freeos.me"
+		gitlab: "https://gitlab.com/freeos.me",
+		mastodon: "https://mastodon.social/@freeos"
 	};
 	// Keep navigation data declarative so adding, removing, or reordering items only requires editing this array.
 	const NAV_ITEMS = [
 		{ label: "Home", href: "/", icon: "icon-home", isActive: isHomeActive },
 		{ label: "Blog", href: "/blog/", icon: "icon-summary", isActive: isBlogActive },
-		{ label: "Wiki", href: "/wiki/", icon: "icon-summary", isActive: isWikiActive },
-        { label: "Community", href: "/community.html", icon: "icon-community", isActive: isCommunityActive },
+		// { label: "Wiki", href: "/wiki/", icon: "icon-summary", isActive: isWikiActive },
+		// { label: "Community", href: "/community.html", icon: "icon-community", isActive: isCommunityActive },
 		{ label: "Releases", href: "/releases.html", icon: "icon-release", isActive: function() { return isPageActive("releases.html"); } },
 		{ label: "Changelog", href: "/changelog.html", icon: "icon-changelog", isActive: function() { return isPageActive("changelog.html"); } },		
 		{ label: "About", href: "/about.html", icon: "icon-about", isActive: function() { return isPageActive("about.html"); } },
+		{ label: "Mastodon", href: EXTERNAL_LINKS.mastodon, icon: "icon-mastodon", isExternal: true, className: "social-mastodon" },
 		{ label: "GitLab", href: EXTERNAL_LINKS.gitlab, icon: "icon-gitlab", isExternal: true }
 	];
 
@@ -48,7 +50,14 @@
 
 	function renderNavLink(item) {
 		const isActive = item.isActive ? item.isActive() : false;
-		const className = isActive ? " class=\"active\"" : "";
+		const classNames = [];
+		if (isActive) {
+			classNames.push("active");
+		}
+		if (item.className) {
+			classNames.push(item.className);
+		}
+		const className = classNames.length ? " class=\"" + classNames.join(" ") + "\"" : "";
 		const externalAttrs = item.isExternal ? " target=\"_blank\" rel=\"noopener noreferrer\"" : "";
 
 		// Build the full anchor markup in one place so label, icon, active state, and external behavior stay consistent.
@@ -73,8 +82,7 @@
 			+ "<header>"
 			+ "\t<div class=\"container nav-wrap\">"
 			+ "\t\t<a class=\"brand\" href=\"/\" aria-label=\"Go back to homepage\">"
-			+ "\t\t\t<span class=\"brand-logo\" aria-hidden=\"true\"><span class=\"brand-glyph\"></span></span>"
-			+ "\t\t\t<span>FreeOS.me</span>"
+			+ "\t\t\t<img class=\"brand-image\" src=\"/images/logo.png\" alt=\"FreeOS.me\">"
 			+ "\t\t</a>"
 			+ "\t\t<nav class=\"nav-links\" aria-label=\"Main navigation\">"
 			+ NAV_ITEMS.map(renderNavLink).join("")
