@@ -126,7 +126,7 @@ header {
 }
 
 .brand-image {
-	height: 52px;
+	height: 96px;
 	width: auto;
 	display: block;
 }
@@ -209,7 +209,7 @@ header {
 
 @media (max-width: 980px) {
 	.brand-image {
-		height: 44px;
+		height: 78px;
 	}
 }
 
