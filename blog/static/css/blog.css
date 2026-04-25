@@ -185,6 +185,10 @@ footer {
   margin-bottom: 1.5rem;
 }
 
+.blog-category-browse {
+  margin-bottom: 1.6rem;
+}
+
 .section-kicker {
   margin: 0 0 0.65rem;
   color: var(--brand-strong);
@@ -356,6 +360,11 @@ footer {
 .blog-tag-link:focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
+}
+
+.blog-category-tag {
+  background: rgba(53, 132, 228, 0.14);
+  border-color: rgba(28, 113, 216, 0.5);
 }
 
 .blog-content {

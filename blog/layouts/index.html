@@ -2,6 +2,7 @@
   {{ $posts := .Site.RegularPages }}
   {{ $sortedPosts := $posts.ByDate.Reverse }}
   {{ $paginator := .Paginate $sortedPosts 7 }}
+  {{ $categories := .Site.Taxonomies.categories.Alphabetical }}
 
   <section class="blog-home-intro">
     <h1>{{ .Title }}</h1>
@@ -9,6 +10,22 @@
       <div class="blog-home-subtitle">{{ . }}</div>
     {{ end }}
   </section>
+
+  {{ if gt (len $categories) 0 }}
+    <section class="blog-category-browse" aria-labelledby="browse-categories-title">
+      <p class="section-kicker">Browse</p>
+      <div class="blog-section-head">
+        <h2 id="browse-categories-title">By category</h2>
+      </div>
+      <ul class="blog-tag-list" aria-label="Blog categories">
+        {{ range $categories }}
+          <li>
+            <a class="blog-tag blog-tag-link blog-category-tag" href="{{ (printf "categories/%s/" .Term) | relURL }}">{{ .Page.Title }} ({{ .Count }})</a>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
 
   {{ if gt (len $sortedPosts) 0 }}
     {{ if eq $paginator.PageNumber 1 }}
@@ -45,6 +62,14 @@
           {{ range $pagePosts }}
             {{ $postAuthor := or .Params.author $.Site.Params.author }}
             <article class="blog-post-card">
+              {{ with .Params.categories }}
+                <ul class="blog-tag-list" aria-label="Post categories">
+                  {{ range . }}
+                    {{ $categorySlug := . | urlize }}
+                    <li><a class="blog-tag blog-tag-link blog-category-tag" href="{{ (printf "categories/%s/" $categorySlug) | relURL }}">{{ . }}</a></li>
+                  {{ end }}
+                </ul>
+              {{ end }}
               <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
               <p class="blog-meta">{{ .Date.Format "January 2, 2006" }} · {{ .ReadingTime }} min read · By {{ $postAuthor }}</p>
               {{ with .Params.summary }}

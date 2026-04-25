@@ -10,6 +10,15 @@
       <h1>{{ .Title }}</h1>
       <p class="blog-meta">Published on {{ .Date.Format "January 2, 2006" }} · {{ .ReadingTime }} min read · By {{ $author }}</p>
 
+      {{ with .Params.categories }}
+        <ul class="blog-tag-list" aria-label="Post categories">
+          {{ range . }}
+            {{ $categorySlug := . | urlize }}
+            <li><a class="blog-tag blog-tag-link blog-category-tag" href="{{ (printf "categories/%s/" $categorySlug) | relURL }}">{{ . }}</a></li>
+          {{ end }}
+        </ul>
+      {{ end }}
+
       {{ with .Params.summary }}
         <p class="blog-single-summary">{{ . }}</p>
       {{ end }}
@@ -41,6 +50,14 @@
         {{ range $related }}
           {{ $relatedAuthor := or .Params.author $.Site.Params.author }}
           <article class="blog-post-card">
+            {{ with .Params.categories }}
+              <ul class="blog-tag-list" aria-label="Post categories">
+                {{ range . }}
+                  {{ $categorySlug := . | urlize }}
+                  <li><a class="blog-tag blog-tag-link blog-category-tag" href="{{ (printf "categories/%s/" $categorySlug) | relURL }}">{{ . }}</a></li>
+                {{ end }}
+              </ul>
+            {{ end }}
             <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
             <p class="blog-meta">{{ .Date.Format "January 2, 2006" }} · {{ .ReadingTime }} min read · By {{ $relatedAuthor }}</p>
             {{ with .Params.summary }}
