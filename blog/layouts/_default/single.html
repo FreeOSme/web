@@ -29,7 +29,7 @@
     </div>
   </article>
 
-  {{ $otherPosts := where .Site.RegularPages "Section" "posts" }}
+  {{ $otherPosts := .Site.RegularPages }}
   {{ $otherPosts = where $otherPosts "RelPermalink" "ne" .RelPermalink }}
   {{ $related := first 3 ($otherPosts.ByDate.Reverse) }}
   {{ if gt (len $related) 0 }}

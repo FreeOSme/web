@@ -5,6 +5,7 @@ defaultContentLanguage = "en"
 
 [taxonomies]
   tag = "tags"
+  category = "categories"
 
 [params]
   description = "Updates, notes, and development logs for FreeOS.me"

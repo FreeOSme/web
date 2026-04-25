@@ -27,7 +27,7 @@ Right now we are working on:
 
 ## Publishing workflow
 
-Posts are written in Markdown under `blog/content/posts/` and rendered by Hugo during CI.
+Posts are written in Markdown under `blog/content/news/`, `blog/content/engineering/`, and `blog/content/divulgation/`, and rendered by Hugo during CI.
 When a post is ready, `draft` is set to `false` so it appears in the generated site.
 
 ```bash
