@@ -126,7 +126,7 @@ header {
 }
 
 .brand-image {
-	height: 34px;
+	height: 52px;
 	width: auto;
 	display: block;
 }
@@ -196,6 +196,21 @@ header {
 .nav-links a.social-mastodon:hover,
 .nav-links a.social-mastodon:focus-visible {
 	color: #4f52cc;
+}
+
+.nav-links a.social-gitlab {
+	color: #fc6d26;
+}
+
+.nav-links a.social-gitlab:hover,
+.nav-links a.social-gitlab:focus-visible {
+	color: #e24329;
+}
+
+@media (max-width: 980px) {
+	.brand-image {
+		height: 44px;
+	}
 }
 
 .nav-links a[target="_blank"] .nav-label::after,

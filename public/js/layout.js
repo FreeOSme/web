@@ -23,7 +23,7 @@
 		{ label: "Changelog", href: "/changelog.html", icon: "icon-changelog", isActive: function() { return isPageActive("changelog.html"); } },		
 		{ label: "About", href: "/about.html", icon: "icon-about", isActive: function() { return isPageActive("about.html"); } },
 		{ label: "Mastodon", href: EXTERNAL_LINKS.mastodon, icon: "icon-mastodon", isExternal: true, className: "social-mastodon" },
-		{ label: "GitLab", href: EXTERNAL_LINKS.gitlab, icon: "icon-gitlab", isExternal: true }
+		{ label: "GitLab", href: EXTERNAL_LINKS.gitlab, icon: "icon-gitlab", isExternal: true, className: "social-gitlab" }
 	];
 
 	function isPageActive(pageName) {

@@ -15,7 +15,7 @@
         { label: "Changelog", href: "/changelog.html", icon: "icon-changelog", active: isChangelogActive },
         { label: "About", href: "/about.html", icon: "icon-about", active: isAboutActive },
         { label: "Mastodon", href: EXTERNAL_LINKS.mastodon, icon: "icon-mastodon", className: "social-mastodon", external: true },
-        { label: "GitLab", href: EXTERNAL_LINKS.gitlab, icon: "icon-gitlab", external: true },
+        { label: "GitLab", href: EXTERNAL_LINKS.gitlab, icon: "icon-gitlab", className: "social-gitlab", external: true },
     ];
 
     function getCurrentPath() {
@@ -63,7 +63,7 @@
             "#freeos-client-header{position:fixed;top:0;left:0;right:0;z-index:2147483647;backdrop-filter:blur(18px);background:rgba(246,245,244,.82);border-bottom:1px solid rgba(214,211,209,.9);box-shadow:0 1px 0 rgba(255,255,255,.6)}" +
             "#freeos-client-header .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:.85rem 0;gap:1rem;width:min(1120px,calc(100% - 2rem));margin:0 auto}" +
             "#freeos-client-header .brand{display:flex;align-items:center;gap:0;text-decoration:none;color:#241f31;font-weight:700;font-size:1.02rem}" +
-            "#freeos-client-header .brand-image{height:34px;width:auto;display:block}" +
+            "#freeos-client-header .brand-image{height:52px;width:auto;display:block}" +
             "#freeos-client-header .brand-logo{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,#65a3f0,#3584e4);color:#fff;font-family:Cantarell,Segoe UI,sans-serif;font-weight:700;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 2px 6px rgba(36,31,49,.06)}" +
             "#freeos-client-header .brand-glyph{width:15px;height:15px;border-radius:4px;background:radial-gradient(circle at 25% 25%,#fff 0 2px,transparent 2.4px),radial-gradient(circle at 75% 25%,#fff 0 2px,transparent 2.4px),radial-gradient(circle at 25% 75%,#fff 0 2px,transparent 2.4px),radial-gradient(circle at 75% 75%,#fff 0 2px,transparent 2.4px);opacity:.96}" +
             "#freeos-client-header .nav-links{display:flex;gap:.55rem;align-items:center;flex-wrap:wrap;justify-content:flex-end}" +
@@ -72,6 +72,8 @@
             "#freeos-client-header .nav-links a.active{color:#241f31;background:#fff;border-color:#d6d3d1;box-shadow:0 2px 6px rgba(36,31,49,.06)}" +
             "#freeos-client-header .nav-links a.social-mastodon{color:#6364ff}" +
             "#freeos-client-header .nav-links a.social-mastodon:hover,#freeos-client-header .nav-links a.social-mastodon:focus-visible{color:#4f52cc}" +
+            "#freeos-client-header .nav-links a.social-gitlab{color:#fc6d26}" +
+            "#freeos-client-header .nav-links a.social-gitlab:hover,#freeos-client-header .nav-links a.social-gitlab:focus-visible{color:#e24329}" +
             "#freeos-client-header .nav-label{display:inline-flex;align-items:center;gap:.5rem}" +
             "#freeos-client-header .ui-icon{display:inline-block;position:relative;flex:0 0 auto;color:currentColor;width:14px;height:14px}" +
             "#freeos-client-header .icon-release::before,#freeos-client-header .icon-changelog::before,#freeos-client-header .icon-about::before,#freeos-client-header .icon-community::before,#freeos-client-header .icon-gitlab::before,#freeos-client-header .icon-home::before,#freeos-client-header .icon-summary::before,#freeos-client-header .icon-mastodon::before{content:'';position:absolute;inset:0;border:1.8px solid currentColor;border-radius:3px;box-sizing:border-box}" +
@@ -91,7 +93,7 @@
             "#freeos-client-header .icon-mastodon::before{border:0;background:currentColor;border-radius:4px;clip-path:polygon(14% 88%,14% 32%,24% 18%,40% 18%,50% 31%,60% 18%,76% 18%,86% 32%,86% 88%,74% 88%,74% 44%,66% 34%,58% 44%,58% 88%,42% 88%,42% 44%,34% 34%,26% 44%,26% 88%);opacity:.95}" +
             "#freeos-client-header .icon-mastodon::after{content:'';position:absolute;left:4px;top:5px;width:2px;height:2px;border-radius:999px;background:#f6f5f4;box-shadow:4px 0 0 #f6f5f4}" +
             "#freeos-client-header .nav-links a[target='_blank'] .nav-label::after{content:'';display:inline-block;width:.5rem;height:.5rem;border-top:1.6px solid currentColor;border-right:1.6px solid currentColor;transform:translateY(-1px);box-sizing:border-box;opacity:.82}" +
-            "@media (max-width:980px){#freeos-client-header .nav-wrap{padding:.55rem 0}.freeos-has-header #matrixchat{padding-top:68px!important}}";
+            "@media (max-width:980px){#freeos-client-header .nav-wrap{padding:.55rem 0}#freeos-client-header .brand-image{height:44px}.freeos-has-header #matrixchat{padding-top:68px!important}}";
 
         document.head.appendChild(style);
     }
