@@ -10,6 +10,37 @@
       <h1>{{ .Title }}</h1>
       <p class="blog-meta">Published on {{ .Date.Format "January 2, 2006" }} · {{ .ReadingTime }} min read · By {{ $author }}</p>
 
+      {{ $workStatus := .Params.work_status }}
+      {{ $doi := .Params.doi }}
+      {{ $pdf := .Params.pdf }}
+      {{ if or $workStatus $doi $pdf }}
+        <p class="blog-scholarly-meta" aria-label="Scholarly metadata">
+          {{ with $workStatus }}
+            <span class="blog-sch-item"><strong>Status:</strong> {{ . }}</span>
+          {{ end }}
+          {{ with $doi }}
+            <span class="blog-sch-item"><strong>DOI:</strong>
+              {{ if eq (lower .) "in progress" }}
+                in progress
+              {{ else if hasPrefix . "10." }}
+                <a href="{{ printf "https://doi.org/%s" . }}">{{ . }}</a>
+              {{ else }}
+                {{ . }}
+              {{ end }}
+            </span>
+          {{ end }}
+          {{ with $pdf }}
+            <span class="blog-sch-item"><strong>PDF:</strong>
+              {{ if eq (lower .) "in progress" }}
+                in progress
+              {{ else }}
+                <a href="{{ . | absURL }}">Preprint PDF</a>
+              {{ end }}
+            </span>
+          {{ end }}
+        </p>
+      {{ end }}
+
       {{ with .Params.categories }}
         <ul class="blog-tag-list" aria-label="Post categories">
           {{ range . }}

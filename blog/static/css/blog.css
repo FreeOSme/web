@@ -53,10 +53,8 @@ a:hover {
   margin: 0 auto;
 }
 
-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
+#site-header header {
+  position: static;
   backdrop-filter: blur(18px);
   background: rgba(246, 245, 244, 0.82);
   border-bottom: 1px solid rgba(214, 211, 209, 0.9);
@@ -325,6 +323,20 @@ footer {
   margin-bottom: 0.8rem;
   color: var(--ink-soft);
   font-size: 1.02rem;
+}
+
+.blog-scholarly-meta {
+  margin-top: 0.7rem;
+  margin-bottom: 0.95rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.blog-sch-item a {
+  font-weight: 700;
 }
 
 .blog-tag-list {
