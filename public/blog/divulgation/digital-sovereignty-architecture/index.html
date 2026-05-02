@@ -26,7 +26,7 @@
     <header class="blog-single-header">
       <p class="section-kicker">Article</p>
       <h1>Digital Sovereignty: A layered architecture for trustworthy informatics</h1>
-      <p class="blog-meta">Published on April 25, 2026 · 10 min read · By Vicente García Díaz</p>
+      <p class="blog-meta">Published on April 25, 2026 · 12 min read · By Vicente García Díaz</p>
 
       
         <ul class="blog-tag-list" aria-label="Post categories">
@@ -102,17 +102,37 @@
     class ServiceDependent,UI1,Cloud,ThirdParties opaque
     class SovereignArchitecture,Gov,OS,App sovereign
     class LocalStore storage
-</code></pre><h2 id="2-sovereignty-as-a-layered-systems-property">2. Sovereignty as a Layered Systems Property</h2>
+</code></pre><p><em>Transition from service-dependent computing to a sovereign architecture with local authority, constrained execution, and explicit network consent.</em></p>
+<h2 id="2-sovereignty-as-a-layered-systems-property">2. Sovereignty as a Layered Systems Property</h2>
 <p>Digital systems rarely fail in a single catastrophic event. They degrade asymmetrically. Storage may be encrypted while behavioral telemetry leaks. Applications may execute locally while delegating critical functionality to opaque remote APIs. Interfaces may promise user control while reserving final authority for vendor-managed policy layers.</p>
 <p>Modern operating systems have evolved into highly entangled dependency trees in which the user is often positioned at the bottom of the effective privilege hierarchy. When a system administrator is outranked by the telemetry logic of the platform vendor, the architecture is not neutral; it is structurally disloyal.</p>
 <p>For this reason, sovereignty must be understood as a <strong>layered systems property</strong>. Each layer protects a different dimension of autonomy, and the guarantees of any one layer remain meaningful only if the others do not silently cancel them. The objective is not ideological purity, but dependency reduction by design.</p>
 <p>A system is not sovereign because it behaves correctly under normal conditions, but because its guarantees remain as invariant as possible under stress, interference, or adversarial pressure. In this sense, digital sovereignty is closely related to robustness and resilience, but directed specifically at power asymmetries and control surfaces (see Figure 2).</p>
-<figure><img src="/images/asymmetric-degradation.png"
-    alt="Architecture diagram illustrating asymmetric degradation across sovereignty layers"><figcaption>
-      <p><strong>Figure 2.</strong> Asymmetric degradation: a breach in Layer 2 (Algorithmic Protection) invalidates the governance guarantees of Layer 3, even when Layer 3 remains nominally intact.</p>
-    </figcaption>
-</figure>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart BT
+    %% Definición de estilos
+    classDef secure fill:#2e3440,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
+    classDef critical fill:#bf616a,stroke:#eceff4,stroke-width:2px,color:#eceff4
+    classDef compromised fill:#2b2b2b,stroke:#bf616a,stroke-width:2px,stroke-dasharray: 5 5,color:#bf616a
 
+    %% Nodos de las Capas (Apilados de abajo hacia arriba)
+    L1[&#34;Layer 1: Infrastructure (Hardware / Edge Intact)&#34;] ::: secure
+    L2[&#34;Layer 2: Algorithmic Protection (Breach: Hidden Telemetry Active)&#34;] ::: critical
+    L3[&#34;Layer 3: Management &amp; Governance (Nominal Control Bypassed)&#34;] ::: compromised
+    L4[&#34;Layer 4: Trustworthy AI (Epistemic Trust Broken)&#34;] ::: compromised
+    L5[&#34;Layer 5: Digital Sovereignty (Sovereign State Revoked)&#34;] ::: compromised
+
+    %% Relaciones y cascada de fallos
+    L1 --&gt;|Secure Foundation| L2
+    L2 -.-&gt;|1. Lateral Data Exfiltration| L3
+    L3 -.-&gt;|2. False Sense of Authority| L4
+    L4 -.-&gt;|3. Systemic Cascading Failure| L5
+
+    %% Anotación lateral
+    note1[&#34;Asymmetric Degradation: A low-level behavioral breach silently invalidates high-level user guarantees.&#34;]
+    L2 --- note1
+    
+    style note1 fill:#434c5e,stroke:#d08770,stroke-width:1px,color:#eceff4
+</code></pre><p><em>Asymmetric degradation across layers: compromise at algorithmic protection propagates upward and revokes practical sovereignty.</em></p>
 <h2 id="3-the-sovereignty-stack">3. The Sovereignty Stack</h2>
 <p>This section outlines the five layers through which digital sovereignty can be engineered as an emergent property rather than a marketing label.</p>
 <h3 id="31-execution--infrastructure--the-where">3.1 Execution &amp; Infrastructure — The “Where”</h3>
@@ -158,12 +178,43 @@
 <li>Policies that are local, explicit, inspectable, and revocable.</li>
 </ul>
 <p>Governance must be implemented as code that can be read, modified, and overridden—not as remote policy enforced elsewhere (see Figure 3).</p>
-<figure><img src="/images/sovereignty-dashboard-ui.png"
-    alt="UI mockup of a sovereignty dashboard showing active processes, network isolation, and authority surfaces"><figcaption>
-      <p><strong>Figure 3.</strong> Sovereignty Dashboard concept: a unified view of active processes, network isolation boundaries, and real-time authority surfaces—making local governance legible at a glance.</p>
-    </figcaption>
-</figure>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart TB
+    %% Definición de estilos
+    classDef dashboard fill:#2e3440,stroke:#88c0d0,stroke-width:2px,color:#eceff4
+    classDef module fill:#3b4252,stroke:#81a1c1,stroke-width:1px,color:#eceff4
+    classDef safe fill:#2b3328,stroke:#a3be8c,stroke-width:1px,color:#eceff4
+    classDef alert fill:#3b2226,stroke:#bf616a,stroke-width:1px,color:#eceff4
 
+    User([User / Root Authority]) ==&gt;|Inspects &amp; Commands| Dash
+
+    subgraph Dash [&#34;Sovereignty Dashboard (Legible Control Plane)&#34;]
+        direction LR
+        
+        subgraph Auth [&#34;1. Authority Surfaces&#34;]
+            direction TB
+            P1[Local Policy Engine] ::: module
+            P2[Capability Revocation] ::: module
+        end
+
+        subgraph Proc [&#34;2. Active Process Monitor&#34;]
+            direction TB
+            M1[Local AI Inference: Sandboxed] ::: safe
+            M2[System Services: Confined] ::: safe
+        end
+
+        subgraph Net [&#34;3. Network Isolation Boundaries&#34;]
+            direction TB
+            N1[Sync to Personal Server: Allowed] ::: safe
+            N2[Vendor Analytics: Blocked] ::: alert
+        end
+        
+        Auth --&gt;|Enforces Execution Limits| Proc
+        Auth --&gt;|Manages eBPF Firewalls| Net
+    end
+    
+    class Auth,Proc,Net dashboard
+    style Dash fill:#222,stroke:#88c0d0,stroke-width:2px,color:#eceff4
+</code></pre><p><em>Governance dashboard model that keeps authority surfaces, process confinement, and network boundaries legible to the local operator.</em></p>
 <h3 id="34-trustworthy-informatics--ai--the-paradigm-shift">3.4 Trustworthy Informatics &amp; AI — The Paradigm Shift</h3>
 <p>Artificial intelligence introduces a deeper challenge. In earlier systems, opacity concerned code or infrastructure. In AI systems, opacity concerns reasoning itself. Users increasingly receive classifications, recommendations, rankings, and decisions generated by models whose internal logic they cannot meaningfully interrogate.</p>
 <p>This creates <strong>epistemic dependence</strong>: the user no longer evaluates outcomes, but defers to them. When a local health model or a security heuristic makes a decision without intelligible justification, the basis for informed consent is weakened. The user is no longer governing the system; the user is trusting an oracle.</p>
@@ -192,12 +243,49 @@
 <h2 id="4-sovereign-computing-as-a-systems-hypothesis">4. Sovereign Computing as a Systems Hypothesis</h2>
 <p>This framework represents a technical hypothesis: that performance, privacy, and sovereignty can coexist if systems are designed from the beginning around <strong>control surfaces rather than feature accumulation</strong>.</p>
 <p>Rather than treating privacy as optional and governance as a legal afterthought, a sovereign architecture begins by defining what must remain under user control—and builds upward from that constraint. This approach is consistent with <a href="https://www.inkandswitch.com/essay/local-first/">local-first software</a> and related design principles that treat synchronization as a complement to local control rather than its replacement (see Figure 4).</p>
-<figure><img src="/images/sovereign-kernel-comparison.png"
-    alt="Systems diagram contrasting a sovereign kernel architecture with traditional operating systems"><figcaption>
-      <p><strong>Figure 4.</strong> Sovereign kernel architecture vs. traditional operating systems: telemetry hooks, forced update channels, and remote policy engines are absent by design, replaced by auditable, user-controlled surfaces.</p>
-    </figcaption>
-</figure>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    %% Definición de estilos
+    classDef opaque fill:#2b2b2b,stroke:#bf616a,stroke-width:1px,color:#eceff4
+    classDef sovereign fill:#2e3440,stroke:#8fbcbb,stroke-width:1px,color:#eceff4
+    classDef hook fill:#bf616a,stroke:#eceff4,stroke-width:1px,stroke-dasharray: 5 5,color:#eceff4
+    classDef monitor fill:#434c5e,stroke:#a3be8c,stroke-width:1px,color:#eceff4
 
+    %% Lado Izquierdo: Tradicional
+    subgraph Trad [&#34;Traditional OS Model&#34;]
+        direction TB
+        App1[Applications] --&gt; API1(Opaque APIs):::opaque
+        
+        subgraph K1 [&#34;Kernel Space (Entangled)&#34;]
+            API1 --&gt; Tele1[Telemetry Hooks]:::hook
+            API1 --&gt; Upd1[Forced Update Channel]:::hook
+            API1 --&gt; Pol1[Remote Policy Engine]:::hook
+        end
+        
+        K1 ==&gt;|Data Exfiltration| Cloud[(Vendor Cloud)]
+    end
+
+    %% Lado Derecho: Soberano
+    subgraph Sov [&#34;Sovereign OS Model&#34;]
+        direction TB
+        App2[Sovereign Applications] --&gt; API2(Auditable APIs):::sovereign
+        
+        subgraph K2 [&#34;Kernel Space (Confined)&#34;]
+            API2 --&gt; Capabilities[Explicit Capability Mgmt]:::monitor
+            API2 --&gt; eBPF[eBPF Behavioral Monitor]:::monitor
+            API2 --&gt; LocalPol[Local Policy Engine]:::monitor
+        end
+        
+        Gov[Local Governance UI] ==&gt;|Configures| K2
+        K2 &lt;--&gt;|Local R/W| Disk[(Trusted Local Storage)]
+    end
+    
+    %% Relación de contraste
+    Trad -.-&gt;|Contrasted with| Sov
+
+    %% Estilos de los subgrafos
+    style Trad fill:#222,stroke:#bf616a,stroke-width:2px,color:#eceff4
+    style Sov fill:#222,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
+</code></pre><p><em>Contrast between traditional and sovereign OS models, replacing telemetry hooks and remote policy control with auditable local mechanisms.</em></p>
 <h2 id="5-engineering-directions">5. Engineering Directions</h2>
 <p>The practical application of this architecture requires documenting trade-offs, design decisions, and implementation constraints as they are tested in real-world scenarios.</p>
 <p>Current engineering and research directions to achieve this stack include:</p>
