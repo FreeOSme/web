@@ -1,7 +1,7 @@
 ---
 title: "Digital Sovereignty: A Layered Architecture for Trustworthy Informatics"
 date: 2026-04-25
-author: "Vicente García Díaz"
+author: ""
 description: "A technical deconstruction of digital sovereignty and the layered architecture required to achieve it."
 categories: ["Divulgation"]
 tags: ["Digital Sovereignty", "XAI", "Trustworthy AI", "Governance", "Edge Computing", "Local-First"]
