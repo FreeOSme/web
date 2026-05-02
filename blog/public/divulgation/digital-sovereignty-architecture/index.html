@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head><script src="/blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=blog/livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+    
+  
+  <title>Digital Sovereignty: A layered architecture for trustworthy informatics | FreeOS.me Blog</title>
+  <meta name="description" content="Digital Sovereignty: A layered architecture for trustworthy informatics Abstract Digital sovereignty is often invoked as a political or legal objective, but rarely specified as an engineering property. This article reframes digital sovereignty as a measurable systems attribute emerging from the interaction of infrastructure, software behavior, governance, and explainable artificial intelligence. It then advances a concrete hypothesis: that performance, privacy, and sovereignty can coexist if operating systems are designed around control surfaces rather than feature accumulation. This work deliberately focuses on problem definition and architectural framing. Specific mechanisms, metrics, and implementations are intentionally deferred to subsequent work.
+">
+  
+  <link rel="canonical" href="http://localhost:1313/blog/divulgation/digital-sovereignty-architecture/">
+  <meta name="author" content="Vicente García Díaz">
+  
+  <meta name="keywords" content="Digital Sovereignty, XAI, Trustworthy AI, Governance, Edge Computing, Local-First">
+  
+
+  <meta name="citation_title" content="Digital Sovereignty: A layered architecture for trustworthy informatics">
+  
+  
+  <meta name="citation_author" content="Vicente García Díaz">
+  
+  <meta name="citation_publication_date" content="2026/04/25">
+  <meta name="citation_online_date" content="2026/04/25">
+  <meta name="citation_language" content="en-us">
+  <meta name="citation_journal_title" content="FreeOS.me Blog">
+  <meta name="citation_publisher" content="FreeOS.me">
+  <meta name="citation_abstract_html_url" content="http://localhost:1313/blog/divulgation/digital-sovereignty-architecture/">
+  <meta name="citation_fulltext_html_url" content="http://localhost:1313/blog/divulgation/digital-sovereignty-architecture/">
+  
+  <meta name="citation_status" content="in progress">
+  
+  
+  
+  
+  
+  <meta name="citation_pdf_url" content="http://localhost:1313/papers/digital-sovereignty-architecture-preprint.pdf">
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+    
+  
+
+  
+
+  
+    
+  
+  
+    
+  
+  
+  
+    
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","author":[{"@type":"Person","name":"Vicente García Díaz"}],"creativeWorkStatus":"in progress","dateModified":"2026-04-25","datePublished":"2026-04-25","description":"Digital Sovereignty: A layered architecture for trustworthy informatics Abstract Digital sovereignty is often invoked as a political or legal objective, but rarely specified as an engineering property. This article reframes digital sovereignty as a measurable systems attribute emerging from the interaction of infrastructure, software behavior, governance, and explainable artificial intelligence. It then advances a concrete hypothesis: that performance, privacy, and sovereignty can coexist if operating systems are designed around control surfaces rather than feature accumulation. This work deliberately focuses on problem definition and architectural framing. Specific mechanisms, metrics, and implementations are intentionally deferred to subsequent work.\n","encoding":{"@type":"MediaObject","contentUrl":"http://localhost:1313/papers/digital-sovereignty-architecture-preprint.pdf","encodingFormat":"application/pdf"},"headline":"Digital Sovereignty: A layered architecture for trustworthy informatics","inLanguage":"en-us","isAccessibleForFree":true,"keywords":["Digital Sovereignty","XAI","Trustworthy AI","Governance","Edge Computing","Local-First"],"mainEntityOfPage":"http://localhost:1313/blog/divulgation/digital-sovereignty-architecture/","publisher":{"@type":"Organization","name":"FreeOS.me","url":"http://localhost:1313/blog"},"url":"http://localhost:1313/blog/divulgation/digital-sovereignty-architecture/"}</script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/blog/css/blog.css">
+</head>
+<body>
+  
+
+  <main class="container">
+    
+  
+  <article class="blog-single">
+    <p class="blog-back-link-wrap">
+      <a class="blog-cta blog-cta-subtle" href="/blog/">← Back to blog</a>
+    </p>
+
+    <header class="blog-single-header">
+      <p class="section-kicker">Article</p>
+      <h1>Digital Sovereignty: A layered architecture for trustworthy informatics</h1>
+      <p class="blog-meta">Published on April 25, 2026 · 16 min read · By Vicente García Díaz</p>
+
+      
+        <ul class="blog-tag-list" aria-label="Post categories">
+          
+            
+            <li><a class="blog-tag blog-tag-link blog-category-tag" href="/blog/categories/divulgation/">Divulgation</a></li>
+          
+        </ul>
+      
+
+      
+
+      
+        <ul class="blog-tag-list" aria-label="Post tags">
+          
+            
+            <li><a class="blog-tag blog-tag-link" href="/blog/tags/digital-sovereignty/">Digital Sovereignty</a></li>
+          
+            
+            <li><a class="blog-tag blog-tag-link" href="/blog/tags/xai/">XAI</a></li>
+          
+            
+            <li><a class="blog-tag blog-tag-link" href="/blog/tags/trustworthy-ai/">Trustworthy AI</a></li>
+          
+            
+            <li><a class="blog-tag blog-tag-link" href="/blog/tags/governance/">Governance</a></li>
+          
+            
+            <li><a class="blog-tag blog-tag-link" href="/blog/tags/edge-computing/">Edge Computing</a></li>
+          
+            
+            <li><a class="blog-tag blog-tag-link" href="/blog/tags/local-first/">Local-First</a></li>
+          
+        </ul>
+      
+    </header>
+
+    <div class="blog-content">
+      <h1 id="digital-sovereignty-a-layered-architecture-for-trustworthy-informatics">Digital Sovereignty: A layered architecture for trustworthy informatics</h1>
+<h2 id="abstract">Abstract</h2>
+<p>Digital sovereignty is often invoked as a political or legal objective, but rarely specified as an engineering property. This article reframes digital sovereignty as a measurable systems attribute emerging from the interaction of infrastructure, software behavior, governance, and explainable artificial intelligence. It then advances a concrete hypothesis: that performance, privacy, and sovereignty can coexist if operating systems are designed around control surfaces rather than feature accumulation. This work deliberately focuses on problem definition and architectural framing. Specific mechanisms, metrics, and implementations are intentionally deferred to subsequent work.</p>
+<h2 id="introduction">Introduction</h2>
+<p>“Digital sovereignty” has become a ubiquitous term—invoked so frequently that its meaning is increasingly diluted. In many cases, what is presented as sovereignty is little more than managed dependency: opaque platforms, proprietary control planes, and decision systems that cannot be meaningfully inspected. The vocabulary has evolved; the power structures often have not.</p>
+<p>From a computer science perspective, this framing is insufficient. Digital sovereignty should not be treated as a slogan, a legal aspiration, or a compliance label, but as a <strong>measurable systems property</strong>. A system is sovereign to the degree that its operator can inspect, constrain, reproduce, and override its behavior without relying on opaque intermediaries.</p>
+<p>Sovereignty is not tested under normal conditions, but under contested ones. If a user cannot audit the binary that manages encryption keys, cannot reconstruct why a model has classified a file or recommended an action, or cannot determine under which jurisdiction computation is actually taking place, then sovereignty is conditional rather than real. A system may appear autonomous during routine operation, yet that autonomy can be revoked by a vendor decision, a remote update, or an extraterritorial legal order.</p>
+<p>This article introduces the <strong>Sovereignty Stack</strong> as a response to that problem. A truly sovereign architecture is not merely a privacy-oriented desktop environment. It requires formalizing a layered framework in which execution locality, legal exposure, algorithmic behavior, governance authority, and explainability are treated as mutually dependent design constraints (see <a class="fig-ref" href="#fig-transition" data-fig-ref="fig-transition">Figure</a>
+).</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    %% Estilos de las cajas
+    classDef opaque fill:#2b2b2b,stroke:#bf616a,stroke-width:2px,color:#eceff4
+    classDef sovereign fill:#2e3440,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
+    classDef storage fill:#434c5e,stroke:#81a1c1,stroke-width:1px,color:#eceff4
+
+    %% Flechas y etiquetas con alto contraste para fondos claros
+    linkStyle default stroke:#1f2937,stroke-width:2.6px,color:#111827
+
+    subgraph ServiceDependent [&#34;Service-Dependent Computing&#34;]
+        direction TB
+        User1([User]) --&gt;|Data Inputs| UI1[Opaque Interface]
+        UI1 --&gt;|Telemetry / RPC| Cloud[(Vendor Cloud)]
+        Cloud -.-&gt;|Remote Policy / Rules| UI1
+        Cloud --&gt;|Data Extraction| ThirdParties[Third-Party APIs]
+    end
+
+    subgraph SovereignArchitecture [&#34;Sovereign Computing Architecture&#34;]
+        direction TB
+        User2([User]) --&gt;|Explicit Authority| Gov[Governance Dashboard]
+        Gov --&gt;|Constrains| OS[Sovereign OS Kernel / eBPF]
+        OS --&gt;|Sandboxed Execution| App[Auditable Application]
+        App &lt;--&gt;|Local R/W| LocalStore[(Local / Edge Storage)]
+        App -.-&gt;|Blocked without Consent| Network[External Network]
+    end
+
+    ServiceDependent ==&gt;|Architectural Shift| SovereignArchitecture
+    
+    %% Asignación de estilos
+    class ServiceDependent,UI1,Cloud,ThirdParties opaque
+    class SovereignArchitecture,Gov,OS,App sovereign
+    class LocalStore storage
+</code></pre><p class="figure-caption" id="fig-transition">Transition from service-dependent computing to a sovereign architecture with local authority, constrained execution, and explicit network consent.</p>
+
+<p>As illustrated in <a class="fig-ref" href="#fig-transition" data-fig-ref="fig-transition">Figure</a>
+, the transition to a sovereign architecture requires inverting the traditional power dynamic. On the left (Service-Dependent Computing), the user interacts with an opaque interface that continuously extracts data to a vendor-controlled cloud. In this model, the cloud acts as the ultimate authority, dictating remote policies back to the local machine and freely sharing data with third-party APIs. On the right (Sovereign Architecture), the hierarchy is restored: the user acts as the explicit root authority through a local governance dashboard. This dashboard constrains the operating system kernel, which in turn enforces strict sandboxing on the applications. While the application can seamlessly read and write to local edge storage, any attempt to connect to an external network is blocked by default unless explicit consent is routed through the user&rsquo;s policy engine.</p>
+<h2 id="sovereignty-as-a-layered-systems-property">Sovereignty as a Layered Systems Property</h2>
+<p>Digital systems rarely fail in a single catastrophic event. They degrade asymmetrically. Storage may be encrypted while behavioral telemetry leaks. Applications may execute locally while delegating critical functionality to opaque remote APIs. Interfaces may promise user control while reserving final authority for vendor-managed policy layers.</p>
+<p>Modern operating systems have evolved into highly entangled dependency trees in which the user is often positioned at the bottom of the effective privilege hierarchy. When a system administrator is outranked by the telemetry logic of the platform vendor, the architecture is not neutral; it is structurally disloyal.</p>
+<p>For this reason, sovereignty must be understood as a <strong>layered systems property</strong>. Each layer protects a different dimension of autonomy, and the guarantees of any one layer remain meaningful only if the others do not silently cancel them. The objective is not ideological purity, but dependency reduction by design.</p>
+<p>A system is not sovereign because it behaves correctly under normal conditions, but because its guarantees remain as invariant as possible under stress, interference, or adversarial pressure. In this sense, digital sovereignty is closely related to robustness and resilience, but directed specifically at power asymmetries and control surfaces (see <a class="fig-ref" href="#fig-degradation" data-fig-ref="fig-degradation">Figure</a>
+).</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart BT
+    %% Definición de estilos
+    classDef secure fill:#2e3440,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
+    classDef critical fill:#bf616a,stroke:#eceff4,stroke-width:2px,color:#eceff4
+    classDef compromised fill:#2b2b2b,stroke:#bf616a,stroke-width:2px,stroke-dasharray: 5 5,color:#bf616a
+
+    %% Forzar flechas y texto de flechas a colores claros para modo oscuro
+    linkStyle default stroke:#d8dee9,stroke-width:2px,color:#eceff4
+
+    %% Nodos de las Capas (Apilados de abajo hacia arriba)
+    L1[&#34;Layer 1: Infrastructure (Hardware / Edge Intact)&#34;]:::secure
+    L2[&#34;Layer 2: Algorithmic Protection (Breach: Hidden Telemetry Active)&#34;]:::critical
+    L3[&#34;Layer 3: Management &amp; Governance (Nominal Control Bypassed)&#34;]:::compromised
+    L4[&#34;Layer 4: Trustworthy AI (Epistemic Trust Broken)&#34;]:::compromised
+    L5[&#34;Layer 5: Digital Sovereignty (Sovereign State Revoked)&#34;]:::compromised
+
+    %% Relaciones y cascada de fallos
+    L1 --&gt;|Secure Foundation| L2
+    L2 -.-&gt;|1. Lateral Data Exfiltration| L3
+    L3 -.-&gt;|2. False Sense of Authority| L4
+    L4 -.-&gt;|3. Systemic Cascading Failure| L5
+
+    %% Anotación lateral
+    note1[&#34;Asymmetric Degradation: A low-level behavioral breach silently invalidates high-level user guarantees.&#34;]
+    L2 --- note1
+    
+    style note1 fill:#434c5e,stroke:#d08770,stroke-width:1px,color:#eceff4
+</code></pre><p class="figure-caption" id="fig-degradation">Asymmetric degradation across layers: compromise at algorithmic protection propagates upward and revokes practical sovereignty.</p>
+
+<p><a class="fig-ref" href="#fig-degradation" data-fig-ref="fig-degradation">Figure</a>
+ demonstrates the concept of asymmetric degradation within the Sovereignty Stack. Unlike a complete system crash, a sovereignty failure is often stealthy and moves bottom-up. In this scenario, while the foundational infrastructure (Layer 1) remains secure and local, a breach occurs at the Algorithmic Protection level (Layer 2)—for instance, a seemingly harmless application silently executing hidden telemetry. This single point of exfiltration creates a cascading failure: it bypasses the user&rsquo;s Management &amp; Governance policies (Layer 3), giving the operator a false sense of authority. Consequently, the Trustworthy AI guarantees (Layer 4) are invalidated because the underlying data flow is no longer strictly confined, leading to the ultimate collapse of the emergent Digital Sovereignty (Layer 5). The system remains technically operational, but its architectural loyalty has been compromised.</p>
+<h2 id="the-sovereignty-stack">The Sovereignty Stack</h2>
+<p>This section outlines the five layers through which digital sovereignty can be engineered as an emergent property rather than a marketing label.</p>
+<h3 id="execution--infrastructure--the-where">Execution &amp; Infrastructure — The “Where”</h3>
+<p>All computation happens somewhere—on hardware owned by someone, governed by someone, and subject to one or more jurisdictions. Cloud abstractions obscure this fact behind convenience, but abstraction does not dissolve legal or political authority.</p>
+<p>Legal analysis of the <a href="https://www.eurojust.europa.eu/publication/cloud-act">U.S. CLOUD Act</a><a class="cite-ref" href="#ref-cloud-act">[1]</a>
+ shows that U.S.-based service providers can be compelled to disclose data under their control regardless of where that data is physically stored. This demonstrates that geographic location alone does not solve the problem of effective authority.</p>
+<p>Infrastructure is therefore not merely a scalability concern; it is a governance boundary. If computation depends on opaque services under foreign legal control, privacy becomes a concession rather than a property. Reclaiming this baseline also means confronting the silicon trust boundary: a sovereign operating system must anticipate a future of auditable firmware (projects such as <a href="https://www.coreboot.org/">coreboot</a><a class="cite-ref" href="#ref-coreboot">[2]</a>
+ demonstrate this is already achievable) and open hardware architectures such as <a href="https://riscv.org/">RISC-V</a><a class="cite-ref" href="#ref-riscv">[3]</a>
+, so that proprietary microcode cannot silently bypass operating-system constraints.</p>
+<p>A sovereign approach prioritizes:</p>
+<ul>
+<li>Edge-first execution, so processing happens as close as possible to the user and the data source.</li>
+<li><a href="https://www.inkandswitch.com/essay/local-first/">Local-first storage</a>, ensuring that data remains available without continuous cloud mediation.</li>
+<li>Optional, explicit, and replaceable remote synchronization.</li>
+<li>Substitutable infrastructure, preventing irreversible dependency formation.</li>
+</ul>
+<p>Research on <a href="https://publications.ait.ac.at/ws/portalfiles/portal/38393888/ICFEC2023-edge-sovereignty.pdf">data sovereignty at the edge of the network</a><a class="cite-ref" href="#ref-edge-sovereignty">[4]</a>
+ has shown how relocating computation closer to the data source can reduce dependency, latency, and jurisdictional exposure. This aligns with European policy discussions, including <a href="https://gdpr-info.eu/">GDPR</a><a class="cite-ref" href="#ref-gdpr">[5]</a>
+ data residency requirements and initiatives linking <a href="https://digital-strategy.ec.europa.eu/en/policies/iot-investing">edge computing</a><a class="cite-ref" href="#ref-ec-edge-policy">[6]</a>
+ to privacy, resilience, and technological sovereignty.</p>
+<h3 id="algorithmic-protection--the-how">Algorithmic Protection — The “How”</h3>
+<p>Control over hardware and location is insufficient if software behavior itself cannot be observed, predicted, or constrained. Contemporary systems frequently embed telemetry, background analytics, opaque auto-updates, silent network calls, and outsourced decision logic. These mechanisms are often framed as usability or security features, yet they also create channels of influence and extraction.</p>
+<p>Algorithmic protection spans two dimensions:</p>
+<ul>
+<li>Cryptographic protection, which preserves confidentiality and integrity.</li>
+<li>Behavioral protection, which ensures that software remains subordinate to explicit user intent.</li>
+</ul>
+<p>A system may be strongly encrypted and still be architecturally disloyal if it silently reports metadata, delegates authority to remote services, or executes logic that the operator cannot inspect. Sovereignty therefore requires not only perimeter defense, but algorithmic containment. <a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">Linux namespaces</a><a class="cite-ref" href="#ref-linux-namespaces">[7]</a>
+, <a href="https://man7.org/linux/man-pages/man2/seccomp.2.html">sandboxing</a><a class="cite-ref" href="#ref-linux-seccomp">[8]</a>
+, <a href="https://ebpf.io/what-is-ebpf/">eBPF</a><a class="cite-ref" href="#ref-ebpf">[9]</a>
+‑based observation, and strict network mediation are relevant not as optional hardening features, but as mechanisms for limiting non-consensual behavior.</p>
+<p>A sovereign operating system combines:</p>
+<ul>
+<li>Strong, auditable cryptographic primitives.</li>
+<li>Zero or minimal telemetry by default.</li>
+<li>Auditable package origins and <a href="https://reproducible-builds.org/">reproducible builds</a><a class="cite-ref" href="#ref-reproducible-builds">[10]</a>
+.</li>
+<li>Predictable networking behavior with explicit authorization.</li>
+<li>Clear visibility into what software is doing and why.</li>
+</ul>
+<p>The goal is not privacy as a checkbox, but <strong>software subordination</strong>: code as an instrument of the operator, not an autonomous agent aligned with remote incentives.</p>
+<h3 id="management--governance--the-who">Management &amp; Governance — The “Who”</h3>
+<p>Sovereignty is ultimately a question of authority: who governs the system when interests diverge?</p>
+<p>Nominal administrative privileges are insufficient if they can be overridden by vendor-controlled repositories, forced update channels, mandatory online identities, revocable licenses, or policy engines external to the machine. In such cases, ownership becomes procedural rather than substantive.</p>
+<p>Many mainstream platforms externalize governance into legal agreements and remote infrastructure. This may be efficient for platform operators, but it is structurally weak from the standpoint of user autonomy. True governance requires <strong>legibility</strong>: if a user cannot visualize the data flows, permission surfaces, and policy mechanisms of their own machine, they cannot meaningfully govern it.</p>
+<p>A sovereign architecture asserts a stricter principle: the user must remain the sole effective root authority over the local system.</p>
+<p>This implies:</p>
+<ul>
+<li>No hidden administrative domains.</li>
+<li>No mandatory online account for core local functionality.</li>
+<li>No forced updates.</li>
+<li>No remote revocation of legitimate system capabilities.</li>
+<li>Policies that are local, explicit, inspectable, and revocable.</li>
+</ul>
+<p>Governance must be implemented as code that can be read, modified, and overridden—not as remote policy enforced elsewhere (see <a class="fig-ref" href="#fig-dashboard" data-fig-ref="fig-dashboard">Figure</a>
+).</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart TB
+    %% Definición de estilos
+    classDef dashboard fill:#2e3440,stroke:#88c0d0,stroke-width:2px,color:#eceff4
+    classDef module fill:#3b4252,stroke:#81a1c1,stroke-width:1px,color:#eceff4
+    classDef safe fill:#2b3328,stroke:#a3be8c,stroke-width:1px,color:#eceff4
+    classDef alert fill:#3b2226,stroke:#bf616a,stroke-width:1px,color:#eceff4
+
+    %% Forzar flechas y texto de flechas a colores claros para modo oscuro
+    linkStyle default stroke:#d8dee9,stroke-width:2px,color:#eceff4
+
+    User([User / Root Authority]) ==&gt;|Inspects &amp; Commands| Dash
+
+    subgraph Dash [&#34;Sovereignty Dashboard (Legible Control Plane)&#34;]
+        direction LR
+        
+        subgraph Auth [&#34;1. Authority Surfaces&#34;]
+            direction TB
+            P1[Local Policy Engine]:::module
+            P2[Capability Revocation]:::module
+        end
+
+        subgraph Proc [&#34;2. Active Process Monitor&#34;]
+            direction TB
+            M1[Local AI Inference: Sandboxed]:::safe
+            M2[System Services: Confined]:::safe
+        end
+
+        subgraph Net [&#34;3. Network Isolation Boundaries&#34;]
+            direction TB
+            N1[Sync to Personal Server: Allowed]:::safe
+            N2[Vendor Analytics: Blocked]:::alert
+        end
+        
+        Auth --&gt;|Enforces Execution Limits| Proc
+        Auth --&gt;|Manages eBPF Firewalls| Net
+    end
+    
+    style Auth fill:#2e3440,stroke:#88c0d0,stroke-width:2px,color:#eceff4
+    style Proc fill:#2e3440,stroke:#88c0d0,stroke-width:2px,color:#eceff4
+    style Net fill:#2e3440,stroke:#88c0d0,stroke-width:2px,color:#eceff4
+    style Dash fill:#222,stroke:#88c0d0,stroke-width:2px,color:#eceff4
+</code></pre><p class="figure-caption" id="fig-dashboard">Governance dashboard model that keeps authority surfaces, process confinement, and network boundaries legible to the local operator.</p>
+
+<p><a class="fig-ref" href="#fig-dashboard" data-fig-ref="fig-dashboard">Figure</a>
+ illustrates the information architecture of a theoretical Sovereignty Dashboard, emphasizing the principle that governance requires legibility. For a user to act as the true root authority, the system&rsquo;s internal state must be transparent and actionable. The dashboard is structured into three unified modules. First, the &ldquo;Authority Surfaces&rdquo; expose the local policy engine, allowing the user to actively manage and revoke capabilities. Second, the &ldquo;Active Process Monitor&rdquo; provides real-time verification that applications—including local AI inference—are running within their designated sandboxes. Finally, the &ldquo;Network Isolation Boundaries&rdquo; visualize exactly where data is allowed to flow (e.g., green-listed sync to a personal server) and where it is actively intercepted by the firewall (e.g., red-listed vendor analytics). By structurally linking user commands to underlying eBPF rules and execution limits, the dashboard eliminates hidden administrative domains.</p>
+<h3 id="trustworthy-informatics--ai--the-paradigm-shift">Trustworthy Informatics &amp; AI — The Paradigm Shift</h3>
+<p>Artificial intelligence introduces a deeper challenge. In earlier systems, opacity concerned code or infrastructure. In AI systems, opacity concerns reasoning itself. Users increasingly receive classifications, recommendations, rankings, and decisions generated by models whose internal logic they cannot meaningfully interrogate.</p>
+<p>This creates <strong>epistemic dependence</strong>: the user no longer evaluates outcomes, but defers to them. When a local health model or a security heuristic makes a decision without intelligible justification, the basis for informed consent is weakened. The user is no longer governing the system; the user is trusting an oracle.</p>
+<p>Work on trustworthy AI by institutions such as <a href="https://airc.nist.gov/airmf-resources/airmf/3-sec-characteristics/">NIST</a><a class="cite-ref" href="#ref-nist-airmf">[11]</a>
+ and the <a href="https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai">EU High-Level Expert Group on AI</a><a class="cite-ref" href="#ref-eu-hleg-ai">[12]</a>
+ frames trustworthiness not only in terms of performance, but also through accountability, transparency, robustness, explainability, and bias management. Complementary guidance on Explainable AI (XAI), such as <a href="https://nvlpubs.nist.gov/nistpubs/ir/2021/nist.ir.8312.pdf">NISTIR 8312</a><a class="cite-ref" href="#ref-nistir-8312">[13]</a>
+, argues that explanations should be available, meaningful to the intended audience, faithful to actual behavior, and properly delimited by operating conditions. The <a href="https://artificialintelligenceact.eu/">EU AI Act</a><a class="cite-ref" href="#ref-eu-ai-act">[14]</a>
+ operationalizes similar requirements as binding obligations for high-risk AI systems, mandating transparency, human oversight, and technical documentation.</p>
+<p>Absent these properties, users lose the capacity to contest, correct, or govern algorithmic judgment. Authority migrates from operator to model.</p>
+<p>A sovereign system treats explainability as a core requirement, favoring:</p>
+<ul>
+<li>Local inference where feasible.</li>
+<li>Interpretable model classes when task-appropriate.</li>
+<li>Documented inference pipelines.</li>
+<li>Human-readable rationales and logs.</li>
+<li>Explicit declarations of scope, confidence, and failure conditions.</li>
+</ul>
+<p>AI must be domesticated—embedded as a constrained component rather than introduced as an unchallengeable oracle.</p>
+<h3 id="digital-sovereignty--the-emergent-state">Digital Sovereignty — The Emergent State</h3>
+<p>Digital sovereignty is not a feature, a product property, or a compliance label. It is the emergent condition that appears when the previous layers remain coherently aligned.</p>
+<p>It marks the transition from a passive model of consent—where users accept terms they cannot negotiate—to an active model of autonomy, where the environment itself structurally resists extraction.</p>
+<p>A system approaches sovereignty when:</p>
+<ul>
+<li>Computation is physically and jurisdictionally aligned with the user.</li>
+<li>Software behavior is observable, bounded, and accountable.</li>
+<li>Governance authority resides locally.</li>
+<li>Automated reasoning remains intelligible, auditable, and contestable.</li>
+</ul>
+<p>Sovereignty rejects hidden dependence, especially the kind that reveals itself only when control is contested. In that sense, it is best understood as asymmetry reduction.</p>
+<h2 id="sovereign-computing-as-a-systems-hypothesis">Sovereign Computing as a Systems Hypothesis</h2>
+<p>Before outlining concrete mechanisms, it is necessary to clarify the nature of the claim being made. This section does not propose an implementation roadmap, but formulates a systems hypothesis intended to guide future engineering and empirical work.</p>
+<p>This framework represents a technical hypothesis: that performance, privacy, and sovereignty can coexist if systems are designed from the beginning around <strong>control surfaces rather than feature accumulation</strong>.</p>
+<p>Rather than treating privacy as optional and governance as a legal afterthought, a sovereign architecture begins by defining what must remain under user control—and builds upward from that constraint. This approach is consistent with <a href="https://www.inkandswitch.com/essay/local-first/">local-first software</a><a class="cite-ref" href="#ref-local-first">[15]</a>
+ and related design principles that treat synchronization as a complement to local control rather than its replacement (see <a class="fig-ref" href="#fig-kernel-contrast" data-fig-ref="fig-kernel-contrast">Figure</a>
+).</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    %% Definición de estilos
+    classDef opaque fill:#2b2b2b,stroke:#bf616a,stroke-width:1px,color:#eceff4
+    classDef sovereign fill:#2e3440,stroke:#8fbcbb,stroke-width:1px,color:#eceff4
+    classDef hook fill:#bf616a,stroke:#eceff4,stroke-width:1px,stroke-dasharray: 5 5,color:#eceff4
+    classDef monitor fill:#434c5e,stroke:#a3be8c,stroke-width:1px,color:#eceff4
+
+    %% Forzar flechas y texto de flechas a colores claros para modo oscuro
+    linkStyle default stroke:#d8dee9,stroke-width:2px,color:#eceff4
+
+    %% Lado Izquierdo: Tradicional
+    subgraph Trad [&#34;Traditional OS Model&#34;]
+        direction TB
+        App1[Applications] --&gt; API1(Opaque APIs):::opaque
+        
+        subgraph K1 [&#34;Kernel Space (Entangled)&#34;]
+            API1 --&gt; Tele1[Telemetry Hooks]:::hook
+            API1 --&gt; Upd1[Forced Update Channel]:::hook
+            API1 --&gt; Pol1[Remote Policy Engine]:::hook
+        end
+        
+        K1 ==&gt;|Data Exfiltration| Cloud[(Vendor Cloud)]
+    end
+
+    %% Lado Derecho: Soberano
+    subgraph Sov [&#34;Sovereign OS Model&#34;]
+        direction TB
+        App2[Sovereign Applications] --&gt; API2(Auditable APIs):::sovereign
+        
+        subgraph K2 [&#34;Kernel Space (Confined)&#34;]
+            API2 --&gt; Capabilities[Explicit Capability Mgmt]:::monitor
+            API2 --&gt; eBPF[eBPF Behavioral Monitor]:::monitor
+            API2 --&gt; LocalPol[Local Policy Engine]:::monitor
+        end
+        
+        Gov[Local Governance UI] ==&gt;|Configures| K2
+        K2 &lt;--&gt;|Local R/W| Disk[(Trusted Local Storage)]
+    end
+    
+    %% Relación de contraste
+    Trad -.-&gt;|Contrasted with| Sov
+
+    %% Estilos de los subgrafos
+    style Trad fill:#222,stroke:#bf616a,stroke-width:2px,color:#eceff4
+    style Sov fill:#222,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
+</code></pre><p class="figure-caption" id="fig-kernel-contrast">Contrast between traditional and sovereign OS models, replacing telemetry hooks and remote policy control with auditable local mechanisms.</p>
+
+<p><a class="fig-ref" href="#fig-kernel-contrast" data-fig-ref="fig-kernel-contrast">Figure</a>
+ visualizes the core systems hypothesis: achieving sovereignty by prioritizing control surfaces over feature accumulation. On the left, the Traditional OS Model reveals an &ldquo;entangled&rdquo; kernel space where opaque APIs are inextricably linked to vendor-controlled hooks—such as hardcoded telemetry, forced update channels, and remote policy engines. These mechanisms bypass the user and route directly to a vendor cloud, creating an architecture designed for dependency. On the right, the Sovereign OS Model presents a &ldquo;confined&rdquo; kernel space. The remote hooks have been stripped away by design. Instead, auditable APIs interact directly with local monitoring mechanisms like explicit capability management, eBPF behavioral monitors, and a local policy engine. Crucially, the external vendor cloud is completely absent from the execution chain; it is replaced by a Local Governance UI that configures the kernel and routes data strictly to trusted local storage, proving that a highly functional operating system can be built without structural disloyalty.</p>
+<h2 id="engineering-directions">Engineering Directions</h2>
+<p>The practical application of this architecture requires documenting trade-offs, design decisions, and implementation constraints as they are tested in real-world scenarios.</p>
+<p>Current engineering and research directions to achieve this stack include:</p>
+<ul>
+<li>Kernel-level and scheduler optimizations for responsive local workloads.</li>
+<li>Secure-by-default storage and memory configurations.</li>
+<li>Low-telemetry or telemetry-free desktop environments.</li>
+<li>Package trust and reproducibility strategies.</li>
+<li>Local-first synchronization and conflict resolution models.</li>
+<li>Explainable, on-device AI integration.</li>
+<li>Governance-aware UX, where authority and policy remain legible.</li>
+</ul>
+<p>The central claim is simple: <strong>sovereignty must be engineered, not declared</strong>.</p>
+<p>These directions are intentionally presented as open engineering questions rather than prescriptions. Their purpose is to outline a research and design agenda, not to claim completeness.</p>
+<h2 id="a-working-definition">A Working Definition</h2>
+<blockquote>
+<p><strong>Digital sovereignty is the capacity of a user or community to compute, decide, store, and interact digitally under rules they can inspect, enforce, and modify—without hidden dependence on opaque infrastructures, unaccountable software, or non-explainable automated authority.</strong></p>
+</blockquote>
+<h2 id="conclusion">Conclusion</h2>
+<p>Digital sovereignty is neither nostalgia nor isolationism. It is the effort to recover technical agency in an ecosystem optimized for abstraction, convenience, and dependence.</p>
+<p>No single release will “deliver” sovereignty. It must be assembled incrementally, layer by layer, because sovereignty—like security—is not a static state, but a continuous act of system design.</p>
+<p>Sovereignty is not granted.<br>
+It is not certified.<br>
+It is engineered—or it does not exist.</p>
+<h2 id="references">References</h2>
+<ol class="ieee-references"><li id="ref-cloud-act">Eurojust, &ldquo;The U.S. CLOUD Act and international cooperation.&rdquo; [Online]. Available: <a href="https://www.eurojust.europa.eu/publication/cloud-act">https://www.eurojust.europa.eu/publication/cloud-act</a></li><li id="ref-coreboot">coreboot Project, &ldquo;coreboot.&rdquo; [Online]. Available: <a href="https://www.coreboot.org/">https://www.coreboot.org/</a></li><li id="ref-riscv">RISC-V International, &ldquo;RISC-V.&rdquo; [Online]. Available: <a href="https://riscv.org/">https://riscv.org/</a></li><li id="ref-edge-sovereignty">B. Krenn et al., &ldquo;Data sovereignty at the edge of the network,&rdquo; in Proc. Int. Conf. Fog and Edge Computing (ICFEC), 2023. [Online]. Available: <a href="https://publications.ait.ac.at/ws/portalfiles/portal/38393888/ICFEC2023-edge-sovereignty.pdf">https://publications.ait.ac.at/ws/portalfiles/portal/38393888/ICFEC2023-edge-sovereignty.pdf</a></li><li id="ref-gdpr">European Union, &ldquo;General Data Protection Regulation (GDPR).&rdquo; [Online]. Available: <a href="https://gdpr-info.eu/">https://gdpr-info.eu/</a></li><li id="ref-ec-edge-policy">European Commission, &ldquo;IoT and edge computing strategy and investments.&rdquo; [Online]. Available: <a href="https://digital-strategy.ec.europa.eu/en/policies/iot-investing">https://digital-strategy.ec.europa.eu/en/policies/iot-investing</a></li><li id="ref-linux-namespaces">M. Kerrisk, &ldquo;namespaces(7) - Linux manual page.&rdquo; [Online]. Available: <a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">https://man7.org/linux/man-pages/man7/namespaces.7.html</a></li><li id="ref-linux-seccomp">M. Kerrisk, &ldquo;seccomp(2) - Linux manual page.&rdquo; [Online]. Available: <a href="https://man7.org/linux/man-pages/man2/seccomp.2.html">https://man7.org/linux/man-pages/man2/seccomp.2.html</a></li><li id="ref-ebpf">eBPF Foundation, &ldquo;What is eBPF?&rdquo; [Online]. Available: <a href="https://ebpf.io/what-is-ebpf/">https://ebpf.io/what-is-ebpf/</a></li><li id="ref-reproducible-builds">Reproducible Builds, &ldquo;Reproducible builds.&rdquo; [Online]. Available: <a href="https://reproducible-builds.org/">https://reproducible-builds.org/</a></li><li id="ref-nist-airmf">NIST, &ldquo;AI Risk Management Framework: Characteristics of trustworthy AI systems.&rdquo; [Online]. Available: <a href="https://airc.nist.gov/airmf-resources/airmf/3-sec-characteristics/">https://airc.nist.gov/airmf-resources/airmf/3-sec-characteristics/</a></li><li id="ref-eu-hleg-ai">European Commission High-Level Expert Group on AI, &ldquo;Ethics guidelines for trustworthy AI,&rdquo; 2019. [Online]. Available: <a href="https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai">https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai</a></li><li id="ref-nistir-8312">P. J. Phillips et al., &ldquo;NISTIR 8312: Four principles of explainable artificial intelligence,&rdquo; NIST, 2021. [Online]. Available: <a href="https://nvlpubs.nist.gov/nistpubs/ir/2021/nist.ir.8312.pdf">https://nvlpubs.nist.gov/nistpubs/ir/2021/nist.ir.8312.pdf</a></li><li id="ref-eu-ai-act">European Union, &ldquo;EU AI Act resources and legal materials.&rdquo; [Online]. Available: <a href="https://artificialintelligenceact.eu/">https://artificialintelligenceact.eu/</a></li><li id="ref-local-first">M. Kleppmann et al., &ldquo;Local-first software: You own your data, in spite of the cloud,&rdquo; Ink &amp; Switch, 2019. [Online]. Available: <a href="https://www.inkandswitch.com/essay/local-first/">https://www.inkandswitch.com/essay/local-first/</a></li></ol>
+
+<hr>
+<p><strong>How to Cite</strong></p>
+<p><strong>APA</strong></p>
+<blockquote>
+<p>Vicente García-Díaz (2026, April 25). <em>Digital sovereignty: A layered architecture for trustworthy informatics</em>. FreeOS.me Blog. <a href="https://freeos.me/blog/divulgation/digital-sovereignty-architecture/">https://freeos.me/blog/divulgation/digital-sovereignty-architecture/</a></p>
+</blockquote>
+<p><strong>BibTeX</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bibtex" data-lang="bibtex"><span style="display:flex;"><span><span style="color:#a6e22e">@misc</span>{garciadiaz2026sovereignty,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">author</span>       = <span style="color:#e6db74">{Vicente García-Díaz}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">title</span>        = <span style="color:#e6db74">{Digital Sovereignty: A layered architecture for trustworthy informatics}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">year</span>         = <span style="color:#e6db74">{2026}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">month</span>        = <span style="color:#e6db74">{April}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">howpublished</span> = <span style="color:#e6db74">{FreeOS.me Blog}</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">url</span>          = <span style="color:#e6db74">{https://freeos.me/blog/divulgation/digital-sovereignty-architecture/}</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+    </div>
+  </article>
+
+  
+  
+  
+  
+
+  </main>
+
+  
+  
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    window.__mermaid = mermaid;
+  </script>
+  <script src="/blog/js/mermaid-init.js"></script>
+  
+</body>
+</html>

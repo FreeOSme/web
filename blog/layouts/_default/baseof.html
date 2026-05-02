@@ -90,18 +90,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap" rel="stylesheet">
+  {{ if .Site.Params.useGlobalShell }}
   <link rel="stylesheet" href="/css/styles.css">
+  {{ end }}
   <link rel="stylesheet" href="{{ "css/blog.css" | relURL }}">
 </head>
 <body>
+  {{ if .Site.Params.useGlobalShell }}
   <div id="site-header"></div>
+  {{ end }}
 
   <main class="container">
     {{ block "main" . }}{{ end }}
   </main>
 
+  {{ if .Site.Params.useGlobalShell }}
   <div id="site-footer"></div>
   <script src="/js/layout.js"></script>
+  {{ end }}
   {{ if and .IsPage (findRE "```mermaid" .RawContent 1) }}
   <script type="module">
     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";

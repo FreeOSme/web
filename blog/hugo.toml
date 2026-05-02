@@ -10,3 +10,4 @@ defaultContentLanguage = "en"
 [params]
   description = "Updates, notes, and development logs for FreeOS.me"
   author = "Vicente Garcia Diaz"
+  useGlobalShell = false
