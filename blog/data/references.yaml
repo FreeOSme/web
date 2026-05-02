@@ -1,30 +1,44 @@
 cloud-act:
   ieee: "Eurojust, \"The U.S. CLOUD Act and international cooperation.\" [Online]. Available: https://www.eurojust.europa.eu/publication/cloud-act"
-riscv:
-  ieee: "RISC-V International, \"RISC-V.\" [Online]. Available: https://riscv.org/"
+
 coreboot:
   ieee: "coreboot Project, \"coreboot.\" [Online]. Available: https://www.coreboot.org/"
-edge-sovereignty:
-  ieee: "B. Krenn et al., \"Data sovereignty at the edge of the network,\" in ICFEC, 2023. [Online]. Available: https://publications.ait.ac.at/ws/portalfiles/portal/38393888/ICFEC2023-edge-sovereignty.pdf"
-ec-edge-policy:
-  ieee: "European Commission, \"IoT and edge computing strategy and investments.\" [Online]. Available: https://digital-strategy.ec.europa.eu/en/policies/iot-investing"
-gdpr:
-  ieee: "European Union, \"General Data Protection Regulation (GDPR).\" [Online]. Available: https://gdpr-info.eu/"
-linux-namespaces:
-  ieee: "M. Kerrisk, \"namespaces(7) - Linux manual page.\" [Online]. Available: https://man7.org/linux/man-pages/man7/namespaces.7.html"
-linux-seccomp:
-  ieee: "M. Kerrisk, \"seccomp(2) - Linux manual page.\" [Online]. Available: https://man7.org/linux/man-pages/man2/seccomp.2.html"
+
 ebpf:
   ieee: "eBPF Foundation, \"What is eBPF?\" [Online]. Available: https://ebpf.io/what-is-ebpf/"
-reproducible-builds:
-  ieee: "Reproducible Builds, \"Reproducible builds.\" [Online]. Available: https://reproducible-builds.org/"
-nist-airmf:
-  ieee: "NIST, \"AI Risk Management Framework: Characteristics of trustworthy AI systems.\" [Online]. Available: https://airc.nist.gov/airmf-resources/airmf/3-sec-characteristics/"
-eu-hleg-ai:
-  ieee: "European Commission High-Level Expert Group on AI, \"Ethics guidelines for trustworthy AI,\" 2019. [Online]. Available: https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai"
-nistir-8312:
-  ieee: "P. J. Phillips et al., \"NISTIR 8312: Four principles of explainable artificial intelligence,\" NIST, 2021. [Online]. Available: https://nvlpubs.nist.gov/nistpubs/ir/2021/nist.ir.8312.pdf"
+
+ec-edge-policy:
+  ieee: "European Commission, \"IoT and edge computing strategy and investments.\" [Online]. Available: https://digital-strategy.ec.europa.eu/en/policies/iot-investing"
+
+edge-sovereignty:
+  ieee: "B. Krenn et al., \"Data sovereignty at the edge of the network,\" in Proc. Int. Conf. Fog and Edge Computing (ICFEC), 2023. [Online]. Available: https://publications.ait.ac.at/ws/portalfiles/portal/38393888/ICFEC2023-edge-sovereignty.pdf"
+
 eu-ai-act:
   ieee: "European Union, \"EU AI Act resources and legal materials.\" [Online]. Available: https://artificialintelligenceact.eu/"
+
+eu-hleg-ai:
+  ieee: "European Commission High-Level Expert Group on AI, \"Ethics guidelines for trustworthy AI,\" 2019. [Online]. Available: https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai"
+
+gdpr:
+  ieee: "European Union, \"General Data Protection Regulation (GDPR).\" [Online]. Available: https://gdpr-info.eu/"
+
+linux-namespaces:
+  ieee: "M. Kerrisk, \"namespaces(7) - Linux manual page.\" [Online]. Available: https://man7.org/linux/man-pages/man7/namespaces.7.html"
+
+linux-seccomp:
+  ieee: "M. Kerrisk, \"seccomp(2) - Linux manual page.\" [Online]. Available: https://man7.org/linux/man-pages/man2/seccomp.2.html"
+
 local-first:
   ieee: "M. Kleppmann et al., \"Local-first software: You own your data, in spite of the cloud,\" Ink & Switch, 2019. [Online]. Available: https://www.inkandswitch.com/essay/local-first/"
+
+nist-airmf:
+  ieee: "NIST, \"AI Risk Management Framework: Characteristics of trustworthy AI systems.\" [Online]. Available: https://airc.nist.gov/airmf-resources/airmf/3-sec-characteristics/"
+
+nistir-8312:
+  ieee: "P. J. Phillips et al., \"NISTIR 8312: Four principles of explainable artificial intelligence,\" NIST, 2021. [Online]. Available: https://nvlpubs.nist.gov/nistpubs/ir/2021/nist.ir.8312.pdf"
+
+reproducible-builds:
+  ieee: "Reproducible Builds, \"Reproducible builds.\" [Online]. Available: https://reproducible-builds.org/"
+
+riscv:
+  ieee: "RISC-V International, \"RISC-V.\" [Online]. Available: https://riscv.org/"
