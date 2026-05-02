@@ -176,6 +176,7 @@ It is engineered—or it does not exist.
 
 ---
 
+<!--
 ## How to Cite
 
 **APA**
@@ -195,3 +196,4 @@ It is engineered—or it does not exist.
   note         = {Accessed: \today}
 }
 ```
+-->
