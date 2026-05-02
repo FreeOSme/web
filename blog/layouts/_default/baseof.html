@@ -85,7 +85,7 @@
     {{ $schema = merge $schema (dict "encoding" (dict "@type" "MediaObject" "encodingFormat" "application/pdf" "contentUrl" ($pdf | absURL))) }}
   {{ end }}
 
-  <script type="application/ld+json">{{ $schema | jsonify }}</script>
+  <script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
   {{ end }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
