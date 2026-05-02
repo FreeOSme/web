@@ -11,7 +11,7 @@ tags: ["Digital Sovereignty", "XAI", "Trustworthy AI", "Governance", "Edge Compu
 
 ## Abstract
 
-Digital sovereignty is often invoked as a political or legal objective, but rarely specified as an engineering property. This article reframes digital sovereignty as a measurable systems attribute emerging from the interaction of infrastructure, software behavior, governance, and explainable artificial intelligence. It then advances a concrete hypothesis: that performance, privacy, and sovereignty can coexist if operating systems are designed around control surfaces rather than feature accumulation.
+Digital sovereignty is often invoked as a political or legal objective, but rarely specified as an engineering property. This article reframes digital sovereignty as a measurable systems attribute emerging from the interaction of infrastructure, software behavior, governance, and explainable artificial intelligence. It then advances a concrete hypothesis: that performance, privacy, and sovereignty can coexist if operating systems are designed around control surfaces rather than feature accumulation. This work is a conceptual systems framework, not an empirical evaluation.
 
 ## 1. Introduction
 
@@ -23,7 +23,37 @@ Sovereignty is not tested under normal conditions, but under contested ones. If 
 
 This article introduces the **Sovereignty Stack** as a response to that problem. A truly sovereign architecture is not merely a privacy-oriented desktop environment. It requires formalizing a layered framework in which execution locality, legal exposure, algorithmic behavior, governance authority, and explainability are treated as mutually dependent design constraints (see Figure 1).
 
-{{< figure src="/images/sovereignty-transition-diagram.png" alt="Conceptual diagram showing the transition from Service-Dependent Computing to Sovereign Computing architectures" caption="**Figure 1.** The transition from service-dependent computing to sovereign computing architectures. Centralized platforms are replaced by local execution, explicit governance, and inspectable software behavior." >}}
+```mermaid
+flowchart LR
+    %% Estilos de las cajas
+    classDef opaque fill:#2b2b2b,stroke:#bf616a,stroke-width:2px,color:#eceff4
+    classDef sovereign fill:#2e3440,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
+    classDef storage fill:#434c5e,stroke:#81a1c1,stroke-width:1px,color:#eceff4
+
+    subgraph ServiceDependent ["Service-Dependent Computing"]
+        direction TB
+        User1([User]) -->|Data Inputs| UI1[Opaque Interface]
+        UI1 -->|Telemetry / RPC| Cloud[(Vendor Cloud)]
+        Cloud -.->|Remote Policy / Rules| UI1
+        Cloud -->|Data Extraction| ThirdParties[Third-Party APIs]
+    end
+
+    subgraph SovereignArchitecture ["Sovereign Computing Architecture"]
+        direction TB
+        User2([User]) -->|Explicit Authority| Gov[Governance Dashboard]
+        Gov -->|Constrains| OS[Sovereign OS Kernel / eBPF]
+        OS -->|Sandboxed Execution| App[Auditable Application]
+        App <-->|Local R/W| LocalStore[(Local / Edge Storage)]
+        App -.->|Blocked without Consent| Network[External Network]
+    end
+
+    ServiceDependent ==>|Architectural Shift| SovereignArchitecture
+    
+    %% Asignación de estilos
+    class ServiceDependent,UI1,Cloud,ThirdParties opaque
+    class SovereignArchitecture,Gov,OS,App sovereign
+    class LocalStore storage
+```
 
 ## 2. Sovereignty as a Layered Systems Property
 
