@@ -1,14 +1,22 @@
 (function() {
 	// Analytics
-	const _analyticsSrc = "https://cloud.umami.is/script.js";
-	const _analyticsId = "1a0825be-da9b-4123-8871-3374153a3ccb";
-	const _hasAnalytics = document.querySelector('script[src="' + _analyticsSrc + '"][data-website-id="' + _analyticsId + '"]');
-	if (!_hasAnalytics) {
-		const _analytics = document.createElement("script");
-		_analytics.defer = true;
-		_analytics.src = _analyticsSrc;
-		_analytics.dataset.websiteId = _analyticsId;
-		document.head.appendChild(_analytics);
+	const _matomoSrc = "//stats.garcia.at/matomo.js";
+	const _hasMatomo = document.querySelector('script[src*="stats.garcia.at/matomo.js"]');
+	if (!_hasMatomo) {
+		var _paq = window._paq = window._paq || [];
+		_paq.push(["trackPageView"]);
+		_paq.push(["enableLinkTracking"]);
+		(function() {
+			var u = "//stats.garcia.at/";
+			_paq.push(["setTrackerUrl", u + "matomo.php"]);
+			_paq.push(["setSiteId", "2"]);
+			var d = document;
+			var g = d.createElement("script");
+			var s = d.getElementsByTagName("script")[0];
+			g.async = true;
+			g.src = _matomoSrc;
+			s.parentNode.insertBefore(g, s);
+		})();
 	}
 
 	// Normalize the current location once so every active-state check uses the same source of truth.
