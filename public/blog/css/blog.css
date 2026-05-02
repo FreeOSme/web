@@ -453,10 +453,16 @@ footer {
 }
 
 .blog-content .mermaid {
-  width: min(100%, 860px);
+  width: min(100%, 980px);
   margin: 1.35rem auto;
   padding: 0.35rem;
   overflow-x: auto;
+  font-size: 1rem;
+}
+
+.blog-content .mermaid svg {
+  width: 100% !important;
+  height: auto !important;
 }
 
 .blog-content .figure-caption {

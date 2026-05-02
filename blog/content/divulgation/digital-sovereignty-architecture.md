@@ -33,8 +33,8 @@ flowchart LR
     classDef sovereign fill:#2e3440,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
     classDef storage fill:#434c5e,stroke:#81a1c1,stroke-width:1px,color:#eceff4
 
-    %% Flechas y etiquetas con alto contraste para fondos claros
-    linkStyle default stroke:#1f2937,stroke-width:2.6px,color:#111827
+    %% Flechas y etiquetas con mayor contraste
+    linkStyle default stroke:#0b1220,stroke-width:3.2px,color:#0b1220
 
     subgraph ServiceDependent ["Service-Dependent Computing"]
         direction TB
@@ -78,12 +78,12 @@ A system is not sovereign because it behaves correctly under normal conditions, 
 ```mermaid
 flowchart BT
     %% Definición de estilos
-    classDef secure fill:#2e3440,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
-    classDef critical fill:#bf616a,stroke:#eceff4,stroke-width:2px,color:#eceff4
-    classDef compromised fill:#2b2b2b,stroke:#bf616a,stroke-width:2px,stroke-dasharray: 5 5,color:#bf616a
+    classDef secure fill:#1f2937,stroke:#111827,stroke-width:2.4px,color:#f8fafc
+    classDef critical fill:#7f1d1d,stroke:#111827,stroke-width:2.4px,color:#f8fafc
+    classDef compromised fill:#111827,stroke:#0f172a,stroke-width:2.4px,stroke-dasharray: 5 5,color:#f8fafc
 
-    %% Forzar flechas y texto de flechas a colores claros para modo oscuro
-    linkStyle default stroke:#d8dee9,stroke-width:2px,color:#eceff4
+    %% Flechas y etiquetas oscuras
+    linkStyle default stroke:#111827,stroke-width:2.8px,color:#111827
 
     %% Nodos de las Capas (Apilados de abajo hacia arriba)
     L1["Layer 1: Infrastructure (Hardware / Edge Intact)"]:::secure
@@ -265,13 +265,13 @@ Rather than treating privacy as optional and governance as a legal afterthought,
 ```mermaid
 flowchart LR
     %% Definición de estilos
-    classDef opaque fill:#2b2b2b,stroke:#bf616a,stroke-width:1px,color:#eceff4
-    classDef sovereign fill:#2e3440,stroke:#8fbcbb,stroke-width:1px,color:#eceff4
-    classDef hook fill:#bf616a,stroke:#eceff4,stroke-width:1px,stroke-dasharray: 5 5,color:#eceff4
-    classDef monitor fill:#434c5e,stroke:#a3be8c,stroke-width:1px,color:#eceff4
+    classDef opaque fill:#2b2b2b,stroke:#bf616a,stroke-width:2px,color:#eceff4
+    classDef sovereign fill:#2e3440,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
+    classDef hook fill:#bf616a,stroke:#eceff4,stroke-width:2px,stroke-dasharray: 5 5,color:#eceff4
+    classDef monitor fill:#434c5e,stroke:#a3be8c,stroke-width:2px,color:#eceff4
 
-    %% Forzar flechas y texto de flechas a colores claros para modo oscuro
-    linkStyle default stroke:#d8dee9,stroke-width:2px,color:#eceff4
+    %% Más contraste de líneas y etiquetas para mejorar legibilidad
+    linkStyle default stroke:#111827,stroke-width:2.8px,color:#111827
 
     %% Lado Izquierdo: Tradicional
     subgraph Trad ["Traditional OS Model"]
@@ -279,9 +279,9 @@ flowchart LR
         App1[Applications] --> API1(Opaque APIs):::opaque
         
         subgraph K1 ["Kernel Space (Entangled)"]
-            API1 --> Tele1[Telemetry Hooks]:::hook
-            API1 --> Upd1[Forced Update Channel]:::hook
-            API1 --> Pol1[Remote Policy Engine]:::hook
+            API1 --> Tele1[Telemetry]:::hook
+            API1 --> Upd1[Forced Updates]:::hook
+            API1 --> Pol1[Remote Policy]:::hook
         end
         
         K1 ==>|Data Exfiltration| Cloud[(Vendor Cloud)]
@@ -293,13 +293,13 @@ flowchart LR
         App2[Sovereign Applications] --> API2(Auditable APIs):::sovereign
         
         subgraph K2 ["Kernel Space (Confined)"]
-            API2 --> Capabilities[Explicit Capability Mgmt]:::monitor
-            API2 --> eBPF[eBPF Behavioral Monitor]:::monitor
-            API2 --> LocalPol[Local Policy Engine]:::monitor
+            API2 --> Capabilities[Capability Mgmt]:::monitor
+            API2 --> eBPF[eBPF Monitor]:::monitor
+            API2 --> LocalPol[Local Policy]:::monitor
         end
         
-        Gov[Local Governance UI] ==>|Configures| K2
-        K2 <-->|Local R/W| Disk[(Trusted Local Storage)]
+        Gov[Governance UI] ==>|Configures| K2
+        K2 <-->|Local R/W| Disk[(Local Storage)]
     end
     
     %% Relación de contraste
