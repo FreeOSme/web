@@ -21,27 +21,9 @@ From a computer science perspective, this framing is insufficient. Digital sover
 
 Sovereignty is not tested under normal conditions, but under contested ones. If a user cannot audit the binary that manages encryption keys, cannot reconstruct why a model has classified a file or recommended an action, or cannot determine under which jurisdiction computation is actually taking place, then sovereignty is conditional rather than real. A system may appear autonomous during routine operation, yet that autonomy can be revoked by a vendor decision, a remote update, or an extraterritorial legal order.
 
-This article introduces the **Sovereignty Stack** as a response to that problem. A truly sovereign architecture is not merely a privacy-oriented desktop environment. It requires formalizing a layered framework in which execution locality, legal exposure, algorithmic behavior, governance authority, and explainability are treated as mutually dependent design constraints.
+This article introduces the **Sovereignty Stack** as a response to that problem. A truly sovereign architecture is not merely a privacy-oriented desktop environment. It requires formalizing a layered framework in which execution locality, legal exposure, algorithmic behavior, governance authority, and explainability are treated as mutually dependent design constraints (see Figure 1).
 
-![Conceptual Diagram: The transition from Service-Dependent Computing to Sovereign Computing architectures.](/images/sovereignty-transition-diagram.png)
-
-```mermaid
-flowchart LR
-    subgraph Opaque ["Service-Dependent Computing"]
-        direction TB
-        User1((User)) -->|Data Extraction| Server[Centralized Cloud]
-        Server -->|Opaque Decisions| User1
-        style Opaque fill:#2b2b2b,stroke:#bf616a,stroke-width:2px,color:#eceff4
-    end
-
-    subgraph Sovereign ["Sovereign Computing"]
-        direction TB
-        User2((User)) -->|Local Governance| Edge[Edge Node / FreeOS]
-        Edge -->|Explainable Logic| User2
-        style Sovereign fill:#2e3440,stroke:#88c0d0,stroke-width:2px,color:#eceff4
-    end
-
-    Opaque ==>|Architectural Shift| Sovereign
+{{< figure src="/images/sovereignty-transition-diagram.png" alt="Conceptual diagram showing the transition from Service-Dependent Computing to Sovereign Computing architectures" caption="**Figure 1.** The transition from service-dependent computing to sovereign computing architectures. Centralized platforms are replaced by local execution, explicit governance, and inspectable software behavior." >}}
 
 ## 2. Sovereignty as a Layered Systems Property
 
@@ -51,9 +33,9 @@ Modern operating systems have evolved into highly entangled dependency trees in 
 
 For this reason, sovereignty must be understood as a **layered systems property**. Each layer protects a different dimension of autonomy, and the guarantees of any one layer remain meaningful only if the others do not silently cancel them. The objective is not ideological purity, but dependency reduction by design.
 
-A system is not sovereign because it behaves correctly under normal conditions, but because its guarantees remain as invariant as possible under stress, interference, or adversarial pressure. In this sense, digital sovereignty is closely related to robustness and resilience, but directed specifically at power asymmetries and control surfaces.
+A system is not sovereign because it behaves correctly under normal conditions, but because its guarantees remain as invariant as possible under stress, interference, or adversarial pressure. In this sense, digital sovereignty is closely related to robustness and resilience, but directed specifically at power asymmetries and control surfaces (see Figure 2).
 
-![Architecture Diagram: Asymmetric Degradation. Showing how a breach in Layer 2 invalidates the governance guarantees of Layer 3.](/images/asymmetric-degradation.png)
+{{< figure src="/images/asymmetric-degradation.png" alt="Architecture diagram illustrating asymmetric degradation across sovereignty layers" caption="**Figure 2.** Asymmetric degradation: a breach in Layer 2 (Algorithmic Protection) invalidates the governance guarantees of Layer 3, even when Layer 3 remains nominally intact." >}}
 
 ## 3. The Sovereignty Stack
 
@@ -115,9 +97,9 @@ This implies:
 - No remote revocation of legitimate system capabilities.
 - Policies that are local, explicit, inspectable, and revocable.
 
-Governance must be implemented as code that can be read, modified, and overridden—not as remote policy enforced elsewhere.
+Governance must be implemented as code that can be read, modified, and overridden—not as remote policy enforced elsewhere (see Figure 3).
 
-![UI Mockup: A Sovereignty Dashboard. Visualizing active processes, network isolation, and real-time authority surfaces.](/images/sovereignty-dashboard-ui.png)
+{{< figure src="/images/sovereignty-dashboard-ui.png" alt="UI mockup of a sovereignty dashboard showing active processes, network isolation, and authority surfaces" caption="**Figure 3.** Sovereignty Dashboard concept: a unified view of active processes, network isolation boundaries, and real-time authority surfaces—making local governance legible at a glance." >}}
 
 ### 3.4 Trustworthy Informatics & AI — The Paradigm Shift
 
@@ -158,9 +140,9 @@ Sovereignty rejects hidden dependence, especially the kind that reveals itself o
 
 This framework represents a technical hypothesis: that performance, privacy, and sovereignty can coexist if systems are designed from the beginning around **control surfaces rather than feature accumulation**.
 
-Rather than treating privacy as optional and governance as a legal afterthought, a sovereign architecture begins by defining what must remain under user control—and builds upward from that constraint. This approach is consistent with [local-first software](https://www.inkandswitch.com/essay/local-first/) and related design principles that treat synchronization as a complement to local control rather than its replacement.
+Rather than treating privacy as optional and governance as a legal afterthought, a sovereign architecture begins by defining what must remain under user control—and builds upward from that constraint. This approach is consistent with [local-first software](https://www.inkandswitch.com/essay/local-first/) and related design principles that treat synchronization as a complement to local control rather than its replacement (see Figure 4).
 
-![Systems Diagram: A sovereign kernel architecture contrasted with traditional operating systems, highlighting the removal of telemetry hooks.](/images/sovereign-kernel-comparison.png)
+{{< figure src="/images/sovereign-kernel-comparison.png" alt="Systems diagram contrasting a sovereign kernel architecture with traditional operating systems" caption="**Figure 4.** Sovereign kernel architecture vs. traditional operating systems: telemetry hooks, forced update channels, and remote policy engines are absent by design, replaced by auditable, user-controlled surfaces." >}}
 
 ## 5. Engineering Directions
 
