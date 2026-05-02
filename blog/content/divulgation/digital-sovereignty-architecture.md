@@ -11,9 +11,9 @@ tags: ["Digital Sovereignty", "XAI", "Trustworthy AI", "Governance", "Edge Compu
 
 ## Abstract
 
-Digital sovereignty is often invoked as a political or legal objective, but rarely specified as an engineering property. This article reframes digital sovereignty as a measurable systems attribute emerging from the interaction of infrastructure, software behavior, governance, and explainable artificial intelligence. It then advances a concrete hypothesis: that performance, privacy, and sovereignty can coexist if operating systems are designed around control surfaces rather than feature accumulation. This work is a conceptual systems framework, not an empirical evaluation.
+Digital sovereignty is often invoked as a political or legal objective, but rarely specified as an engineering property. This article reframes digital sovereignty as a measurable systems attribute emerging from the interaction of infrastructure, software behavior, governance, and explainable artificial intelligence. It then advances a concrete hypothesis: that performance, privacy, and sovereignty can coexist if operating systems are designed around control surfaces rather than feature accumulation. This work deliberately focuses on problem definition and architectural framing. Specific mechanisms, metrics, and implementations are intentionally deferred to subsequent work.
 
-## 1. Introduction
+## Introduction
 
 “Digital sovereignty” has become a ubiquitous term—invoked so frequently that its meaning is increasingly diluted. In many cases, what is presented as sovereignty is little more than managed dependency: opaque platforms, proprietary control planes, and decision systems that cannot be meaningfully inspected. The vocabulary has evolved; the power structures often have not.
 
@@ -57,7 +57,7 @@ flowchart LR
 
 *Transition from service-dependent computing to a sovereign architecture with local authority, constrained execution, and explicit network consent.*
 
-## 2. Sovereignty as a Layered Systems Property
+## Sovereignty as a Layered Systems Property
 
 Digital systems rarely fail in a single catastrophic event. They degrade asymmetrically. Storage may be encrypted while behavioral telemetry leaks. Applications may execute locally while delegating critical functionality to opaque remote APIs. Interfaces may promise user control while reserving final authority for vendor-managed policy layers.
 
@@ -96,11 +96,11 @@ flowchart BT
 
 *Asymmetric degradation across layers: compromise at algorithmic protection propagates upward and revokes practical sovereignty.*
 
-## 3. The Sovereignty Stack
+## The Sovereignty Stack
 
 This section outlines the five layers through which digital sovereignty can be engineered as an emergent property rather than a marketing label.
 
-### 3.1 Execution & Infrastructure — The “Where”
+### Execution & Infrastructure — The “Where”
 
 All computation happens somewhere—on hardware owned by someone, governed by someone, and subject to one or more jurisdictions. Cloud abstractions obscure this fact behind convenience, but abstraction does not dissolve legal or political authority.
 
@@ -117,7 +117,7 @@ A sovereign approach prioritizes:
 
 Research on [data sovereignty at the edge of the network](https://publications.ait.ac.at/ws/portalfiles/portal/38393888/ICFEC2023-edge-sovereignty.pdf) has shown how relocating computation closer to the data source can reduce dependency, latency, and jurisdictional exposure. This aligns with European policy discussions, including [GDPR](https://gdpr-info.eu/) data residency requirements and initiatives linking [edge computing](https://digital-strategy.ec.europa.eu/en/policies/iot-investing) to privacy, resilience, and technological sovereignty.
 
-### 3.2 Algorithmic Protection — The “How”
+### Algorithmic Protection — The “How”
 
 Control over hardware and location is insufficient if software behavior itself cannot be observed, predicted, or constrained. Contemporary systems frequently embed telemetry, background analytics, opaque auto-updates, silent network calls, and outsourced decision logic. These mechanisms are often framed as usability or security features, yet they also create channels of influence and extraction.
 
@@ -138,7 +138,7 @@ A sovereign operating system combines:
 
 The goal is not privacy as a checkbox, but **software subordination**: code as an instrument of the operator, not an autonomous agent aligned with remote incentives.
 
-### 3.3 Management & Governance — The “Who”
+### Management & Governance — The “Who”
 
 Sovereignty is ultimately a question of authority: who governs the system when interests diverge?
 
@@ -201,7 +201,7 @@ flowchart TB
 
 *Governance dashboard model that keeps authority surfaces, process confinement, and network boundaries legible to the local operator.*
 
-### 3.4 Trustworthy Informatics & AI — The Paradigm Shift
+### Trustworthy Informatics & AI — The Paradigm Shift
 
 Artificial intelligence introduces a deeper challenge. In earlier systems, opacity concerned code or infrastructure. In AI systems, opacity concerns reasoning itself. Users increasingly receive classifications, recommendations, rankings, and decisions generated by models whose internal logic they cannot meaningfully interrogate.
 
@@ -221,7 +221,7 @@ A sovereign system treats explainability as a core requirement, favoring:
 
 AI must be domesticated—embedded as a constrained component rather than introduced as an unchallengeable oracle.
 
-### 3.5 Digital Sovereignty — The Emergent State
+### Digital Sovereignty — The Emergent State
 
 Digital sovereignty is not a feature, a product property, or a compliance label. It is the emergent condition that appears when the previous layers remain coherently aligned.
 
@@ -236,7 +236,9 @@ A system approaches sovereignty when:
 
 Sovereignty rejects hidden dependence, especially the kind that reveals itself only when control is contested. In that sense, it is best understood as asymmetry reduction.
 
-## 4. Sovereign Computing as a Systems Hypothesis
+## Sovereign Computing as a Systems Hypothesis
+
+Before outlining concrete mechanisms, it is necessary to clarify the nature of the claim being made. This section does not propose an implementation roadmap, but formulates a systems hypothesis intended to guide future engineering and empirical work.
 
 This framework represents a technical hypothesis: that performance, privacy, and sovereignty can coexist if systems are designed from the beginning around **control surfaces rather than feature accumulation**.
 
@@ -289,7 +291,7 @@ flowchart LR
 
 *Contrast between traditional and sovereign OS models, replacing telemetry hooks and remote policy control with auditable local mechanisms.*
 
-## 5. Engineering Directions
+## Engineering Directions
 
 The practical application of this architecture requires documenting trade-offs, design decisions, and implementation constraints as they are tested in real-world scenarios.
 
@@ -303,13 +305,15 @@ Current engineering and research directions to achieve this stack include:
 - Explainable, on-device AI integration.
 - Governance-aware UX, where authority and policy remain legible.
 
-The central claim is simple: **sovereignty must be engineered, not declared**.
+The central claim is simple: **sovereignty must be engineered, not declared**. 
 
-## 6. A Working Definition
+These directions are intentionally presented as open engineering questions rather than prescriptions. Their purpose is to outline a research and design agenda, not to claim completeness.
+
+## A Working Definition
 
 > **Digital sovereignty is the capacity of a user or community to compute, decide, store, and interact digitally under rules they can inspect, enforce, and modify—without hidden dependence on opaque infrastructures, unaccountable software, or non-explainable automated authority.**
 
-## 7. Conclusion
+## Conclusion
 
 Digital sovereignty is neither nostalgia nor isolationism. It is the effort to recover technical agency in an ecosystem optimized for abstraction, convenience, and dependence.
 
@@ -321,7 +325,7 @@ It is engineered—or it does not exist.
 
 ---
 
-## How to Cite
+**How to Cite**
 
 **APA**
 

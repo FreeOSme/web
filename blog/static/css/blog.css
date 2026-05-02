@@ -371,7 +371,7 @@ footer {
   color: var(--ink);
   font-size: 1.03rem;
   line-height: 1.78;
-  counter-reset: mermaid-figure;
+  counter-reset: mermaid-figure section;
 }
 
 .blog-content p {
@@ -383,6 +383,23 @@ footer {
 .blog-content h3 {
   margin-top: 1.7rem;
   margin-bottom: 0.7rem;
+}
+
+.blog-content h2 {
+  counter-increment: section;
+  counter-reset: subsection;
+}
+
+.blog-content h2::before {
+  content: counter(section) ". ";
+}
+
+.blog-content h3 {
+  counter-increment: subsection;
+}
+
+.blog-content h3::before {
+  content: counter(section) "." counter(subsection) " ";
 }
 
 .blog-content ul,
