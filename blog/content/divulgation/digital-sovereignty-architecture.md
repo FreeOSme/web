@@ -75,11 +75,11 @@ flowchart BT
     classDef compromised fill:#2b2b2b,stroke:#bf616a,stroke-width:2px,stroke-dasharray: 5 5,color:#bf616a
 
     %% Nodos de las Capas (Apilados de abajo hacia arriba)
-    L1["Layer 1: Infrastructure (Hardware / Edge Intact)"] ::: secure
-    L2["Layer 2: Algorithmic Protection (Breach: Hidden Telemetry Active)"] ::: critical
-    L3["Layer 3: Management & Governance (Nominal Control Bypassed)"] ::: compromised
-    L4["Layer 4: Trustworthy AI (Epistemic Trust Broken)"] ::: compromised
-    L5["Layer 5: Digital Sovereignty (Sovereign State Revoked)"] ::: compromised
+    L1["Layer 1: Infrastructure (Hardware / Edge Intact)"]:::secure
+    L2["Layer 2: Algorithmic Protection (Breach: Hidden Telemetry Active)"]:::critical
+    L3["Layer 3: Management & Governance (Nominal Control Bypassed)"]:::compromised
+    L4["Layer 4: Trustworthy AI (Epistemic Trust Broken)"]:::compromised
+    L5["Layer 5: Digital Sovereignty (Sovereign State Revoked)"]:::compromised
 
     %% Relaciones y cascada de fallos
     L1 -->|Secure Foundation| L2
@@ -173,27 +173,29 @@ flowchart TB
         
         subgraph Auth ["1. Authority Surfaces"]
             direction TB
-            P1[Local Policy Engine] ::: module
-            P2[Capability Revocation] ::: module
+            P1[Local Policy Engine]:::module
+            P2[Capability Revocation]:::module
         end
 
         subgraph Proc ["2. Active Process Monitor"]
             direction TB
-            M1[Local AI Inference: Sandboxed] ::: safe
-            M2[System Services: Confined] ::: safe
+            M1[Local AI Inference: Sandboxed]:::safe
+            M2[System Services: Confined]:::safe
         end
 
         subgraph Net ["3. Network Isolation Boundaries"]
             direction TB
-            N1[Sync to Personal Server: Allowed] ::: safe
-            N2[Vendor Analytics: Blocked] ::: alert
+            N1[Sync to Personal Server: Allowed]:::safe
+            N2[Vendor Analytics: Blocked]:::alert
         end
         
         Auth -->|Enforces Execution Limits| Proc
         Auth -->|Manages eBPF Firewalls| Net
     end
     
-    class Auth,Proc,Net dashboard
+    style Auth fill:#2e3440,stroke:#88c0d0,stroke-width:2px,color:#eceff4
+    style Proc fill:#2e3440,stroke:#88c0d0,stroke-width:2px,color:#eceff4
+    style Net fill:#2e3440,stroke:#88c0d0,stroke-width:2px,color:#eceff4
     style Dash fill:#222,stroke:#88c0d0,stroke-width:2px,color:#eceff4
 ```
 
@@ -330,11 +332,10 @@ It is engineered—or it does not exist.
 ```bibtex
 @misc{garciadiaz2026sovereignty,
   author       = {Vicente García-Díaz},
-  title        = {Digital Sovereignty: A Layered Architecture for Trustworthy Informatics},
+  title        = {Digital Sovereignty: A layered architecture for trustworthy informatics},
   year         = {2026},
   month        = {April},
   howpublished = {FreeOS.me Blog},
   url          = {https://freeos.me/blog/divulgation/digital-sovereignty-architecture/},
-  note         = {Accessed: \today}
 }
 ```
