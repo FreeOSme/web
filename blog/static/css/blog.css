@@ -394,6 +394,14 @@ footer {
   content: counter(section) ". ";
 }
 
+.blog-content h2:first-of-type {
+  counter-increment: none;
+}
+
+.blog-content h2:first-of-type::before {
+  content: "";
+}
+
 .blog-content h3 {
   counter-increment: subsection;
 }
@@ -439,7 +447,7 @@ footer {
   overflow-x: auto;
 }
 
-.blog-content .mermaid + p {
+.blog-content .figure-caption {
   width: min(100%, 860px);
   margin: -0.35rem auto 1.25rem;
   color: var(--ink-soft);
@@ -449,12 +457,16 @@ footer {
   counter-increment: mermaid-figure;
 }
 
-.blog-content .mermaid + p em {
+.blog-content .figure-caption em {
   font-style: normal;
 }
 
-.blog-content .mermaid + p::before {
+.blog-content .figure-caption::before {
   content: "Figure " counter(mermaid-figure) ". ";
+  font-weight: 700;
+}
+
+.blog-content a.fig-ref {
   font-weight: 700;
 }
 

@@ -21,7 +21,7 @@ From a computer science perspective, this framing is insufficient. Digital sover
 
 Sovereignty is not tested under normal conditions, but under contested ones. If a user cannot audit the binary that manages encryption keys, cannot reconstruct why a model has classified a file or recommended an action, or cannot determine under which jurisdiction computation is actually taking place, then sovereignty is conditional rather than real. A system may appear autonomous during routine operation, yet that autonomy can be revoked by a vendor decision, a remote update, or an extraterritorial legal order.
 
-This article introduces the **Sovereignty Stack** as a response to that problem. A truly sovereign architecture is not merely a privacy-oriented desktop environment. It requires formalizing a layered framework in which execution locality, legal exposure, algorithmic behavior, governance authority, and explainability are treated as mutually dependent design constraints (see Figure 1).
+This article introduces the **Sovereignty Stack** as a response to that problem. A truly sovereign architecture is not merely a privacy-oriented desktop environment. It requires formalizing a layered framework in which execution locality, legal exposure, algorithmic behavior, governance authority, and explainability are treated as mutually dependent design constraints (see {{< figref id="transition" >}}).
 
 ```mermaid
 flowchart LR
@@ -29,6 +29,9 @@ flowchart LR
     classDef opaque fill:#2b2b2b,stroke:#bf616a,stroke-width:2px,color:#eceff4
     classDef sovereign fill:#2e3440,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
     classDef storage fill:#434c5e,stroke:#81a1c1,stroke-width:1px,color:#eceff4
+
+    %% Forzar flechas y texto de flechas a colores claros para modo oscuro
+    linkStyle default stroke:#d8dee9,stroke-width:2px,color:#eceff4
 
     subgraph ServiceDependent ["Service-Dependent Computing"]
         direction TB
@@ -55,7 +58,9 @@ flowchart LR
     class LocalStore storage
 ```
 
-*Transition from service-dependent computing to a sovereign architecture with local authority, constrained execution, and explicit network consent.*
+{{< figcap id="transition" >}}Transition from service-dependent computing to a sovereign architecture with local authority, constrained execution, and explicit network consent.{{< /figcap >}}
+
+As illustrated in {{< figref id="transition" >}}, the transition to a sovereign architecture requires inverting the traditional power dynamic. On the left (Service-Dependent Computing), the user interacts with an opaque interface that continuously extracts data to a vendor-controlled cloud. In this model, the cloud acts as the ultimate authority, dictating remote policies back to the local machine and freely sharing data with third-party APIs. On the right (Sovereign Architecture), the hierarchy is restored: the user acts as the explicit root authority through a local governance dashboard. This dashboard constrains the operating system kernel, which in turn enforces strict sandboxing on the applications. While the application can seamlessly read and write to local edge storage, any attempt to connect to an external network is blocked by default unless explicit consent is routed through the user's policy engine.
 
 ## Sovereignty as a Layered Systems Property
 
@@ -65,7 +70,7 @@ Modern operating systems have evolved into highly entangled dependency trees in 
 
 For this reason, sovereignty must be understood as a **layered systems property**. Each layer protects a different dimension of autonomy, and the guarantees of any one layer remain meaningful only if the others do not silently cancel them. The objective is not ideological purity, but dependency reduction by design.
 
-A system is not sovereign because it behaves correctly under normal conditions, but because its guarantees remain as invariant as possible under stress, interference, or adversarial pressure. In this sense, digital sovereignty is closely related to robustness and resilience, but directed specifically at power asymmetries and control surfaces (see Figure 2).
+A system is not sovereign because it behaves correctly under normal conditions, but because its guarantees remain as invariant as possible under stress, interference, or adversarial pressure. In this sense, digital sovereignty is closely related to robustness and resilience, but directed specifically at power asymmetries and control surfaces (see {{< figref id="degradation" >}}).
 
 ```mermaid
 flowchart BT
@@ -73,6 +78,9 @@ flowchart BT
     classDef secure fill:#2e3440,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
     classDef critical fill:#bf616a,stroke:#eceff4,stroke-width:2px,color:#eceff4
     classDef compromised fill:#2b2b2b,stroke:#bf616a,stroke-width:2px,stroke-dasharray: 5 5,color:#bf616a
+
+    %% Forzar flechas y texto de flechas a colores claros para modo oscuro
+    linkStyle default stroke:#d8dee9,stroke-width:2px,color:#eceff4
 
     %% Nodos de las Capas (Apilados de abajo hacia arriba)
     L1["Layer 1: Infrastructure (Hardware / Edge Intact)"]:::secure
@@ -94,7 +102,9 @@ flowchart BT
     style note1 fill:#434c5e,stroke:#d08770,stroke-width:1px,color:#eceff4
 ```
 
-*Asymmetric degradation across layers: compromise at algorithmic protection propagates upward and revokes practical sovereignty.*
+{{< figcap id="degradation" >}}Asymmetric degradation across layers: compromise at algorithmic protection propagates upward and revokes practical sovereignty.{{< /figcap >}}
+
+{{< figref id="degradation" >}} demonstrates the concept of asymmetric degradation within the Sovereignty Stack. Unlike a complete system crash, a sovereignty failure is often stealthy and moves bottom-up. In this scenario, while the foundational infrastructure (Layer 1) remains secure and local, a breach occurs at the Algorithmic Protection level (Layer 2)—for instance, a seemingly harmless application silently executing hidden telemetry. This single point of exfiltration creates a cascading failure: it bypasses the user's Management & Governance policies (Layer 3), giving the operator a false sense of authority. Consequently, the Trustworthy AI guarantees (Layer 4) are invalidated because the underlying data flow is no longer strictly confined, leading to the ultimate collapse of the emergent Digital Sovereignty (Layer 5). The system remains technically operational, but its architectural loyalty has been compromised.
 
 ## The Sovereignty Stack
 
@@ -156,7 +166,7 @@ This implies:
 - No remote revocation of legitimate system capabilities.
 - Policies that are local, explicit, inspectable, and revocable.
 
-Governance must be implemented as code that can be read, modified, and overridden—not as remote policy enforced elsewhere (see Figure 3).
+Governance must be implemented as code that can be read, modified, and overridden—not as remote policy enforced elsewhere (see {{< figref id="dashboard" >}}).
 
 ```mermaid
 flowchart TB
@@ -165,6 +175,9 @@ flowchart TB
     classDef module fill:#3b4252,stroke:#81a1c1,stroke-width:1px,color:#eceff4
     classDef safe fill:#2b3328,stroke:#a3be8c,stroke-width:1px,color:#eceff4
     classDef alert fill:#3b2226,stroke:#bf616a,stroke-width:1px,color:#eceff4
+
+    %% Forzar flechas y texto de flechas a colores claros para modo oscuro
+    linkStyle default stroke:#d8dee9,stroke-width:2px,color:#eceff4
 
     User([User / Root Authority]) ==>|Inspects & Commands| Dash
 
@@ -199,7 +212,9 @@ flowchart TB
     style Dash fill:#222,stroke:#88c0d0,stroke-width:2px,color:#eceff4
 ```
 
-*Governance dashboard model that keeps authority surfaces, process confinement, and network boundaries legible to the local operator.*
+{{< figcap id="dashboard" >}}Governance dashboard model that keeps authority surfaces, process confinement, and network boundaries legible to the local operator.{{< /figcap >}}
+
+{{< figref id="dashboard" >}} illustrates the information architecture of a theoretical Sovereignty Dashboard, emphasizing the principle that governance requires legibility. For a user to act as the true root authority, the system's internal state must be transparent and actionable. The dashboard is structured into three unified modules. First, the "Authority Surfaces" expose the local policy engine, allowing the user to actively manage and revoke capabilities. Second, the "Active Process Monitor" provides real-time verification that applications—including local AI inference—are running within their designated sandboxes. Finally, the "Network Isolation Boundaries" visualize exactly where data is allowed to flow (e.g., green-listed sync to a personal server) and where it is actively intercepted by the firewall (e.g., red-listed vendor analytics). By structurally linking user commands to underlying eBPF rules and execution limits, the dashboard eliminates hidden administrative domains.
 
 ### Trustworthy Informatics & AI — The Paradigm Shift
 
@@ -242,7 +257,7 @@ Before outlining concrete mechanisms, it is necessary to clarify the nature of t
 
 This framework represents a technical hypothesis: that performance, privacy, and sovereignty can coexist if systems are designed from the beginning around **control surfaces rather than feature accumulation**.
 
-Rather than treating privacy as optional and governance as a legal afterthought, a sovereign architecture begins by defining what must remain under user control—and builds upward from that constraint. This approach is consistent with [local-first software](https://www.inkandswitch.com/essay/local-first/) and related design principles that treat synchronization as a complement to local control rather than its replacement (see Figure 4).
+Rather than treating privacy as optional and governance as a legal afterthought, a sovereign architecture begins by defining what must remain under user control—and builds upward from that constraint. This approach is consistent with [local-first software](https://www.inkandswitch.com/essay/local-first/) and related design principles that treat synchronization as a complement to local control rather than its replacement (see {{< figref id="kernel-contrast" >}}).
 
 ```mermaid
 flowchart LR
@@ -251,6 +266,9 @@ flowchart LR
     classDef sovereign fill:#2e3440,stroke:#8fbcbb,stroke-width:1px,color:#eceff4
     classDef hook fill:#bf616a,stroke:#eceff4,stroke-width:1px,stroke-dasharray: 5 5,color:#eceff4
     classDef monitor fill:#434c5e,stroke:#a3be8c,stroke-width:1px,color:#eceff4
+
+    %% Forzar flechas y texto de flechas a colores claros para modo oscuro
+    linkStyle default stroke:#d8dee9,stroke-width:2px,color:#eceff4
 
     %% Lado Izquierdo: Tradicional
     subgraph Trad ["Traditional OS Model"]
@@ -289,7 +307,9 @@ flowchart LR
     style Sov fill:#222,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
 ```
 
-*Contrast between traditional and sovereign OS models, replacing telemetry hooks and remote policy control with auditable local mechanisms.*
+{{< figcap id="kernel-contrast" >}}Contrast between traditional and sovereign OS models, replacing telemetry hooks and remote policy control with auditable local mechanisms.{{< /figcap >}}
+
+{{< figref id="kernel-contrast" >}} visualizes the core systems hypothesis: achieving sovereignty by prioritizing control surfaces over feature accumulation. On the left, the Traditional OS Model reveals an "entangled" kernel space where opaque APIs are inextricably linked to vendor-controlled hooks—such as hardcoded telemetry, forced update channels, and remote policy engines. These mechanisms bypass the user and route directly to a vendor cloud, creating an architecture designed for dependency. On the right, the Sovereign OS Model presents a "confined" kernel space. The remote hooks have been stripped away by design. Instead, auditable APIs interact directly with local monitoring mechanisms like explicit capability management, eBPF behavioral monitors, and a local policy engine. Crucially, the external vendor cloud is completely absent from the execution chain; it is replaced by a Local Governance UI that configures the kernel and routes data strictly to trusted local storage, proving that a highly functional operating system can be built without structural disloyalty.
 
 ## Engineering Directions
 

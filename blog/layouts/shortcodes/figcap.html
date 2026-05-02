@@ -1,0 +1,2 @@
+{{- $id := .Get "id" | urlize -}}
+<p class="figure-caption" id="fig-{{ $id }}">{{ .Inner | markdownify }}</p>

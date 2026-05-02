@@ -36,6 +36,34 @@
     mermaid.run({
       querySelector: ".mermaid"
     });
+
+    wireFigureReferences();
+  }
+
+  function wireFigureReferences() {
+    var captions = document.querySelectorAll(".blog-content .figure-caption");
+    if (!captions.length) {
+      return;
+    }
+
+    var figureNumberById = {};
+
+    captions.forEach(function (caption, index) {
+      var figureNumber = index + 1;
+      if (!caption.id) {
+        caption.id = "fig-" + figureNumber;
+      }
+      figureNumberById[caption.id] = figureNumber;
+    });
+
+    var refs = document.querySelectorAll("a.fig-ref[data-fig-ref]");
+    refs.forEach(function (ref) {
+      var targetId = ref.getAttribute("data-fig-ref") || "";
+      var figureNumber = figureNumberById[targetId];
+      if (figureNumber) {
+        ref.textContent = "Figure " + figureNumber;
+      }
+    });
   }
 
   if (document.readyState === "loading") {
