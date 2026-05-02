@@ -1,12 +1,15 @@
 (function () {
   function bootMermaid() {
     var mermaid = window.__mermaid;
-    if (!mermaid) {
+    var blocks = document.querySelectorAll("pre code.language-mermaid");
+    if (!blocks.length) {
+      wireFigureReferences();
       return;
     }
 
-    var blocks = document.querySelectorAll("pre code.language-mermaid");
-    if (!blocks.length) {
+    if (!mermaid) {
+      // Keep page functional even if Mermaid CDN import fails.
+      wireFigureReferences();
       return;
     }
 
@@ -23,19 +26,32 @@
       pre.replaceWith(wrapper);
     });
 
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: "default",
-      securityLevel: "strict",
-      flowchart: {
-        htmlLabels: false,
-        useMaxWidth: true
-      }
-    });
+    try {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: "default",
+        securityLevel: "strict",
+        flowchart: {
+          htmlLabels: false,
+          useMaxWidth: true
+        }
+      });
 
-    mermaid.run({
-      querySelector: ".mermaid"
-    });
+      mermaid.run({
+        querySelector: ".mermaid"
+      });
+    } catch (_error) {
+      // If Mermaid parsing fails, show source blocks instead of breaking the page.
+      var rendered = document.querySelectorAll(".mermaid");
+      rendered.forEach(function (node) {
+        var pre = document.createElement("pre");
+        var code = document.createElement("code");
+        code.className = "language-mermaid";
+        code.textContent = node.textContent || "";
+        pre.appendChild(code);
+        node.replaceWith(pre);
+      });
+    }
 
     wireFigureReferences();
   }
