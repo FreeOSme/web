@@ -1,0 +1,23 @@
+{{- $allRefs := hugo.Data.references -}}
+{{- $order := .Page.Scratch.Get "citeOrder" | default (slice) -}}
+{{- $list := slice -}}
+
+{{- if gt (len $order) 0 -}}
+  {{- range $order -}}
+    {{- if index $allRefs . -}}
+      {{- $list = $list | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- range $k, $_ := $allRefs -}}
+    {{- $list = $list | append $k -}}
+  {{- end -}}
+{{- end -}}
+
+<ol class="ieee-references">
+  {{- range $list -}}
+    {{- $key := . -}}
+    {{- $ref := index $allRefs $key -}}
+    <li id="ref-{{ $key }}">{{ $ref.ieee | markdownify }}</li>
+  {{- end -}}
+</ol>

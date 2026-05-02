@@ -3,8 +3,90 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ $pageDescription := .Site.Params.description }}
+  {{ with .Summary }}
+    {{ $pageDescription = . | plainify }}
+  {{ end }}
   <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
-  <meta name="description" content="{{ with .Summary }}{{ . | plainify }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta name="description" content="{{ $pageDescription }}">
+  {{ if .IsPage }}
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta name="author" content="{{ or .Params.author .Site.Params.author }}">
+  {{ with .Params.tags }}
+  <meta name="keywords" content="{{ delimit . ", " }}">
+  {{ end }}
+
+  <meta name="citation_title" content="{{ .Title }}">
+  {{ $citationAuthor := or .Params.author .Site.Params.author }}
+  {{ if reflect.IsSlice $citationAuthor }}
+    {{ range $citationAuthor }}
+  <meta name="citation_author" content="{{ . }}">
+    {{ end }}
+  {{ else }}
+  <meta name="citation_author" content="{{ $citationAuthor }}">
+  {{ end }}
+  <meta name="citation_publication_date" content="{{ .Date.Format "2006/01/02" }}">
+  <meta name="citation_online_date" content="{{ .Date.Format "2006/01/02" }}">
+  <meta name="citation_language" content="{{ .Site.LanguageCode }}">
+  <meta name="citation_journal_title" content="{{ .Site.Title }}">
+  <meta name="citation_publisher" content="FreeOS.me">
+  <meta name="citation_abstract_html_url" content="{{ .Permalink }}">
+  <meta name="citation_fulltext_html_url" content="{{ .Permalink }}">
+  {{ with .Params.work_status }}
+  <meta name="citation_status" content="{{ . }}">
+  {{ end }}
+  {{ $doi := .Params.doi }}
+  {{ if and $doi (findRE `^10\.[0-9]{4,9}/\S+$` $doi 1) }}
+  <meta name="citation_doi" content="{{ $doi }}">
+  {{ end }}
+  {{ $pdf := .Params.pdf }}
+  {{ if and $pdf (findRE `\.pdf($|\?)` $pdf 1) }}
+  <meta name="citation_pdf_url" content="{{ $pdf | absURL }}">
+  {{ end }}
+
+  {{ $schemaCitationAuthor := or .Params.author .Site.Params.author }}
+  {{ $authorNames := slice }}
+  {{ if reflect.IsSlice $schemaCitationAuthor }}
+    {{ $authorNames = $schemaCitationAuthor }}
+  {{ else }}
+    {{ $authorNames = slice $schemaCitationAuthor }}
+  {{ end }}
+
+  {{ $authorObjects := slice }}
+  {{ range $authorNames }}
+    {{ $authorObjects = $authorObjects | append (dict "@type" "Person" "name" .) }}
+  {{ end }}
+
+  {{ $schema := dict
+    "@context" "https://schema.org"
+    "@type" "ScholarlyArticle"
+    "headline" .Title
+    "author" $authorObjects
+    "datePublished" (.Date.Format "2006-01-02")
+    "dateModified" (.Lastmod.Format "2006-01-02")
+    "inLanguage" .Site.LanguageCode
+    "isAccessibleForFree" true
+    "description" $pageDescription
+    "url" .Permalink
+    "mainEntityOfPage" .Permalink
+    "publisher" (dict "@type" "Organization" "name" "FreeOS.me" "url" ((strings.TrimRight "/" .Site.BaseURL)))
+  }}
+
+  {{ with .Params.tags }}
+    {{ $schema = merge $schema (dict "keywords" .) }}
+  {{ end }}
+  {{ with .Params.work_status }}
+    {{ $schema = merge $schema (dict "creativeWorkStatus" .) }}
+  {{ end }}
+  {{ if and $doi (findRE `^10\.[0-9]{4,9}/\S+$` $doi 1) }}
+    {{ $schema = merge $schema (dict "identifier" (printf "https://doi.org/%s" $doi)) }}
+  {{ end }}
+  {{ if and $pdf (findRE `\.pdf($|\?)` $pdf 1) }}
+    {{ $schema = merge $schema (dict "encoding" (dict "@type" "MediaObject" "encodingFormat" "application/pdf" "contentUrl" ($pdf | absURL))) }}
+  {{ end }}
+
+  <script type="application/ld+json">{{ $schema | jsonify }}</script>
+  {{ end }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap" rel="stylesheet">

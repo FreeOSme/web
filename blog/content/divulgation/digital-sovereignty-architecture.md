@@ -5,6 +5,9 @@ author: "Vicente García Díaz"
 description: "A technical deconstruction of digital sovereignty and the layered architecture required to achieve it."
 categories: ["Divulgation"]
 tags: ["Digital Sovereignty", "XAI", "Trustworthy AI", "Governance", "Edge Computing", "Local-First"]
+work_status: "in progress"
+doi: "in progress"
+pdf: "/papers/digital-sovereignty-architecture-preprint.pdf"
 ---
 
 # Digital Sovereignty: A layered architecture for trustworthy informatics
@@ -30,8 +33,8 @@ flowchart LR
     classDef sovereign fill:#2e3440,stroke:#8fbcbb,stroke-width:2px,color:#eceff4
     classDef storage fill:#434c5e,stroke:#81a1c1,stroke-width:1px,color:#eceff4
 
-    %% Forzar flechas y texto de flechas a colores claros para modo oscuro
-    linkStyle default stroke:#d8dee9,stroke-width:2px,color:#eceff4
+    %% Flechas y etiquetas con alto contraste para fondos claros
+    linkStyle default stroke:#1f2937,stroke-width:2.6px,color:#111827
 
     subgraph ServiceDependent ["Service-Dependent Computing"]
         direction TB
@@ -114,9 +117,9 @@ This section outlines the five layers through which digital sovereignty can be e
 
 All computation happens somewhere—on hardware owned by someone, governed by someone, and subject to one or more jurisdictions. Cloud abstractions obscure this fact behind convenience, but abstraction does not dissolve legal or political authority.
 
-Legal analysis of the [U.S. CLOUD Act](https://www.eurojust.europa.eu/publication/cloud-act) shows that U.S.-based service providers can be compelled to disclose data under their control regardless of where that data is physically stored. This demonstrates that geographic location alone does not solve the problem of effective authority.
+Legal analysis of the [U.S. CLOUD Act](https://www.eurojust.europa.eu/publication/cloud-act){{< cite key="cloud-act" >}} shows that U.S.-based service providers can be compelled to disclose data under their control regardless of where that data is physically stored. This demonstrates that geographic location alone does not solve the problem of effective authority.
 
-Infrastructure is therefore not merely a scalability concern; it is a governance boundary. If computation depends on opaque services under foreign legal control, privacy becomes a concession rather than a property. Reclaiming this baseline also means confronting the silicon trust boundary: a sovereign operating system must anticipate a future of auditable firmware (projects such as [coreboot](https://www.coreboot.org/) demonstrate this is already achievable) and open hardware architectures such as [RISC-V](https://riscv.org/), so that proprietary microcode cannot silently bypass operating-system constraints.
+Infrastructure is therefore not merely a scalability concern; it is a governance boundary. If computation depends on opaque services under foreign legal control, privacy becomes a concession rather than a property. Reclaiming this baseline also means confronting the silicon trust boundary: a sovereign operating system must anticipate a future of auditable firmware (projects such as [coreboot](https://www.coreboot.org/){{< cite key="coreboot" >}} demonstrate this is already achievable) and open hardware architectures such as [RISC-V](https://riscv.org/){{< cite key="riscv" >}}, so that proprietary microcode cannot silently bypass operating-system constraints.
 
 A sovereign approach prioritizes:
 
@@ -125,7 +128,7 @@ A sovereign approach prioritizes:
 - Optional, explicit, and replaceable remote synchronization.
 - Substitutable infrastructure, preventing irreversible dependency formation.
 
-Research on [data sovereignty at the edge of the network](https://publications.ait.ac.at/ws/portalfiles/portal/38393888/ICFEC2023-edge-sovereignty.pdf) has shown how relocating computation closer to the data source can reduce dependency, latency, and jurisdictional exposure. This aligns with European policy discussions, including [GDPR](https://gdpr-info.eu/) data residency requirements and initiatives linking [edge computing](https://digital-strategy.ec.europa.eu/en/policies/iot-investing) to privacy, resilience, and technological sovereignty.
+Research on [data sovereignty at the edge of the network](https://publications.ait.ac.at/ws/portalfiles/portal/38393888/ICFEC2023-edge-sovereignty.pdf){{< cite key="edge-sovereignty" >}} has shown how relocating computation closer to the data source can reduce dependency, latency, and jurisdictional exposure. This aligns with European policy discussions, including [GDPR](https://gdpr-info.eu/){{< cite key="gdpr" >}} data residency requirements and initiatives linking [edge computing](https://digital-strategy.ec.europa.eu/en/policies/iot-investing){{< cite key="ec-edge-policy" >}} to privacy, resilience, and technological sovereignty.
 
 ### Algorithmic Protection — The “How”
 
@@ -136,13 +139,13 @@ Algorithmic protection spans two dimensions:
 - Cryptographic protection, which preserves confidentiality and integrity.
 - Behavioral protection, which ensures that software remains subordinate to explicit user intent.
 
-A system may be strongly encrypted and still be architecturally disloyal if it silently reports metadata, delegates authority to remote services, or executes logic that the operator cannot inspect. Sovereignty therefore requires not only perimeter defense, but algorithmic containment. [Linux namespaces](https://man7.org/linux/man-pages/man7/namespaces.7.html), [sandboxing](https://man7.org/linux/man-pages/man2/seccomp.2.html), [eBPF](https://ebpf.io/what-is-ebpf/)‑based observation, and strict network mediation are relevant not as optional hardening features, but as mechanisms for limiting non-consensual behavior.
+A system may be strongly encrypted and still be architecturally disloyal if it silently reports metadata, delegates authority to remote services, or executes logic that the operator cannot inspect. Sovereignty therefore requires not only perimeter defense, but algorithmic containment. [Linux namespaces](https://man7.org/linux/man-pages/man7/namespaces.7.html){{< cite key="linux-namespaces" >}}, [sandboxing](https://man7.org/linux/man-pages/man2/seccomp.2.html){{< cite key="linux-seccomp" >}}, [eBPF](https://ebpf.io/what-is-ebpf/){{< cite key="ebpf" >}}‑based observation, and strict network mediation are relevant not as optional hardening features, but as mechanisms for limiting non-consensual behavior.
 
 A sovereign operating system combines:
 
 - Strong, auditable cryptographic primitives.
 - Zero or minimal telemetry by default.
-- Auditable package origins and [reproducible builds](https://reproducible-builds.org/).
+- Auditable package origins and [reproducible builds](https://reproducible-builds.org/){{< cite key="reproducible-builds" >}}.
 - Predictable networking behavior with explicit authorization.
 - Clear visibility into what software is doing and why.
 
@@ -222,7 +225,7 @@ Artificial intelligence introduces a deeper challenge. In earlier systems, opaci
 
 This creates **epistemic dependence**: the user no longer evaluates outcomes, but defers to them. When a local health model or a security heuristic makes a decision without intelligible justification, the basis for informed consent is weakened. The user is no longer governing the system; the user is trusting an oracle.
 
-Work on trustworthy AI by institutions such as [NIST](https://airc.nist.gov/airmf-resources/airmf/3-sec-characteristics/) and the [EU High-Level Expert Group on AI](https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai) frames trustworthiness not only in terms of performance, but also through accountability, transparency, robustness, explainability, and bias management. Complementary guidance on Explainable AI (XAI), such as [NISTIR 8312](https://nvlpubs.nist.gov/nistpubs/ir/2021/nist.ir.8312.pdf), argues that explanations should be available, meaningful to the intended audience, faithful to actual behavior, and properly delimited by operating conditions. The [EU AI Act](https://artificialintelligenceact.eu/) operationalizes similar requirements as binding obligations for high-risk AI systems, mandating transparency, human oversight, and technical documentation.
+Work on trustworthy AI by institutions such as [NIST](https://airc.nist.gov/airmf-resources/airmf/3-sec-characteristics/){{< cite key="nist-airmf" >}} and the [EU High-Level Expert Group on AI](https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai){{< cite key="eu-hleg-ai" >}} frames trustworthiness not only in terms of performance, but also through accountability, transparency, robustness, explainability, and bias management. Complementary guidance on Explainable AI (XAI), such as [NISTIR 8312](https://nvlpubs.nist.gov/nistpubs/ir/2021/nist.ir.8312.pdf){{< cite key="nistir-8312" >}}, argues that explanations should be available, meaningful to the intended audience, faithful to actual behavior, and properly delimited by operating conditions. The [EU AI Act](https://artificialintelligenceact.eu/){{< cite key="eu-ai-act" >}} operationalizes similar requirements as binding obligations for high-risk AI systems, mandating transparency, human oversight, and technical documentation.
 
 Absent these properties, users lose the capacity to contest, correct, or govern algorithmic judgment. Authority migrates from operator to model.
 
@@ -257,7 +260,7 @@ Before outlining concrete mechanisms, it is necessary to clarify the nature of t
 
 This framework represents a technical hypothesis: that performance, privacy, and sovereignty can coexist if systems are designed from the beginning around **control surfaces rather than feature accumulation**.
 
-Rather than treating privacy as optional and governance as a legal afterthought, a sovereign architecture begins by defining what must remain under user control—and builds upward from that constraint. This approach is consistent with [local-first software](https://www.inkandswitch.com/essay/local-first/) and related design principles that treat synchronization as a complement to local control rather than its replacement (see {{< figref id="kernel-contrast" >}}).
+Rather than treating privacy as optional and governance as a legal afterthought, a sovereign architecture begins by defining what must remain under user control—and builds upward from that constraint. This approach is consistent with [local-first software](https://www.inkandswitch.com/essay/local-first/){{< cite key="local-first" >}} and related design principles that treat synchronization as a complement to local control rather than its replacement (see {{< figref id="kernel-contrast" >}}).
 
 ```mermaid
 flowchart LR
@@ -342,6 +345,10 @@ No single release will “deliver” sovereignty. It must be assembled increment
 Sovereignty is not granted.  
 It is not certified.  
 It is engineered—or it does not exist.
+
+## References
+
+{{< references >}}
 
 ---
 

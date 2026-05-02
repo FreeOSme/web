@@ -1,0 +1,18 @@
+{{- $key := .Get "key" | default (.Get 0) -}}
+{{- if not $key -}}
+  {{- errorf "cite shortcode requires a reference key" -}}
+{{- end -}}
+
+{{- $order := .Page.Scratch.Get "citeOrder" | default (slice) -}}
+{{- if not (in $order $key) -}}
+  {{- $order = $order | append $key -}}
+  {{- .Page.Scratch.Set "citeOrder" $order -}}
+{{- end -}}
+
+{{- $idx := 0 -}}
+{{- range $i, $k := $order -}}
+  {{- if eq $k $key -}}
+    {{- $idx = add $i 1 -}}
+  {{- end -}}
+{{- end -}}
+<a class="cite-ref" href="#ref-{{ $key }}">[{{ $idx }}]</a>
