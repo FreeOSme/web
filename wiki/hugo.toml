@@ -7,6 +7,7 @@ theme = "hextra"
 
 [params]
   description = "FreeOS.me documentation and knowledge base"
+  author = "Vicente García Díaz"
 
 [markup]
   [markup.highlight]

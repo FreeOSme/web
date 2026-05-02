@@ -9,9 +9,9 @@
   {{ end }}
   <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
   <meta name="description" content="{{ $pageDescription }}">
+  <meta name="author" content="{{ or .Params.author .Site.Params.author }}">
   {{ if .IsPage }}
   <link rel="canonical" href="{{ .Permalink }}">
-  <meta name="author" content="{{ or .Params.author .Site.Params.author }}">
   {{ with .Params.tags }}
   <meta name="keywords" content="{{ delimit . ", " }}">
   {{ end }}
