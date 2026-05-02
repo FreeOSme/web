@@ -1,5 +1,5 @@
 ---
-title: "Digital Sovereignty: A Layered Architecture for Trustworthy Informatics"
+title: "Digital Sovereignty: A layered architecture for trustworthy informatics"
 date: 2026-04-25
 author: "Vicente García Díaz"
 description: "A technical deconstruction of digital sovereignty and the layered architecture required to achieve it."
@@ -7,7 +7,7 @@ categories: ["Divulgation"]
 tags: ["Digital Sovereignty", "XAI", "Trustworthy AI", "Governance", "Edge Computing", "Local-First"]
 ---
 
-# Digital Sovereignty: A Layered Architecture for Trustworthy Informatics
+# Digital Sovereignty: A layered architecture for trustworthy informatics
 
 ## Abstract
 
@@ -24,6 +24,24 @@ Sovereignty is not tested under normal conditions, but under contested ones. If 
 This article introduces the **Sovereignty Stack** as a response to that problem. A truly sovereign architecture is not merely a privacy-oriented desktop environment. It requires formalizing a layered framework in which execution locality, legal exposure, algorithmic behavior, governance authority, and explainability are treated as mutually dependent design constraints.
 
 ![Conceptual Diagram: The transition from Service-Dependent Computing to Sovereign Computing architectures.](/images/sovereignty-transition-diagram.png)
+
+```mermaid
+flowchart LR
+    subgraph Opaque ["Service-Dependent Computing"]
+        direction TB
+        User1((User)) -->|Data Extraction| Server[Centralized Cloud]
+        Server -->|Opaque Decisions| User1
+        style Opaque fill:#2b2b2b,stroke:#bf616a,stroke-width:2px,color:#eceff4
+    end
+
+    subgraph Sovereign ["Sovereign Computing"]
+        direction TB
+        User2((User)) -->|Local Governance| Edge[Edge Node / FreeOS]
+        Edge -->|Explainable Logic| User2
+        style Sovereign fill:#2e3440,stroke:#88c0d0,stroke-width:2px,color:#eceff4
+    end
+
+    Opaque ==>|Architectural Shift| Sovereign
 
 ## 2. Sovereignty as a Layered Systems Property
 
@@ -173,3 +191,25 @@ No single release will “deliver” sovereignty. It must be assembled increment
 Sovereignty is not granted.  
 It is not certified.  
 It is engineered—or it does not exist.
+
+---
+
+## How to Cite
+
+**APA**
+
+> Vicente García-Díaz (2026, April 25). *Digital sovereignty: A layered architecture for trustworthy informatics*. FreeOS.me Blog. https://freeos.me/blog/divulgation/digital-sovereignty-architecture/
+
+**BibTeX**
+
+```bibtex
+@misc{garciadiaz2026sovereignty,
+  author       = {Vicente García-Díaz},
+  title        = {Digital Sovereignty: A Layered Architecture for Trustworthy Informatics},
+  year         = {2026},
+  month        = {April},
+  howpublished = {FreeOS.me Blog},
+  url          = {https://freeos.me/blog/divulgation/digital-sovereignty-architecture/},
+  note         = {Accessed: \today}
+}
+```
