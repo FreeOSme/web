@@ -94,6 +94,9 @@
   <link rel="stylesheet" href="/css/styles.css">
   {{ end }}
   <link rel="stylesheet" href="{{ "css/blog.css" | relURL }}">
+  {{ if .IsPage }}
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="1a0825be-da9b-4123-8871-3374153a3ccb"></script>
+  {{ end }}
 </head>
 <body>
   {{ if .Site.Params.useGlobalShell }}
