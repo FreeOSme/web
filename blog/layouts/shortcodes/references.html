@@ -1,4 +1,4 @@
-{{- $allRefs := hugo.Data.references -}}
+{{- $allRefs := site.Data.references -}}
 {{- $order := .Page.Scratch.Get "citeOrder" | default (slice) -}}
 {{- $list := slice -}}
 

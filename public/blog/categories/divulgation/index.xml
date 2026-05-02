@@ -6,12 +6,12 @@
     <description>Recent content in Divulgation on FreeOS.me Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://freeos.me/blog/categories/divulgation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Digital Sovereignty: A layered architecture for trustworthy informatics</title>
       <link>https://freeos.me/blog/divulgation/digital-sovereignty-architecture/</link>
-      <pubDate>Sat, 25 Apr 2026 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 02 May 2026 00:00:00 +0000</pubDate>
       <guid>https://freeos.me/blog/divulgation/digital-sovereignty-architecture/</guid>
       <description>&lt;h1 id=&#34;digital-sovereignty-a-layered-architecture-for-trustworthy-informatics&#34;&gt;Digital Sovereignty: A layered architecture for trustworthy informatics&lt;/h1&gt;&#xA;&lt;h2 id=&#34;abstract&#34;&gt;Abstract&lt;/h2&gt;&#xA;&lt;p&gt;Digital sovereignty is often invoked as a political or legal objective, but rarely specified as an engineering property. This article reframes digital sovereignty as a measurable systems attribute emerging from the interaction of infrastructure, software behavior, governance, and explainable artificial intelligence. It then advances a concrete hypothesis: that performance, privacy, and sovereignty can coexist if operating systems are designed around control surfaces rather than feature accumulation. This work deliberately focuses on problem definition and architectural framing. Specific mechanisms, metrics, and implementations are intentionally deferred to subsequent work.&lt;/p&gt;</description>
     </item>
