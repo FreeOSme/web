@@ -130,6 +130,7 @@
 			+ "<footer>"
 			+ "\t<div class=\"container\">"
 			+ "\t\t<p>FreeOS.me @" + year + " · Linux distribution in progress</p>"
+			+ "\t\t<p><a href=\"https://gitlab.com/freeos.me/awesone/\" target=\"_blank\" rel=\"noopener noreferrer\">FreeOS links</a></p>"
 			+ "\t</div>"
 			+ "</footer>";
 	}

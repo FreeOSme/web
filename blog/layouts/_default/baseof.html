@@ -121,6 +121,14 @@
     {{ block "main" . }}{{ end }}
   </main>
 
+  {{ if not .Site.Params.useGlobalShell }}
+  <footer>
+    <div class="container">
+      <p><a href="https://gitlab.com/freeos.me/awesone/" target="_blank" rel="noopener noreferrer">FreeOS links</a></p>
+    </div>
+  </footer>
+  {{ end }}
+
   {{ if .Site.Params.useGlobalShell }}
   <div id="site-footer"></div>
   <script src="/js/layout.js"></script>
